@@ -7,9 +7,7 @@
 
 int main(void)
 {
-	char *input = NULL, *input_cpy = NULL;
-	char *delim = " \n", *token = NULL;
-	char **arr;
+	char *input = NULL, *input_cpy = NULL, *delim = " \n", *token = NULL, **args;
 	size_t n, i;
 
 	while (1)
@@ -21,34 +19,38 @@ int main(void)
 			printf("Shell has left the chat\n");
 			return (-1);
 		}
-		input_cpy = malloc(sizeof(input));
+		input_cpy = malloc(sizeof(char) * (strlen(input) + 1));
 		if (!input_cpy)
 		{
 			printf("Womp womp woomp, sorry, no can do!");
 			return (-1);
 		}
 		strcpy(input_cpy, input);
-		token = strtok(input_cpy, delim);
-		for (n = 0; token; n++)
-			token = strtok(NULL, delim);
-		arr = malloc(sizeof(char *) * n);
-		if (!arr)
+		n = 0;
+		do {
+			token = strtok(n == 0 ? input_cpy : NULL, delim);
+			n++;
+		} while (token);
+		args = malloc(sizeof(char *) * (n + 1));
+		if (!args)
 		{
 			printf("Womp womp woomp, sorry, no can do!");
 			return (-1);
 		}
 		for (i = 0; i < n; i++)
 		{
-			if (!i)
-				token = strtok(input, delim);
-			else
-				token = strtok(NULL, delim);
-			arr[i] = malloc(sizeof(token));
-			strcpy(arr[i], token);
+			token = strtok(i == 0 ? input_cpy : NULL, delim);
+			printf("%s ", token);
+			args[i] = malloc(sizeof(char) * (strlen(token) + 1));
+			strcpy(args[i], token);
 		}
-		arr[i] = NULL;
-		execmd(arr);
+		args[i] = NULL;
+		execmd(args);
 	}
 	printf("\n");
+	free(args);
+	free(token);
+	free(input_cpy);
+	free(input);
 	return (0);
 }
