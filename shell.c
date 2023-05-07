@@ -53,6 +53,8 @@ char **read_line(void)
 int main(void)
 {
 	char **args = NULL;
+	pid_t pid;
+	int status;
 
 	while (1)
 	{
@@ -61,8 +63,15 @@ int main(void)
 			free(args);
 		args = read_line();
 		if (args == NULL)
-			return (-1);
-		execmd(args);
+		  return (-1);
+		pid = fork();
+		if (pid == 0)
+		{
+			execmd(args);
+			exit(0);
+		}
+		else
+			waitpid(pid, &status, 0);
 	}
 	printf("\n");
 	free(args);
