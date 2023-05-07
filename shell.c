@@ -9,6 +9,7 @@ int main(void)
 {
 	char *input = NULL, *input_cpy = NULL, *delim = " \n", *token = NULL, **args;
 	size_t n, i;
+	int argc;
 
 	while (1)
 	{
@@ -26,18 +27,19 @@ int main(void)
 			return (-1);
 		}
 		strcpy(input_cpy, input);
-		n = 0;
+		argc = 0;
 		do {
-			token = strtok(n == 0 ? input_cpy : NULL, delim);
-			n++;
+			token = strtok(argc == 0 ? input_cpy : NULL, delim);
+			argc++;
 		} while (token);
-		args = malloc(sizeof(char *) * (n + 1));
+		argc++;
+		args = malloc(sizeof(char *) * argc);
 		if (!args)
 		{
 			printf("Womp womp woomp, sorry, no can do!");
 			return (-1);
 		}
-		for (i = 0; i < n; i++)
+		for (i = 0; i < argc; i++)
 		{
 			token = strtok(i == 0 ? input_cpy : NULL, delim);
 			printf("%s ", token);
