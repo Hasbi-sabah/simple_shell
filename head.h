@@ -9,5 +9,6 @@
 #include <sys/wait.h>
 void execmd(char **);
 char *get_location(char *);
+char **_strtok(char *, char *);
 
 #endif
