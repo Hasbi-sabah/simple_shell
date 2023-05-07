@@ -5,8 +5,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-
-void execmd(char **arr);
-char *get_location(char *comm);
+#include <sys/types.h>
+#include <sys/wait.h>
+void execmd(char **);
+char *get_location(char *);
 
 #endif
