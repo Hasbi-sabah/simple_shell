@@ -11,6 +11,8 @@ int main(void)
 	char *delim = " \n", *token = NULL;
 	char **arr;
 	size_t n, i;
+	int status;
+	pid_t pid;
 
 	while (1)
 	{
@@ -47,7 +49,14 @@ int main(void)
 			strcpy(arr[i], token);
 		}
 		arr[i] = NULL;
-		execmd(arr);
+		pid = fork();
+		if (pid == 0)
+		{
+			execmd(arr);
+			exit(0);
+		}
+		else
+			waitpid(pid, &status, 0);
 	}
 	printf("\n");
 	return (0);
