@@ -42,7 +42,6 @@ int main(void)
 			free(input);
 			return (0);
 		}
-		printf("no error");
 		args = read_line(input);
 		if (args == NULL)
 			return (-1);
