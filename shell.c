@@ -1,63 +1,60 @@
 #include "head.h"
 
 /**
+ * read_line - read command line
+ * @input: input command line
+ * Return: command decomposition
+ */
+char **read_line(char *input)
+{
+	char *input_cpy = NULL;
+	char *delim = " \n";
+
+	input_cpy = malloc(sizeof(char) * (strlen(input) + 1));
+	if (!input_cpy)
+	{
+		printf("Womp womp woomp, sorry, no can do!");
+		return (NULL);
+	}
+	strcpy(input_cpy, input);
+	return (_strtok(input_cpy, delim));
+}
+/**
  * main - simple shell program
  * Return: 0
  */
-
 int main(void)
 {
-	char *input = NULL, *input_cpy = NULL;
-	char *delim = " \n", *token = NULL;
-	char **arr;
-	size_t n, i;
-	int status;
+	char **args = NULL;
 	pid_t pid;
+	int status;
+	size_t n = 0;
+	char *input = NULL;
 
 	while (1)
 	{
 		printf("$ ");
-		n = getline(&input, &n, stdin);
-		if ((int)n == -1)
+		if (args != NULL)
+			free(args);
+		if (getline(&input, &n, stdin) == -1)
 		{
 			printf("Shell has left the chat\n");
+			free(input);
+			return (0);
+		}
+		args = read_line(input);
+		if (args == NULL)
 			return (-1);
-		}
-		input_cpy = malloc(sizeof(input));
-		if (!input_cpy)
-		{
-			printf("Womp womp woomp, sorry, no can do!");
-			return (-1);
-		}
-		strcpy(input_cpy, input);
-		token = strtok(input_cpy, delim);
-		for (n = 0; token; n++)
-			token = strtok(NULL, delim);
-		arr = malloc(sizeof(char *) * n);
-		if (!arr)
-		{
-			printf("Womp womp woomp, sorry, no can do!");
-			return (-1);
-		}
-		for (i = 0; i < n; i++)
-		{
-			if (!i)
-				token = strtok(input, delim);
-			else
-				token = strtok(NULL, delim);
-			arr[i] = malloc(sizeof(token));
-			strcpy(arr[i], token);
-		}
-		arr[i] = NULL;
 		pid = fork();
 		if (pid == 0)
 		{
-			execmd(arr);
+			execmd(args);
 			exit(0);
 		}
 		else
 			waitpid(pid, &status, 0);
 	}
 	printf("\n");
+	free(args);
 	return (0);
 }
