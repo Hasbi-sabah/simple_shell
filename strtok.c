@@ -42,7 +42,6 @@ char **_strtok(char *s, char *delim)
 			tokens[k] = (char *)malloc(len * sizeof(char));
 			found = 1;
 			j = 0;
-			printf("\n");
 		}
 		else
 		{
