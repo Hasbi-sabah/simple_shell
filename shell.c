@@ -1,11 +1,11 @@
 #include "head.h"
 
 /**
- * read_line - read command line
+ * split_line - read command line
  * @input: input command line
  * Return: command decomposition
  */
-char **read_line(char *input)
+char **split_line(char *input)
 {
 	char *input_cpy = NULL;
 	char *delim = " \n";
@@ -30,7 +30,6 @@ int main(void)
 	int status;
 	size_t n = 0;
 	char *input = NULL;
-
 	while (1)
 	{
 		printf("$ ");
@@ -42,8 +41,7 @@ int main(void)
 			free(input);
 			return (0);
 		}
-		printf("no error");
-		args = read_line(input);
+		args = split_line(input);
 		if (args == NULL)
 			return (-1);
 		pid = fork();
