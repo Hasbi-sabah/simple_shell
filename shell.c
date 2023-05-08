@@ -8,16 +8,15 @@
 char **split_line(char *input)
 {
 	char *input_cpy = NULL;
-	char *delim = " \n";
 
-	input_cpy = malloc(sizeof(char) * (strlen(input) + 1));
+	input_cpy = malloc(strlen(input) + 1);
 	if (!input_cpy)
 	{
 		printf("Womp womp woomp, sorry, no can do!");
 		return (NULL);
 	}
 	strcpy(input_cpy, input);
-	return (_strtok(input_cpy, delim));
+	return (_strtok(input_cpy, " \n"));
 }
 /**
  * main - simple shell program
@@ -41,11 +40,7 @@ int main(void)
 			free(input);
 			return (0);
 		}
-<<<<<<< HEAD
 		args = split_line(input);
-=======
-		args = read_line(input);
->>>>>>> a4c4795fb1a040a5c939075dc0ad9f38acf5266c
 		if (args == NULL)
 			return (-1);
 		pid = fork();
