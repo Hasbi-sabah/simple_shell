@@ -28,8 +28,8 @@ char **_strtok(char *s, char *delim)
 	size_t i, len = strlen(s);
 	int j = 0, k = 0, found = 0;
 
-	tokens = (char **)malloc(len * sizeof(char));
-	*tokens = (char *)malloc(len * sizeof(char));
+	tokens = (char **)malloc(len * sizeof(char *));
+	*tokens = (char *)malloc(len);
 	for (i = 0; i < len; i++)
 	{
 		if (exists_within(s[i], delim))
@@ -39,7 +39,7 @@ char **_strtok(char *s, char *delim)
 				tokens[k][++j] = '\0';
 				k++;
 			}
-			tokens[k] = (char *)malloc(len * sizeof(char));
+			tokens[k] = (char *)malloc(len);
 			found = 1;
 			j = 0;
 			printf("\n");
