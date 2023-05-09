@@ -21,12 +21,14 @@ void cmd_selector(const char *cmd, va_list va)
 }
 /**
  * execmd - execute
- * @args: argument array
+ * @arr: argument array
+ * @name: name
+ * Return: none
  */
 void execmd(char **arr, char *name)
 {
-	char *comm = NULL;
-	char *env;
+	char *comm = NULL, *env;
+
 	if (arr)
 	{
 		comm = arr[0];

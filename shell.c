@@ -17,13 +17,15 @@ char **split_line(char *input)
 }
 /**
  * main - simple shell program
+ * @argc: arguments count
+ * @args: arguments set
  * Return: 0
  */
 int main(int argc, char **args)
 {
 	pid_t pid;
 	int status;
-	char *input = NULL, *name = args[0];
+	char *input, *name = args[0];
 
 	(void) argc;
 	while (1)
@@ -36,6 +38,7 @@ int main(int argc, char **args)
 			free(input);
 			return (0);
 		}
+		printf("%s\n", input);
 		args = split_line(input);
 		if (args == NULL)
 			return (-1);

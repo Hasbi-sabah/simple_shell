@@ -7,5 +7,6 @@
  */
 int _getline(char **line)
 {
-	return(scanf("%s", *line));
+	*line = malloc(1024);
+	return (scanf("%s", *line));
 }
