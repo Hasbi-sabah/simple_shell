@@ -38,7 +38,7 @@ char **_strtok(char *s, char *delim)
 				break;
 			tokens[k] = (char *)malloc(len);
 			found = 1;
-			j = 0;
+			j = 0;printf("\n");
 		}
 		else
 		{
