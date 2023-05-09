@@ -27,7 +27,6 @@ int main(void)
 	char **args = NULL;
 	pid_t pid;
 	int status;
-	size_t n = 0;
 	char *input = NULL;
 
 	while (1)
@@ -35,7 +34,7 @@ int main(void)
 		printf("$ ");
 		if (args != NULL)
 			free(args);
-		if (getline(&input, &n, stdin) == -1)
+		if (_getline(&input) == -1)
 		{
 			printf("Shell has left the chat\n");
 			free(input);

@@ -11,6 +11,7 @@
 void execmd(char **);
 char *get_location(char *);
 char **_strtok(char *, char *);
+int _getline(char **);
 /**
  *struct cmd_executer - Structure
  *@cmd: cmd name
