@@ -7,14 +7,9 @@
  */
 int exists_within(char c, char *s)
 {
-	size_t i;
-
-	for (i = 0; i < strlen(s); i++)
-	{
-		if (s[i] == c)
-			return (1);
-	}
-	return (0);
+	if (*s == '\0')
+		return (c == '\0');
+	return (s[i] == c ? 1 : exists_within(c, s + 1));
 }
 /**
  * _strtok - check code
@@ -39,6 +34,8 @@ char **_strtok(char *s, char *delim)
 				tokens[k][++j] = '\0';
 				k++;
 			}
+			if (s[i] == '\n')
+				break;
 			tokens[k] = (char *)malloc(len);
 			found = 1;
 			j = 0;

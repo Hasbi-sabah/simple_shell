@@ -29,6 +29,7 @@ int main(void)
 	int status;
 	size_t n = 0;
 	char *input = NULL;
+
 	while (1)
 	{
 		printf("$ ");
