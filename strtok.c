@@ -8,8 +8,8 @@
 int exists_within(char c, char *s)
 {
 	if (*s == '\0')
-		return (c == '\0');
-	return (*s == c ? 1 : exists_within(c, s + 1));
+		return (c == *s);
+	return (c == *s ? 1 : exists_within(c, s + 1));
 }
 /**
  * _strtok - check code
