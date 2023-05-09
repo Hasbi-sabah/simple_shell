@@ -8,7 +8,6 @@
 char **read_line(char *input)
 {
 	char *input_cpy = NULL;
-	char *delim = " \n";
 
 	input_cpy = malloc(sizeof(char) * (strlen(input) + 1));
 	if (!input_cpy)
@@ -17,7 +16,7 @@ char **read_line(char *input)
 		return (NULL);
 	}
 	strcpy(input_cpy, input);
-	return (_strtok(input_cpy, delim));
+	return (_strtok(input_cpy, " \n"));
 }
 /**
  * main - simple shell program
