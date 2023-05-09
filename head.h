@@ -8,7 +8,8 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdarg.h>
-void execmd(char **);
+extern char **environ;
+void execmd(char **, char *);
 char *get_location(char *);
 char **_strtok(char *, char *);
 int _getline(char **);

@@ -1,4 +1,5 @@
 #include "head.h"
+
 /**
  * cmd_selector - check code
  * @cmd: command name
@@ -22,15 +23,23 @@ void cmd_selector(const char *cmd, va_list va)
  * execmd - execute
  * @args: argument array
  */
-
-void execmd(char **args)
+void execmd(char **arr, char *name)
 {
-	char *cmd = NULL;
-
-	if (args)
+	char *comm = NULL;
+	char *env;
+	if (arr)
 	{
-		cmd = args[0];
-		if (execve(cmd, args, NULL) == -1)
-			perror("Error");
+		comm = arr[0];
+		if (strstr(comm, "echo"))
+		{
+			env = getenv(arr[1] + 1);
+			if (env)
+			{
+				arr[1] = malloc(sizeof(env));
+				strcpy(arr[1], env);
+			}
+		}
+		if (execve(comm, arr, environ) == -1)
+			perror(name);
 	}
 }
