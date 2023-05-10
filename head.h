@@ -15,7 +15,7 @@ char *get_location(char *);
 char **_strtok(char *, char *);
 int _getline(char **);
 char **get_commands(void);
-int is_command(char *);
+int is_command(const char *);
 /**
  *struct cmd_executer - Structure
  *@cmd: cmd name

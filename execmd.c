@@ -32,22 +32,25 @@ void execmd(char **arr, char *name)
 	if (arr)
 	{
 		comm = arr[0];
-		if (is_command(comm))
+		if (execve(comm, arr, environ) == -1)
 		{
-			strcat(path, comm);
-			strcpy(comm, path);
-			strcpy(arr[0], path);
-			if (strstr(comm, "echo"))
+			if (is_command(comm))
 			{
-				env = getenv(arr[1] + 1);
-				if (env)
+				strcat(path, comm);
+				strcpy(comm, path);
+				strcpy(arr[0], path);
+				if (strstr(comm, "echo"))
 				{
-					arr[1] = malloc(sizeof(env));
-					strcpy(arr[1], env);
+					env = getenv(arr[1] + 1);
+					if (env)
+					{
+						arr[1] = malloc(sizeof(env));
+						strcpy(arr[1], env);
+					}
 				}
 			}
-		if (execve(comm, arr, environ) == -1)
-			perror(name);
+			if (execve(comm, arr, environ) == -1)
+				perror(name);
 		}
 		else
 			printf("%s: 1: %s: not found\n", name, comm);

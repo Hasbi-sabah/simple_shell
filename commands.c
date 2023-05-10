@@ -1,6 +1,6 @@
 #include "head.h"
 
-int is_command(char *comm)
+int is_command(const char *comm)
 {
 	DIR *dir;
 	char **cmds = NULL;
