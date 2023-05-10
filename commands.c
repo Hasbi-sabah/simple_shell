@@ -3,35 +3,40 @@
 int is_command(const char *comm)
 {
 	DIR *dir;
-	char **cmds = NULL;
-	int i = 0;
+	char **cmds = NULL, *path, **path_arr;
+	int i = 0, j;
 	struct dirent *f;
 
-	dir = opendir("/bin");
-	while ((f = readdir(dir)))
+	path = getenv("PATH");
+	path_arr = _strtok(path, ":");
+	for (j = 0; path_arr[j]; j++)
 	{
-		if (f->d_type == DT_REG)
-			i++;
-	}
-	closedir(dir);
-	dir = opendir("/bin");
-	cmds = malloc((i + 1) * sizeof(char *));
-	i = 0;
-	while ((f = readdir(dir)))
-	{
-		if (f->d_type == DT_REG)
+		dir = opendir(path_arr[j]);
+		while ((f = readdir(dir)))
 		{
-			cmds[i] = malloc(sizeof(f->d_name));
-			strcpy(cmds[i], f->d_name);
-			i++;
+			if (f->d_type == DT_REG)
+				i++;
 		}
+		closedir(dir);
+		dir = opendir(path_arr[j]);
+		cmds = malloc((i + 1) * sizeof(char *));
+		i = 0;
+		while ((f = readdir(dir)))
+		{
+			if (f->d_type == DT_REG)
+			{
+				cmds[i] = malloc(sizeof(f->d_name));
+				strcpy(cmds[i], f->d_name);
+				i++;
+			}
+		}
+		closedir(dir);
+		for (i = 0; cmds[i]; i++)
+		{
+			if (strcmp(comm, cmds[i]) == 0)
+				return (1);
+		}
+		free(cmds);
 	}
-	closedir(dir);
-	for (i = 0; cmds[i]; i++)
-	{
-		if (strcmp(comm, cmds[i]) == 0)
-			return (1);
-	}
-	free(cmds);
 	return (0);
 }
