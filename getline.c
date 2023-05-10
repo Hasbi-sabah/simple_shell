@@ -8,5 +8,5 @@
 int _getline(char **line)
 {
 	*line = malloc(1024);
-	return (scanf("%s", *line));
+	return (read(STDIN_FILENO, *line, 1024));
 }

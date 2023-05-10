@@ -25,16 +25,15 @@ int main(int argc, char **args)
 {
 	pid_t pid;
 	int status;
-	size_t n = 0;
 	char *input, *name = args[0];
 
 	(void) argc;
 	while (1)
 	{
-		printf("$ ");
+		write(1, "$ ", 2);
 		if (args != NULL)
 			args = NULL;
-		if (getline(&input, &n, stdin) == -1)
+		if (_getline(&input) <= 0)
 		{
 			free(input);
 			return (0);
