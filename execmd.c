@@ -27,21 +27,31 @@ void cmd_selector(const char *cmd, va_list va)
  */
 void execmd(char **arr, char *name)
 {
-	char *comm = NULL, *env;
+	char *comm = NULL, *env, path[] = "/bin/";
 
 	if (arr)
 	{
 		comm = arr[0];
-		if (strstr(comm, "echo"))
+		printf("%s, %s\n", arr[0], arr[1]);
+		if (is_command(comm))
 		{
-			env = getenv(arr[1] + 1);
-			if (env)
+			strcat(path, comm);
+			strcpy(comm, path);
+			strcpy(arr[0], path);
+			printf("%s, %s\n", arr[0], arr[1]);
+			if (strstr(comm, "echo"))
 			{
-				arr[1] = malloc(sizeof(env));
-				strcpy(arr[1], env);
+				env = getenv(arr[1] + 1);
+				if (env)
+				{
+					arr[1] = malloc(sizeof(env));
+					strcpy(arr[1], env);
+				}
 			}
-		}
 		if (execve(comm, arr, environ) == -1)
 			perror(name);
+		}
+		else
+			printf("not a comm");
 	}
 }

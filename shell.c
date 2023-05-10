@@ -38,7 +38,6 @@ int main(int argc, char **args)
 			free(input);
 			return (0);
 		}
-		printf("%s\n", input);
 		args = split_line(input);
 		if (args == NULL)
 			return (-1);
@@ -52,6 +51,7 @@ int main(int argc, char **args)
 		}
 		else
 			waitpid(pid, &status, 0);
+		free(args);
 	}
 	printf("\n");
 	return (0);

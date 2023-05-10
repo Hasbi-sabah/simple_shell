@@ -8,11 +8,14 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdarg.h>
+#include <dirent.h>
 extern char **environ;
 void execmd(char **, char *);
 char *get_location(char *);
 char **_strtok(char *, char *);
 int _getline(char **);
+char **get_commands(void);
+int is_command(char *);
 /**
  *struct cmd_executer - Structure
  *@cmd: cmd name
