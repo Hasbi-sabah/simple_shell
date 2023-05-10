@@ -25,6 +25,7 @@ int main(int argc, char **args)
 {
 	pid_t pid;
 	int status;
+	size_t n = 0;
 	char *input, *name = args[0];
 
 	(void) argc;
@@ -33,7 +34,7 @@ int main(int argc, char **args)
 		printf("$ ");
 		if (args != NULL)
 			args = NULL;
-		if (_getline(&input) == -1)
+		if (getline(&input, &n, stdin) == -1)
 		{
 			free(input);
 			return (0);

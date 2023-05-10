@@ -32,13 +32,11 @@ void execmd(char **arr, char *name)
 	if (arr)
 	{
 		comm = arr[0];
-		printf("%s, %s\n", arr[0], arr[1]);
 		if (is_command(comm))
 		{
 			strcat(path, comm);
 			strcpy(comm, path);
 			strcpy(arr[0], path);
-			printf("%s, %s\n", arr[0], arr[1]);
 			if (strstr(comm, "echo"))
 			{
 				env = getenv(arr[1] + 1);
@@ -52,6 +50,6 @@ void execmd(char **arr, char *name)
 			perror(name);
 		}
 		else
-			printf("not a comm");
+			printf("%s: 1: %s: not found\n", name, comm);
 	}
 }
