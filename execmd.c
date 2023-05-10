@@ -27,15 +27,16 @@ void cmd_selector(const char *cmd, va_list va)
  */
 void execmd(char **arr, char *name)
 {
-	char *comm = NULL, *env, path[] = "/bin/";
+	char *comm = NULL, *env, *path;
 
 	if (arr)
 	{
 		comm = arr[0];
 		if (execve(comm, arr, environ) == -1)
 		{
-			if (is_command(comm))
+			if ((path = is_command(comm)))
 			{
+				strcat(path, "/");
 				strcat(path, comm);
 				strcpy(comm, path);
 				strcpy(arr[0], path);
@@ -50,7 +51,7 @@ void execmd(char **arr, char *name)
 				}
 			}
 			if (execve(comm, arr, environ) == -1)
-				perror(name);
+				printf("%s: 1: %s: not found\n", name, comm);
 		}
 		else
 			printf("%s: 1: %s: not found\n", name, comm);

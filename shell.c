@@ -36,6 +36,7 @@ int main(int argc, char **args)
 		if (_getline(&input) <= 0)
 		{
 			free(input);
+			write(1, "\n", 1);
 			return (0);
 		}
 		args = split_line(input);

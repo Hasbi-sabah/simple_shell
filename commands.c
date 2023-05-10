@@ -1,6 +1,6 @@
 #include "head.h"
 
-int is_command(const char *comm)
+char *is_command(const char *comm)
 {
 	DIR *dir;
 	char **cmds = NULL, *path, **path_arr;
@@ -34,9 +34,9 @@ int is_command(const char *comm)
 		for (i = 0; cmds[i]; i++)
 		{
 			if (strcmp(comm, cmds[i]) == 0)
-				return (1);
+				return (path_arr[j]);
 		}
 		free(cmds);
 	}
-	return (0);
+	return (NULL);
 }
