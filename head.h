@@ -10,20 +10,12 @@
 #include <stdarg.h>
 #include <dirent.h>
 extern char **environ;
-void execmd(char **, char *);
-char *get_location(char *);
 char **_strtok(char *, char *);
 int _getline(char **);
-char **get_commands(void);
-char *is_command(const char *);
-/**
- *struct cmd_executer - Structure
- *@cmd: cmd name
- *@exe_func: execution function
- */
-typedef struct
-{
-	char *cmd;
-	void (*exe_func)(va_list);
-} cmd_executer;
+void check_fork_error(char *, char **, char *);
+void execmd(char **, char *);
+void get_cmds(char ***, char *);
+char *is_command(char *);
+char *is_path(char *);
+void _free(char **);
 #endif

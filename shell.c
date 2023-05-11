@@ -23,36 +23,33 @@ char **split_line(char *input)
  */
 int main(int argc, char **args)
 {
-	pid_t pid;
-	int status;
+	int flag;
 	char *input, *name = args[0];
 
 	(void) argc;
+
 	while (1)
 	{
+		args = NULL;
 		write(1, "$ ", 2);
-		if (args != NULL)
-			args = NULL;
 		if (_getline(&input) <= 0)
 		{
 			free(input);
 			write(1, "\n", 1);
-			return (0);
+			exit(0);
 		}
+		printf("-%s\n", input);
+		flag = 0;
+		if (strcmp(input, "\n") == 0)
+			flag = 1;
 		args = split_line(input);
+		printf("-%s\n", args[0]);
 		if (args == NULL)
 			return (-1);
 		if (strcmp(args[0], "exit") == 0)
 			return (0);
-		pid = fork();
-		if (pid == 0)
-		{
-			execmd(args, name);
-			exit(0);
-		}
-		else
-			waitpid(pid, &status, 0);
-		free(args);
+		if (!flag)
+			check_fork_error(args[0], args, name);
 	}
 	printf("\n");
 	return (0);

@@ -1,23 +1,44 @@
 #include "head.h"
 
-/**
- * cmd_selector - check code
- * @cmd: command name
- * @va: variadic list
- * Return: none
- */
-void cmd_selector(const char *cmd, va_list va)
+void check_fork_error(char *comm, char **args, char *name)
 {
-	cmd_executer executers[] = {
-		{"exit", NULL},
-		{NULL, NULL}
-	};
-	int j = 0;
+	pid_t pid;
+	int status;
+	static int i = 0;
+	int j, k;
+	char *error_msg = NULL, temp[20], *p = NULL;
 
-	while (executers[j].exe_func != NULL && strcmp(cmd, executers[j].cmd) != 0)
-		j++;
-	if (executers[j].exe_func != NULL)
-		executers[j].exe_func(va);
+	i++;
+	printf("-%s\n", comm);
+	if (is_path(comm) || (p = is_command(comm)))
+	{
+		pid = fork();
+		if (pid == 0)
+		{
+			execmd(args, p);
+			exit(0);
+		}
+		else
+			waitpid(pid, &status, 0);
+		free(comm);
+	}
+	else
+	{
+		strcat(error_msg, name);
+		strcat(error_msg, ": ");
+		for (j = 0, k = i; k > 0; j++)
+			k /= 10;
+		for (k = i; k > 0; j--)
+		{
+			temp[j] = k % 10 + '0';
+			k /= 10;
+		}
+		strcat(error_msg, temp);
+		strcat(error_msg, ": ");
+		strcat(error_msg, comm);
+		strcat(error_msg, ": not found\n");
+		write(2, error_msg, strlen(error_msg));
+	}
 }
 /**
  * execmd - execute
@@ -25,35 +46,26 @@ void cmd_selector(const char *cmd, va_list va)
  * @name: name
  * Return: none
  */
-void execmd(char **arr, char *name)
+void execmd(char **arr, char *path)
 {
-	char *comm = NULL, *env, *path;
+	char *comm = NULL, *env;
 
-	if (arr)
+	comm = arr[0];
+	if (path)
 	{
-		comm = arr[0];
-		if (execve(comm, arr, environ) == -1)
+		strcat(path, "/");
+		strcat(path, comm);
+		strcpy(comm, path);
+		strcpy(arr[0], path);
+		if (strstr(comm, "echo"))
 		{
-			if ((path = is_command(comm)))
+			env = getenv(arr[1] + 1);
+			if (env)
 			{
-				strcat(path, "/");
-				strcat(path, comm);
-				strcpy(comm, path);
-				strcpy(arr[0], path);
-				if (strstr(comm, "echo"))
-				{
-					env = getenv(arr[1] + 1);
-					if (env)
-					{
-						arr[1] = malloc(sizeof(env));
-						strcpy(arr[1], env);
-					}
-				}
+				arr[1] = malloc(sizeof(env));
+				strcpy(arr[1], env);
 			}
-			if (execve(comm, arr, environ) == -1)
-				printf("%s: 1: %s: not found\n", name, comm);
 		}
-		else
-			printf("%s: 1: %s: not found\n", name, comm);
 	}
+	execve(comm, arr, environ);
 }
