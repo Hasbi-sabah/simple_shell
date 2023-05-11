@@ -36,7 +36,7 @@ char *is_command(char *comm)
 			if (strcmp(comm, cmds[i]) == 0)
 				return (path_arr[j]);
 		}
-		_free(cmds);
 	}
+	_free(cmds);
 	return (NULL);
 }

@@ -24,7 +24,8 @@ void check_fork_error(char *comm, char **args, char *name)
 	}
 	else
 	{
-		strcat(error_msg, name);
+		printf("here??\n");
+		strcpy(error_msg, name);
 		strcat(error_msg, ": ");
 		for (j = 0, k = i; k > 0; j++)
 			k /= 10;
