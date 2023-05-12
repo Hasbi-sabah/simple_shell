@@ -1,18 +1,5 @@
 #include "head.h"
-/**
- * split_line - read command line
- * @input: input command line
- * Return: command decomposition
- */
-char **split_line(char *input)
-{
-	char *input_cpy = NULL;
 
-	input_cpy = strdup(input);
-	if (!input_cpy)
-		return (NULL);
-	return (_strtok(input_cpy, " \n"));
-}
 /**
  * exists_within - check code
  * @c: character
