@@ -18,11 +18,9 @@ void check_fork_error(char *, char **, char *);
 void execmd(char **, char *, char *);
 void get_cmds(char ***, char *);
 void _free(char **);
-void exit_function(int, char **);
 void _fork(char *, char **);
 int cmd_selector(const char *, char **);
 int args_count(char **);
-void change_dir(int, char **);
 char *is_valid(char *);
 char *int_to_str(int, char *);
 int args_count(char **);
@@ -31,4 +29,7 @@ typedef struct
 	char *cmd;
 	void (*exe_func)(int, char **);
 } cmd_executer;
+void change_dir(int, char **);
+void exit_function(int, char **);
+void export(int, char **);
 #endif

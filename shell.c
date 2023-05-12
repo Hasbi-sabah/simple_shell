@@ -20,7 +20,7 @@ int main(int argc, char **args)
 			write(1, "\n", 1);
 			continue;
 		}
-		arr = split_line(input);
+		arr = _strtok(input, " \n");
 		if (arr == NULL)
 		{
 			free(input);
