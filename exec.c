@@ -48,20 +48,14 @@ void execmd(char **arr, char *name, char *path)
 	if (arr)
 	{
 		comm = arr[0];
-		if (path)
+		strcpy(arr[0], path);
+		if (strstr(comm, "echo"))
 		{
-			strcat(path, "/");
-			strcat(path, comm);
-			strcpy(comm, path);
-			strcpy(arr[0], path);
-			if (strstr(comm, "echo"))
+			env = getenv(arr[1] + 1);
+			if (env)
 			{
-				env = getenv(arr[1] + 1);
-				if (env)
-				{
-					arr[1] = malloc(sizeof(env));
-					strcpy(arr[1], env);
-				}
+				arr[1] = malloc(sizeof(env));
+				strcpy(arr[1], env);
 			}
 		}
 		execve(comm, arr, environ);
@@ -72,10 +66,12 @@ void _fork(char *name, char **arr)
 {
 	pid_t pid;
 	int status;
-	char *path = NULL, *comm = NULL;
+	static int i = 0;
+	char *path = NULL, *comm = NULL, *error, *i_str;
 
+	i++;
 	comm = arr[0];
-	if (is_path(comm) || (path = is_command(comm)))
+	if ((path = is_valid(comm)))
 	{
 		pid = fork();
 		if (pid == 0)
@@ -87,7 +83,32 @@ void _fork(char *name, char **arr)
 			waitpid(pid, &status, 0);
 	}
 	else
-		printf("error\n");
+	{
+		i_str = malloc(20);
+		i_str = int_to_str(i, i_str);
+		error = malloc(strlen(i_str) + strlen(name) + strlen(comm) + strlen(": : : not found\n") + 4);
+		strcpy(error, name), strcat(error, ": ");
+		strcat(error, i_str), strcat(error, ": ");
+		strcat(error, comm), strcat(error, ": not found\n");
+		write(2, error, strlen(error));
+		free(error);
+		free(i_str);
+	}
 	free(path);
 	free(comm);
+}
+char *int_to_str(int n, char *s)
+{
+	int i, j;
+	char temp;
+
+	for (i = 0; n > 0; i++, n /= 10)
+		s[i] = n % 10 + '0';
+	for (j = 0; j < i / 2; j++)
+	{
+		temp = s[j];
+		s[j] = s[i - j - 1];
+		s[i - j - 1] = temp;
+	}
+	return (s);
 }
