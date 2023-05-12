@@ -6,7 +6,7 @@ void check_fork_error(char *comm, char **args, char *name)
 	int status;
 	static int i = 0;
 	int j, k;
-	char *error_msg = NULL, temp[20], *p = NULL;
+	char temp[20], *p = NULL;
 
 	i++;
 	printf("-%s\n", comm);
@@ -20,13 +20,11 @@ void check_fork_error(char *comm, char **args, char *name)
 		}
 		else
 			waitpid(pid, &status, 0);
-		free(comm);
 	}
 	else
 	{
 		printf("here??\n");
-		strcpy(error_msg, name);
-		strcat(error_msg, ": ");
+		strcat(name, ": ");
 		for (j = 0, k = i; k > 0; j++)
 			k /= 10;
 		for (k = i; k > 0; j--)
@@ -34,11 +32,11 @@ void check_fork_error(char *comm, char **args, char *name)
 			temp[j] = k % 10 + '0';
 			k /= 10;
 		}
-		strcat(error_msg, temp);
-		strcat(error_msg, ": ");
-		strcat(error_msg, comm);
-		strcat(error_msg, ": not found\n");
-		write(2, error_msg, strlen(error_msg));
+		strcat(name, temp);
+		strcat(name, ": ");
+		strcat(name, comm);
+		strcat(name, ": not found\n");
+		write(2, name, strlen(name));
 	}
 }
 /**

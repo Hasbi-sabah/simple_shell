@@ -1,5 +1,19 @@
 #include "head.h"
 /**
+ * split_line - read command line
+ * @input: input command line
+ * Return: command decomposition
+ */
+char **split_line(char *input)
+{
+	char *input_cpy = NULL;
+
+	input_cpy = strdup(input);
+	if (!input_cpy)
+		return (NULL);
+	return (_strtok(input_cpy, " \n"));
+}
+/**
  * exists_within - check code
  * @c: character
  * @s: string
@@ -29,13 +43,13 @@ char **_strtok(char *s, char *delim)
 	{
 		if (exists_within(s[i], delim))
 		{
-			if (found == 0)
-			{
-				tokens[k][++j] = '\0';
-				k++;
-			}
 			if (s[i] == '\n')
 				break;
+			if (found == 0 && i > 0)
+			{
+				tokens[k][j] = '\0';
+				k++;
+			}
 			tokens[k] = (char *)malloc(len);
 			found = 1;
 			j = 0;
@@ -45,6 +59,11 @@ char **_strtok(char *s, char *delim)
 			tokens[k][j++] = s[i];
 			found = 0;
 		}
+	}
+	while (strlen(tokens[k]) == 0)
+	{
+		tokens[k] = NULL;
+		k--;
 	}
 	return (tokens);
 }
