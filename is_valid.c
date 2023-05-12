@@ -1,5 +1,10 @@
 #include "head.h"
 
+/**
+ * is_valid - is valid command
+ * @comm: command
+ * Return: string
+ */
 char *is_valid(char *comm)
 {
 	int i;
