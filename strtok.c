@@ -47,7 +47,7 @@ char **_strtok(char *s, char *delim)
 			found = 0;
 		}
 	}
-	while (tokens[k] == NULL || strlen(tokens[k]) == 0)
+	while (strlen(tokens[k]) == 0)
 	{
 		tokens[k] = NULL;
 		k--;
