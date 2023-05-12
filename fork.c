@@ -36,7 +36,8 @@ void _fork(char *name, char **arr)
 
 	i++;
 	comm = arr[0];
-	if ((path = is_valid(comm)))
+	path = is_valid(comm);
+	if (path != NULL)
 	{
 		pid = fork();
 		if (pid == 0)

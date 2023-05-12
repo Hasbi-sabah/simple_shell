@@ -9,7 +9,6 @@
 int main(int argc, char **args)
 {
 	char *input, *name = args[0], **arr;
-	int i;
 
 	(void) argc;
 	while (1)
@@ -31,12 +30,7 @@ int main(int argc, char **args)
 		printf("%d\n", args_count(arr));
 		if (args_count(arr) > 0 && cmd_selector(arr[0], arr) == 0)
 			_fork(name, arr);
-		i = 0;
-		while (arr[i] != NULL)
-		{
-			free(arr[i]);
-			i++;
-		}
+	        _free(arr);
 	}
 	write(1, "\n", 1);
 	return (0);

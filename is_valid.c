@@ -11,10 +11,8 @@ char *is_valid(char *comm)
 	struct stat buf;
 	char *path, **path_arr;
 
-	path = getenv("PATH");
-	path_arr = _strtok(path, ":");
-	path = NULL;
-	for (i = 0; path_arr[i]; i++, free(path))
+	path_arr = _strtok(getenv("PATH"), ":");
+	for (i = 0; path_arr[i]; i++)
 	{
 		if (!strstr(comm, "/"))
 		{
