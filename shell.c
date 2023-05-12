@@ -18,16 +18,15 @@ int main(int argc, char **args)
 		{
 			free(input);
 			write(1, "\n", 1);
-			return (0);
+			continue;
 		}
 		arr = split_line(input);
-		free(input);
 		if (arr == NULL)
 		{
+			free(input);
 			write(1, "\n", 1);
 			continue;
 		}
-		printf("%d\n", args_count(arr));
 		if (args_count(arr) > 0 && cmd_selector(arr[0], arr) == 0)
 			_fork(name, arr);
 	        _free(arr);
