@@ -8,6 +8,7 @@
  */
 int main(int argc, char **args)
 {
+	char op = 0;
 	char *input, *leftover = NULL, *name = args[0], **arr;
 
 	(void) argc;
@@ -27,24 +28,32 @@ int main(int argc, char **args)
 			input = leftover;
 		if (strcmp(input, "\n"))
 		{
-			leftover = check_ops(&input);
+			leftover = check_ops(&input, &op);
 			arr = _strtok(input, " \n");
-			if (args_count(arr) > 0 && cmd_selector(arr[0], arr) == 0)
+			if (cmd_selector(arr[0], arr) == 0)
 				_fork(name, arr);
 		}
 	}
 	write(1, "\n", 1);
 	return (0);
 }
-char *check_ops(char **input)
+char *check_ops(char **input, char *op)
 {
 	char *leftover, *temp;
 
-	leftover = strpbrk(*input, ";");
-	if (leftover)
+	if ((leftover = strpbrk(*input, ";")))
 	{
 		temp = strdup(++leftover);
 		*(--leftover) = '\0';
+		while (*temp == ' ')
+			temp++;
+		return (temp);
+	}
+	else if ((leftover = strpbrk(*input, "&|")))
+	{
+		*op = leftover[0];
+		temp = strdup(leftover + 2);
+		*(leftover) = '\0';
 		while (*temp == ' ')
 			temp++;
 		return (temp);
