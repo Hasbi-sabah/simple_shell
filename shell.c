@@ -1,6 +1,26 @@
 #include "head.h"
 
 /**
+ * check_ops - check code
+ * @inputs: arguments set
+ * Return: string
+ */
+char *check_ops(char **input)
+{
+	char *leftover, *temp;
+
+	leftover = strpbrk(*input, ";");
+	if (leftover)
+	{
+		temp = strdup(++leftover);
+		*(--leftover) = '\0';
+		while (*temp == ' ')
+			temp++;
+		return (temp);
+	}
+	return (NULL);
+}
+/**
  * main - simple shell program
  * @argc: arguments count
  * @args: arguments set
@@ -35,19 +55,4 @@ int main(int argc, char **args)
 	}
 	write(1, "\n", 1);
 	return (0);
-}
-char *check_ops(char **input)
-{
-	char *leftover, *temp;
-
-	leftover = strpbrk(*input, ";");
-	if (leftover)
-	{
-		temp = strdup(++leftover);
-		*(--leftover) = '\0';
-		while (*temp == ' ')
-			temp++;
-		return (temp);
-	}
-	return (NULL);
 }
