@@ -24,7 +24,12 @@ int args_count(char **);
 char *is_valid(char *);
 char *int_to_str(int, char *);
 int args_count(char **);
-typedef struct
+/**
+ * struct cmd_executer - structure
+ * @cmd: command
+ * @exe_func: function
+ */
+typedef struct cmd_executer
 {
 	char *cmd;
 	void (*exe_func)(int, char **);

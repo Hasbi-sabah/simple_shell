@@ -18,18 +18,20 @@ int main(int argc, char **args)
 		{
 			free(input);
 			write(1, "\n", 1);
-			continue;
+			return(0);
 		}
-		arr = _strtok(input, " \n");
-		if (arr == NULL)
+		if (strcmp(input, "\n"))
 		{
-			free(input);
-			write(1, "\n", 1);
-			continue;
+			arr = _strtok(input, " \n");
+			if (arr == NULL)
+			{
+				free(input);
+				write(1, "\n", 1);
+				return(0);
+			}
+			if (args_count(arr) > 0 && cmd_selector(arr[0], arr) == 0)
+				_fork(name, arr);
 		}
-		if (args_count(arr) > 0 && cmd_selector(arr[0], arr) == 0)
-			_fork(name, arr);
-	        _free(arr);
 	}
 	write(1, "\n", 1);
 	return (0);

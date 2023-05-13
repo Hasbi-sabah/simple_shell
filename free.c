@@ -1,5 +1,8 @@
 #include "head.h"
-
+/**
+ * _free - frees
+ * @arr: arr
+ */
 void _free(char **arr)
 {
 	int i;

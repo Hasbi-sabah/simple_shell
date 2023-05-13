@@ -4,6 +4,7 @@
  * execmd - execute
  * @arr: argument array
  * @name: name
+ * @path: path
  * Return: none
  */
 void execmd(char **arr, char *name, char *path)

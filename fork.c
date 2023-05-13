@@ -22,7 +22,7 @@ char *int_to_str(int n, char *s)
 	return (s);
 }
 /**
- * fork - check code
+ * _fork - check code
  * @name: command name
  * @arr: arguments
  * Return: none
@@ -31,7 +31,7 @@ void _fork(char *name, char **arr)
 {
 	pid_t pid;
 	int status;
-	static int i = 0;
+	static int i;
 	char *path = NULL, *comm = NULL, *error, *i_str;
 
 	i++;
@@ -52,7 +52,8 @@ void _fork(char *name, char **arr)
 	{
 		i_str = malloc(20);
 		i_str = int_to_str(i, i_str);
-		error = malloc(strlen(i_str) + strlen(name) + strlen(comm) + strlen(": : : not found\n") + 4);
+		error = malloc(strlen(i_str) + strlen(name)
+				+ strlen(comm) + strlen(": : : not found\n") + 4);
 		strcpy(error, name), strcat(error, ": ");
 		strcat(error, i_str), strcat(error, ": ");
 		strcat(error, comm), strcat(error, ": not found\n");
@@ -60,6 +61,4 @@ void _fork(char *name, char **arr)
 		free(error);
 		free(i_str);
 	}
-	free(path);
-	free(comm);
 }
