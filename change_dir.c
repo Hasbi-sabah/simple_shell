@@ -9,8 +9,17 @@
 void change_dir(int argc, char **args)
 {
 	int r;
+	char *path, *error;
 
-	r = argc == 1 ? chdir("~") : chdir(args[1]);
+	path = argc == 1 ? "~" : args[1];
+	r = chdir(path);
 	if (r < 0)
-		perror("chdir() error");
+	{
+		error = malloc(strlen(path) + 4 + 29);
+		strcpy(error, "cd: ");
+		strcat(error, path);
+		strcat(error, ": No such file or directory\n");
+		write(2, error, strlen(error));
+		free(error);
+	}
 }

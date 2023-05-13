@@ -8,7 +8,7 @@
  */
 int main(int argc, char **args)
 {
-	char *input, *name = args[0];
+	char *input, *name = args[0], **arr;
 
 	(void) argc;
 	while (1)
@@ -18,18 +18,18 @@ int main(int argc, char **args)
 		{
 			free(input);
 			write(1, "\n", 1);
-			return (0);
+			continue;
 		}
-		if (strcmp(input, "\n"))
+		arr = _strtok(input, " \n");
+		if (arr == NULL)
 		{
-			args = NULL;
-			args = split_line(input);
 			free(input);
-			if (args == NULL)
-				return (-1);
-			if (cmd_selector(args[0], args) == 0)
-				_fork(name, args);
+			write(1, "\n", 1);
+			continue;
 		}
+		if (args_count(arr) > 0 && cmd_selector(arr[0], arr) == 0)
+			_fork(name, arr);
+	        _free(arr);
 	}
 	write(1, "\n", 1);
 	return (0);
