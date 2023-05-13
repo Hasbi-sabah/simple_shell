@@ -11,7 +11,7 @@ void change_dir(int argc, char **args)
 	int r;
 	char *path, *error;
 
-	path = argc == 1 ? "~" : args[1];
+	path = argc == 1 || strcmp(args[1], "~") == 0 ? getenv("HOME") : args[1];
 	r = chdir(path);
 	if (r < 0)
 	{
@@ -22,4 +22,5 @@ void change_dir(int argc, char **args)
 		write(2, error, strlen(error));
 		free(error);
 	}
+	setenv("PWD", path, 1);
 }
