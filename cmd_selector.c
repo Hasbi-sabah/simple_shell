@@ -12,6 +12,7 @@ int cmd_selector(const char *cmd, char **args)
 		{"exit", exit_function},
 		{"cd", change_dir},
 		{"export", export},
+		{"unset", unset},
 		{NULL, NULL}
 	};
 	int j = 0;

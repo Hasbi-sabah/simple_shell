@@ -38,4 +38,5 @@ typedef struct cmd_executer
 void change_dir(int, char **);
 void exit_function(int, char **);
 void export(int, char **);
+void unset(int, char **);
 #endif
