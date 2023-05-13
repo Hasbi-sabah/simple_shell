@@ -6,7 +6,7 @@
  * @args: arguments
  * Return: none
  */
-void export(int argc, char **args)
+void unset(int argc, char **args)
 {
         if (argc == 1 || getenv(args[1]) == NULL)
 		write(1, "\n", 1);
