@@ -24,6 +24,7 @@ int args_count(char **);
 char *is_valid(char *);
 char *int_to_str(int, char *);
 int args_count(char **);
+char *check_ops(char **);
 /**
  * struct cmd_executer - structure
  * @cmd: command
