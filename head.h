@@ -33,10 +33,10 @@ char *check_ops(char **);
 typedef struct cmd_executer
 {
 	char *cmd;
-	void (*exe_func)(int, char **);
+	int (*exe_func)(int, char **);
 } cmd_executer;
-void change_dir(int, char **);
-void exit_function(int, char **);
-void export(int, char **);
-void unset(int, char **);
+int change_dir(int, char **);
+int exit_function(int, char **);
+int export(int, char **);
+int unset(int, char **);
 #endif
