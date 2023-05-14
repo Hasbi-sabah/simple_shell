@@ -15,7 +15,7 @@ int exit_function(int n, char **args)
 		if (args[1][i] < '0' || args[1][i] > '9')
 		{
 			write(2, "Illegal number\n", 15);
-			return;
+			return (1);
 		}
 	}
 	if (n > 1)
