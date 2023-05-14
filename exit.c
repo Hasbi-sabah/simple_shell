@@ -4,9 +4,9 @@
  * exit_function - check code
  * @n: arguments count
  * @args: arguments
- * Return: none
+ * Return: success
  */
-void exit_function(int n, char **args)
+int exit_function(int n, char **args)
 {
 	int i = 0;
 
