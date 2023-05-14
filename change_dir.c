@@ -4,10 +4,10 @@
  * change_dir - check code
  * @argc: arguments count
  * @args: arguments
- * Return: none
+ * Return: success
  */
 char previous[1024];
-void change_dir(int argc, char **args)
+int change_dir(int argc, char **args)
 {
 	int r;
 	char *path, *error;
