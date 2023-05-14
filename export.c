@@ -4,9 +4,9 @@
  * export - check code
  * @argc: arguments count
  * @args: arguments
- * Return: none
+ * Return: success
  */
-void export(int argc, char **args)
+int export(int argc, char **args)
 {
 	char **env;
 
