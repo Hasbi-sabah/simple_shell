@@ -39,4 +39,5 @@ int change_dir(int, char **);
 int exit_function(int, char **);
 int export(int, char **);
 int unset(int, char **);
+int echo(int, char **);
 #endif
