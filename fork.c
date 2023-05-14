@@ -30,8 +30,8 @@ char *int_to_str(int n, char *s)
 void _fork(char *name, char **arr)
 {
 	pid_t pid;
-	int status;
 	static int i;
+	int status;
 	char *path = NULL, *comm = NULL, *error, *i_str;
 
 	i++;

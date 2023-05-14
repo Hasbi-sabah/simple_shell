@@ -26,6 +26,8 @@ char *check_ops(char **input)
  * @args: arguments set
  * Return: 0
  */
+int EXIT_STATUS = 0;
+int ERROR_ID = 0;
 int main(int argc, char **args)
 {
 	char *input, *leftover = NULL, *name = args[0], **arr;
@@ -40,7 +42,7 @@ int main(int argc, char **args)
 			{
 				free(input);
 				write(1, "\n", 1);
-				return(0);
+				return (0);
 			}
 		}
 		else
