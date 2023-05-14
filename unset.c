@@ -12,4 +12,5 @@ int unset(int argc, char **args)
 		write(1, "\n", 1);
 	else
 		unsetenv(args[1]);
+	return (1);
 }
