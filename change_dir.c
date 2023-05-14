@@ -24,8 +24,9 @@ int change_dir(int argc, char **args)
 		strcat(error, ": No such file or directory\n");
 		write(2, error, strlen(error));
 		free(error);
-		return;
+		return (1);
 	}
 	getcwd(previous, sizeof(previous));
 	setenv("PWD", path, 1);
+	return (1);
 }
