@@ -13,6 +13,7 @@ int cmd_selector(const char *cmd, char **args)
 		{"cd", change_dir},
 		{"export", export},
 		{"unset", unset},
+		{"echo", NULL},
 		{NULL, NULL}
 	};
 	int j = 0;
@@ -20,9 +21,6 @@ int cmd_selector(const char *cmd, char **args)
 	while (executers[j].exe_func != NULL && strcmp(cmd, executers[j].cmd) != 0)
 		j++;
 	if (executers[j].exe_func != NULL)
-	{
-		executers[j].exe_func(args_count(args), args);
-		return (1);
-	}
+		return (executers[j].exe_func(args_count(args), args));
 	return (0);
 }
