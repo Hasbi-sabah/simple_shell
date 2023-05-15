@@ -40,7 +40,7 @@ int ERROR_ID = 0;
 int main(int argc, char **args)
 {
 	char op = 0;
-	char *input, *leftover = NULL, *name = args[0], **arr;
+	char *input, *temp, *leftover = NULL, *name = args[0], **arr;
 
 	(void) argc;
 	while (1)
@@ -54,16 +54,20 @@ int main(int argc, char **args)
 				write(1, "\n", 1);
 				return (0);
 			}
+			temp = strstr(input, "#");
+			if (temp)
+				*temp = '\0';
 		}
-		else
+		else if (input && *input != '\0')
 			input = leftover;
-		if (strcmp(input, "\n"))
+		if (input && *input != '\0' && strcmp(input, "\n"))
 		{
 			leftover = check_ops(&input, &op);
 			arr = _strtok(input, " \n");
 			if (cmd_selector(arr[0], arr) == 0)
 				_fork(name, arr);
 		}
+		free(input);
 	}
 	write(1, "\n", 1);
 	return (0);
