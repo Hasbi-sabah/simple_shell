@@ -4,14 +4,16 @@
  * change_dir - check code
  * @argc: arguments count
  * @args: arguments
- * Return: success
+ * Return: none
  */
-char previous[1024];
-int change_dir(int argc, char **args)
+void change_dir(int argc, char **args)
 {
 	int r;
 	char *path, *error;
+	static char *previous = NULL;
 
+	if (!previous)
+		getcwd(previous, 1024);
 	path = argc == 1 || strcmp(args[1], "~") == 0 ? getenv("HOME") : args[1];
 	if (strcmp(path, "-") == 0)
 		path = previous;
@@ -24,9 +26,8 @@ int change_dir(int argc, char **args)
 		strcat(error, ": No such file or directory\n");
 		write(2, error, strlen(error));
 		free(error);
-		return (1);
+		return;
 	}
 	getcwd(previous, sizeof(previous));
 	setenv("PWD", path, 1);
-	return (1);
 }
