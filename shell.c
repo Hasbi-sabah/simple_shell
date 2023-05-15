@@ -58,16 +58,16 @@ int main(int argc, char **args)
 			if (temp)
 				*temp = '\0';
 		}
-		else if (input && *input != '\0')
+		else
 			input = leftover;
-		if (input && *input != '\0' && strcmp(input, "\n"))
+		
+		if (strcmp(input, "\n") && *input != '\0')
 		{
 			leftover = check_ops(&input, &op);
 			arr = _strtok(input, " \n");
 			if (cmd_selector(arr[0], arr) == 0)
 				_fork(name, arr);
 		}
-		free(input);
 	}
 	write(1, "\n", 1);
 	return (0);
