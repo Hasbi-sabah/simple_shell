@@ -13,7 +13,7 @@ void export(int argc, char **args)
 	if (argc == 1)
 	{
 		for (env = environ; *env != NULL; env++)
-			printf("%s=%s\n", *env, getenv(*env));
+			printf("%s=%s\n", *env, _getenv(*env));
 	}
 	else
 	{
