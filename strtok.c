@@ -52,12 +52,5 @@ char **_strtok(char *s, char *delim)
 		tokens[k] = NULL;
 		k--;
 	}
-	/**
-	if (k < 0)
-	{
-		free(tokens);
-		tokens = NULL;
-	}
-	*/
 	return (tokens);
 }
