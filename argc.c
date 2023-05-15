@@ -6,7 +6,7 @@
  */
 int args_count(char **args)
 {
-	if (*args == NULL)
+	if (args == NULL || *args == NULL)
 		return (0);
 	return (1 + args_count(args + 1));
 }
