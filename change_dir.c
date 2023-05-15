@@ -6,12 +6,14 @@
  * @args: arguments
  * Return: success
  */
-char previous[1024];
+char *previous = NULL;
 int change_dir(int argc, char **args)
 {
 	int r;
 	char *path, *error;
 
+	if (!previous)
+		getcwd(previous, 1024);
 	path = argc == 1 || strcmp(args[1], "~") == 0 ? getenv("HOME") : args[1];
 	if (strcmp(path, "-") == 0)
 		path = previous;
@@ -26,7 +28,7 @@ int change_dir(int argc, char **args)
 		free(error);
 		return (1);
 	}
-	getcwd(previous, sizeof(previous));
+	getcwd(previous, 1024);
 	setenv("PWD", path, 1);
 	return (1);
 }
