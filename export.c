@@ -4,9 +4,9 @@
  * export - check code
  * @argc: arguments count
  * @args: arguments
- * Return: none
+ * Return: success
  */
-void export(int argc, char **args)
+int export(int argc, char **args)
 {
 	char **env;
 
@@ -20,4 +20,5 @@ void export(int argc, char **args)
 		env = _strtok(args[1], " =");
 		setenv(env[0], env[1], 1);
 	}
+	return (1);
 }

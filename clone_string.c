@@ -7,10 +7,11 @@
  */
 char *clone(char *s)
 {
-	char *clone = malloc(1 + strlen(s));
+	char *clone;
 
 	if (s == NULL)
 		return (NULL);
+	clone = malloc(1 + strlen(s));
 	strcpy(clone, s);
 	return (clone);
 }

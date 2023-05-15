@@ -25,6 +25,7 @@ char *is_valid(char *);
 char *int_to_str(int, char *);
 int args_count(char **);
 char *check_ops(char **, char *);
+char *_getenv(char *var);
 /**
  * struct cmd_executer - structure
  * @cmd: command
@@ -33,9 +34,11 @@ char *check_ops(char **, char *);
 typedef struct cmd_executer
 {
 	char *cmd;
-	void (*exe_func)(int, char **);
+	int (*exe_func)(int, char **);
 } cmd_executer;
-void change_dir(int, char **);
-void exit_function(int, char **);
-void export(int, char **);
+int change_dir(int, char **);
+int exit_function(int, char **);
+int export(int, char **);
+int unset(int, char **);
+int echo(char **);
 #endif
