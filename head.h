@@ -27,6 +27,7 @@ int args_count(char **);
 char *check_ops(char **, char *);
 char *_getenv(char *);
 int echo(char **);
+
 /**
  * struct cmd_executer - structure
  * @cmd: command
