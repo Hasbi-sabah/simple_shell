@@ -18,15 +18,6 @@ char *check_ops(char **input, char *op)
 			temp++;
 		return (temp);
 	}
-	else if ((leftover = strpbrk(*input, "&|")))
-	{
-		*op = leftover[0];
-		temp = strdup(leftover + 2);
-		*(leftover) = '\0';
-		while (*temp == ' ')
-			temp++;
-		return (temp);
-	}
 	return (NULL);
 }
 /**
@@ -40,7 +31,7 @@ int ERROR_ID = 0;
 int main(int argc, char **args)
 {
 	char op = 0;
-	char *input, *temp, *leftover = NULL, *name = args[0], **arr;
+	char *input, *temp, *leftover = NULL, *name = args[0];
 
 	(void) argc;
 	while (1)
@@ -64,9 +55,7 @@ int main(int argc, char **args)
 		if (strcmp(input, "\n") && *input != '\0')
 		{
 			leftover = check_ops(&input, &op);
-			arr = _strtok(input, " \n");
-			if (cmd_selector(arr[0], arr) == 0)
-				_fork(name, arr);
+			split_line(input, name);
 		}
 	}
 	write(1, "\n", 1);

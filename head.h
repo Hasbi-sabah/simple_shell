@@ -11,7 +11,7 @@
 #include <stdarg.h>
 #include <dirent.h>
 extern char **environ;
-char **split_line(char *);
+void split_line(char *, char *);
 char **_strtok(char *, char *);
 int _getline(char **);
 void check_fork_error(char *, char **, char *);
