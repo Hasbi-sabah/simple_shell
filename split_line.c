@@ -9,7 +9,7 @@
  */
 void replace_substring(char *str, char *old_substr, char *new_substr)
 {
-	char *ptr = strstr(str, old_substr);
+	char *ptr = _strstr(str, old_substr);
 	size_t old_len = strlen(old_substr);
 	size_t new_len = strlen(new_substr);
 
