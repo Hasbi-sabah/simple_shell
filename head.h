@@ -9,6 +9,7 @@
 #include <sys/wait.h>
 #include <stdarg.h>
 #include <dirent.h>
+#include <string.h>
 
 extern char **environ;
 extern int EXIT_STATUS;
