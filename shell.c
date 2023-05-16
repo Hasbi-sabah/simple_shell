@@ -10,9 +10,9 @@ char *check_ops(char **input, char *op)
 {
 	char *leftover, *temp;
 
-	if ((leftover = strpbrk(*input, ";")))
+	if ((leftover = _strpbrk(*input, ";")))
 	{
-		temp = strdup(++leftover);
+		temp = _strdup(++leftover);
 		*(--leftover) = '\0';
 		while (*temp == ' ')
 			temp++;
@@ -45,14 +45,14 @@ int main(int argc, char **args)
 				write(1, "\n", 1);
 				return (0);
 			}
-			temp = strstr(input, "#");
+			temp = _strstr(input, "#");
 			if (temp)
 				*temp = '\0';
 		}
 		else
 			input = leftover;
 		
-		if (strcmp(input, "\n") && *input != '\0')
+		if (_strcmp(input, "\n") && *input != '\0')
 		{
 			leftover = check_ops(&input, &op);
 			split_line(input, name);

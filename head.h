@@ -3,13 +3,14 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
 #include <stdarg.h>
 #include <dirent.h>
+#include <string.h>
+
 extern char **environ;
 void split_line(char *, char *);
 char **_strtok(char *, char *);
@@ -42,4 +43,15 @@ void change_dir(int, char **);
 void exit_function(int, char **);
 void export(int, char **);
 void unset(int, char **);
+
+/* string functions */
+char **_strtok(char *, char *);
+char *_strpbrk(char *, char *);
+char *_strcpy(char *, char *);
+char *_strcat(char *, char *);
+char *_strdup(char *);
+int _strlen(char *);
+int _strcmp(const char *, char *);
+char *_strstr(char *, char *);
+
 #endif

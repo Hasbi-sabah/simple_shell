@@ -8,19 +8,16 @@
 char *_getenv(char *var)
 {
 	int i;
-	char **temp;
+	char *temp;
 
-	temp = malloc(sizeof(char *));
 	for (i = 0; environ[i]; i++)
 	{
-		temp[0] = strdup(environ[i]);
-		temp = _strtok(temp[0], "=");
-		if (strcmp(var, temp[0]) == 0)
+		if (!_strncmp(var, environ[i], _strlen(var)))
 		{
-			free(temp[0]);
-			return (temp[1]);
+			temp = _strstr(environ[i], "=");
+			temp++;
+			return (temp);
 		}
-		free(temp[0]);
 	}
 	return (NULL);
 }

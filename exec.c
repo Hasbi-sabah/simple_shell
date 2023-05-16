@@ -16,13 +16,13 @@ void execmd(char **arr, char *name, char *path)
 	if (arr)
 	{
 		comm = arr[0];
-		if (!strcmp(arr[0], "echo") && (i = echo(arr)) == 0 && arr[1][0] == '$')
+		if (!_strcmp(arr[0], "echo") && (i = echo(arr)) == 0 && arr[1][0] == '$')
 		{
 			env = _getenv(arr[1] + 1);
 			if (env)
 			{
 				arr[1] = malloc(sizeof(env));
-				strcpy(arr[1], env);
+				_strcpy(arr[1], env);
 			}
 			else
 			{
@@ -32,7 +32,7 @@ void execmd(char **arr, char *name, char *path)
 		}
 		if (!i)
 		{
-			strcpy(arr[0], path);
+			_strcpy(arr[0], path);
 			execve(comm, arr, environ);
 		}
 	}

@@ -26,11 +26,11 @@ void replace_substring(char *str, char *old_substr, char *new_substr)
  */
 void split_line(char *line, char *name)
 {
-	size_t old_len = strlen(line);
+	size_t old_len = _strlen(line);
 	char **arr, **line_split;
 
 	replace_substring(line, "&&", "&");
-	if (strlen(line) < old_len)
+	if (_strlen(line) < old_len)
 	{
 		line_split = _strtok(line, "&");
 		while (*line_split)
