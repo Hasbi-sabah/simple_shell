@@ -52,7 +52,7 @@ void and_handling(char *line, char *name)
  */
 int cmd_duplication(char **arr1, char **arr2)
 {
-	int duplication, i;
+	int i;
 
 	if (args_count(arr1) != args_count(arr2))
 		return (0);
@@ -109,16 +109,16 @@ void or_handling(char *line, char *name)
 void split_line(char *line, char *name)
 {
 	size_t old_len = _strlen(line);
-	char **arr, **line_split;
+	char **arr;
 
 	replace_substring(line, "&&", "&");
-	if (_strlen(line) < old_len)
+	if (_strlen(line) < (int)old_len)
 	{
 		and_handling(line, name);
 		return;
 	}
 	replace_substring(line, "||", "|");
-	if (_strlen(line) < old_len)
+	if (_strlen(line) < (int)old_len)
 	{
 		or_handling(line, name);
 		return;

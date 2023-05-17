@@ -13,12 +13,12 @@ int echo(char **args)
 	{
 		if (!_strcmp(args[1], "$$"))
 		{
-			printf("%d\n", getpid());
+			_printf("%d\n", getpid());
 			return (1);
 		}
 		else if (!_strcmp(args[1], "$?"))
 		{
-			printf("%d\n", WEXITSTATUS(EXIT_STATUS));
+			_printf("%d\n", WEXITSTATUS(EXIT_STATUS));
 			return (1);
 		}
 	}

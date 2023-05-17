@@ -33,6 +33,15 @@ int _strcmp(const char *s1, char *s2)
 	}
 	return (*s1 - *s2);
 }
+int _strncmp(const char *s1, char *s2, int n)
+{
+	for (; *s1 == *s2 && n > 0; s1++, s2++, n--)
+	{
+		if (*s1 == '\0')
+			return (0);
+	}
+	return (*s1 - *s2);
+}
 
 /**
  * _strstr - locates a substring.
@@ -60,4 +69,44 @@ char *_strstr(char *haystack, char *needle)
 			return (&haystack[i]);
 	}
 	return (NULL);
+}
+/**
+ * _memcpy - copies memory area.
+ *
+ * @dest: destination memory area
+ * @src: source memory area
+ * @n: bytes of the memory
+ *
+ * Return: dest
+ */
+char *_memcpy(char *dest, char *src, unsigned int n)
+{
+	unsigned int i;
+
+	for (i = 0; i < n; i++)
+	{
+		dest[i] = src[i];
+	}
+	return (dest);
+}
+/**
+ * _strrev - copies and reverses a string
+ * @i: str length
+ * @s: string
+ * Return: i
+ */
+
+int _strrev(char *s, int i)
+{
+	char temp;
+	int j;
+
+	i--;
+	for (j = 0; j <= i / 2; j++)
+	{
+		temp = s[j];
+		s[j] = s[i - j];
+		s[i - j] = temp;
+	}
+	return (j);
 }
