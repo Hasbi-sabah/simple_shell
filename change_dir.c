@@ -6,7 +6,6 @@
  * @args: arguments
  * Return: none
  */
-char *previous = NULL;
 void change_dir(int argc, char **args)
 {
 	int r;
