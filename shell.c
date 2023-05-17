@@ -50,7 +50,6 @@ int main(int argc, char **args)
 			write(1, "$ ", 2);
 			if (_getline(&input) <= 0)
 			{
-				free(input);
 				write(1, "\n", 1);
 				return (0);
 			}

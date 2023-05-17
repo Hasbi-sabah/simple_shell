@@ -68,7 +68,7 @@ int _putchar(char c)
 
 	if (c == -1 || idx >= 1024)
 	{
-		write(1, buff, idx);
+		write(2, buff, idx);
 		idx = 0;
 	}
 	if (c != -1)
