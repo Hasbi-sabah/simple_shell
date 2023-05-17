@@ -85,8 +85,10 @@ void or_handling(char *line, char *name)
 			if (cmd_duplication(arr1, arr2))
 			{
 				duplication = 1;
+				_free(arr2);
 				break;
-			}			
+			}
+		        _free(arr2);			
 		}
 		if (duplication)
 		{
