@@ -3,16 +3,16 @@
 /**
  * check_ops - check code
  * @inputs: arguments set
+ * @op: operation
  * Return: string
  */
-char *check_ops(char **input)
+char *check_ops(char **input, char *op)
 {
 	char *leftover, *temp;
 
-	leftover = strpbrk(*input, ";");
-	if (leftover)
+	if ((leftover = _strpbrk(*input, ";")))
 	{
-		temp = strdup(++leftover);
+		temp = _strdup(++leftover);
 		*(--leftover) = '\0';
 		while (*temp == ' ')
 			temp++;
@@ -30,7 +30,8 @@ int EXIT_STATUS = 0;
 int ERROR_ID = 0;
 int main(int argc, char **args)
 {
-	char *input, *leftover = NULL, *name = args[0], **arr;
+	char op = 0;
+	char *input, *temp, *leftover = NULL, *name = args[0];
 
 	(void) argc;
 	while (1)
@@ -44,15 +45,17 @@ int main(int argc, char **args)
 				write(1, "\n", 1);
 				return (0);
 			}
+			temp = _strstr(input, "#");
+			if (temp)
+				*temp = '\0';
 		}
 		else
 			input = leftover;
-		if (strcmp(input, "\n"))
+		
+		if (_strcmp(input, "\n") && *input != '\0')
 		{
-			leftover = check_ops(&input);
-			arr = _strtok(input, " \n");
-			if (args_count(arr) > 0 && cmd_selector(arr[0], arr) == 0)
-				_fork(name, arr);
+			leftover = check_ops(&input, &op);
+			split_line(input, name);
 		}
 	}
 	write(1, "\n", 1);

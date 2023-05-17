@@ -52,12 +52,12 @@ void _fork(char *name, char **arr)
 	{
 		i_str = malloc(20);
 		i_str = int_to_str(i, i_str);
-		error = malloc(strlen(i_str) + strlen(name)
-				+ strlen(comm) + strlen(": : : not found\n") + 4);
-		strcpy(error, name), strcat(error, ": ");
-		strcat(error, i_str), strcat(error, ": ");
-		strcat(error, comm), strcat(error, ": not found\n");
-		write(2, error, strlen(error));
+		error = malloc(_strlen(i_str) + _strlen(name)
+				+ _strlen(comm) + _strlen(": : : not found\n") + 4);
+		_strcpy(error, name), _strcat(error, ": ");
+		_strcat(error, i_str), _strcat(error, ": ");
+		_strcat(error, comm), _strcat(error, ": not found\n");
+		write(2, error, _strlen(error));
 		free(error);
 		free(i_str);
 	}

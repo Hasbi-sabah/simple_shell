@@ -11,20 +11,20 @@ char *is_valid(char *comm)
 	struct stat buf;
 	char *path, **path_arr;
 
-	path_arr = _strtok(getenv("PATH"), ":");
+	path_arr = _strtok(_getenv("PATH"), ":");
 	for (i = 0; path_arr[i]; i++)
 	{
-		if (!strstr(comm, "/"))
+		if (!_strstr(comm, "/"))
 		{
-			path = malloc(strlen(path_arr[i]) + strlen(comm) + 2);
-			strcpy(path, path_arr[i]);
-			strcat(path, "/");
-			strcat(path, comm);
+			path = malloc(_strlen(path_arr[i]) + _strlen(comm) + 2);
+			_strcpy(path, path_arr[i]);
+			_strcat(path, "/");
+			_strcat(path, comm);
 		}
 		else
 		{
-			path = malloc(strlen(comm) + 1);
-			strcpy(path, comm);
+			path = malloc(_strlen(comm) + 1);
+			_strcpy(path, comm);
 		}
 		if (!access(path, X_OK) && stat(path, &buf) == 0)
 		{

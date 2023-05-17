@@ -4,7 +4,7 @@
  * cmd_selector - check code
  * @cmd: command name
  * @args: arguments
- * Return: none
+ * Return: success
  */
 int cmd_selector(const char *cmd, char **args)
 {
@@ -13,14 +13,16 @@ int cmd_selector(const char *cmd, char **args)
 		{"cd", change_dir},
 		{"export", export},
 		{"unset", unset},
-		{"echo", echo},
 		{NULL, NULL}
 	};
 	int j = 0;
 
-	while (executers[j].exe_func != NULL && strcmp(cmd, executers[j].cmd) != 0)
+	while (executers[j].exe_func != NULL && _strcmp(cmd, executers[j].cmd) != 0)
 		j++;
 	if (executers[j].exe_func != NULL)
-		return (executers[j].exe_func(args_count(args), args));
+	{
+		executers[j].exe_func(args_count(args), args);
+		return (1);
+	}
 	return (0);
 }
