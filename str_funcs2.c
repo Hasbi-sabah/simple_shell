@@ -61,3 +61,43 @@ char *_strstr(char *haystack, char *needle)
 	}
 	return (NULL);
 }
+/**
+ * _memcpy - copies memory area.
+ *
+ * @dest: destination memory area
+ * @src: source memory area
+ * @n: bytes of the memory
+ *
+ * Return: dest
+ */
+char *_memcpy(char *dest, char *src, unsigned int n)
+{
+	unsigned int i;
+
+	for (i = 0; i < n; i++)
+	{
+		dest[i] = src[i];
+	}
+	return (dest);
+}
+/**
+ * _strrev - copies and reverses a string
+ * @i: str length
+ * @s: string
+ * Return: i
+ */
+
+int _strrev(char *s, int i)
+{
+	char temp;
+	int j;
+
+	i--;
+	for (j = 0; j <= i / 2; j++)
+	{
+		temp = s[j];
+		s[j] = s[i - j];
+		s[i - j] = temp;
+	}
+	return (j);
+}

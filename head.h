@@ -43,7 +43,25 @@ int exit_function(int, char **);
 int export(int, char **);
 int unset(int, char **);
 int echo(char **);
-
+/* _printf functions */
+/**
+ * struct conversion - struct
+ * @conv_spec: conversion specifier
+ * @f: function to be executed
+ */
+struct conversion
+{
+	char conv_spec;
+	int (*f)(va_list);
+};
+typedef struct conversion conv_list;
+int _printf(const char *format, ...);
+int call_funcs(conv_list *conversion,
+		va_list conv, const char *format);
+int _putchar(char c);
+int conv_c(va_list conv);
+int conv_s(va_list conv);
+int conv_i_d(va_list conv);
 /* string functions */
 char **_strtok(char *, char *);
 char *_strpbrk(char *, char *);
@@ -53,4 +71,7 @@ char *_strdup(char *);
 int _strlen(char *);
 int _strcmp(const char *, char *);
 char *_strstr(char *, char *);
+char *_memcpy(char *, char *, unsigned int);
+int _strrev(char *, int);
+
 #endif
