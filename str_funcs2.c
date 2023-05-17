@@ -33,6 +33,15 @@ int _strcmp(const char *s1, char *s2)
 	}
 	return (*s1 - *s2);
 }
+int _strncmp(const char *s1, char *s2, int n)
+{
+	for (; *s1 == *s2 && n > 0; s1++, s2++, n--)
+	{
+		if (*s1 == '\0')
+			return (0);
+	}
+	return (*s1 - *s2);
+}
 
 /**
  * _strstr - locates a substring.

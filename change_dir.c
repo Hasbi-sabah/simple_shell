@@ -4,13 +4,14 @@
  * change_dir - check code
  * @argc: arguments count
  * @args: arguments
- * Return: success
+ * Return: none
  */
 char *previous = NULL;
-int change_dir(int argc, char **args)
+void change_dir(int argc, char **args)
 {
 	int r;
 	char *path;
+	static char *previous = NULL;
 
 	if (!previous)
 		getcwd(previous, 1024);
@@ -21,9 +22,8 @@ int change_dir(int argc, char **args)
 	if (r < 0)
 	{
 		_printf("cd: %s: No such file or directory\n", path);
-		return (1);
+		return;
 	}
 	getcwd(previous, 1024);
 	setenv("PWD", path, 1);
-	return (1);
 }

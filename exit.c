@@ -6,7 +6,7 @@
  * @args: arguments
  * Return: success
  */
-int exit_function(int n, char **args)
+void exit_function(int n, char **args)
 {
 	int i;
 
@@ -15,11 +15,10 @@ int exit_function(int n, char **args)
 		if (args[1][i] < '0' || args[1][i] > '9')
 		{
 			write(2, "Illegal number\n", 15);
-			return (1);
+			return;
 		}
 	}
 	if (n > 1)
 		i = atoi(args[1]);
 	exit(i);
-	return (1);
 }

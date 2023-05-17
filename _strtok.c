@@ -21,7 +21,7 @@ int exists_within(char c, char *s)
 char **_strtok(char *s, char *delim)
 {
 	char **tokens;
-	size_t k = 0, j = 0, i, len = _strlen(s);
+	size_t k = 0, j = 0, i, len = strlen(s);
 	int found = 0;
 
 	tokens = (char **)malloc(len * sizeof(char *));
@@ -30,7 +30,7 @@ char **_strtok(char *s, char *delim)
 	{
 		if (exists_within(s[i], delim))
 		{
-			if (s[i] == '\n')
+		        if (s[i] == '\n')
 				break;
 			if (found == 0 && i > 0)
 			{
