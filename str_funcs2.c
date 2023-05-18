@@ -33,7 +33,13 @@ int _strcmp(const char *s1, char *s2)
 	}
 	return (*s1 - *s2);
 }
-
+/**
+ * _strncmp - compares n characters
+ * @s1: first string
+ * @s2: second string
+ * @n: number
+ * Return: integer
+ */
 int _strncmp(const char *s1, char *s2, int n)
 {
 	int i;
@@ -71,6 +77,25 @@ char *_strstr(char *haystack, char *needle)
 			return (&haystack[i]);
 	}
 	return (NULL);
+}
+/**
+ * _memcpy - copies memory area.
+ *
+ * @dest: destination memory area
+ * @src: source memory area
+ * @n: bytes of the memory
+ *
+ * Return: dest
+ */
+char *_memcpy(char *dest, char *src, unsigned int n)
+{
+	unsigned int i;
+
+	for (i = 0; i < n; i++)
+	{
+		dest[i] = src[i];
+	}
+	return (dest);
 }
 /**
  * _strrev - copies and reverses a string

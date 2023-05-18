@@ -9,21 +9,24 @@ char *is_valid(char *comm)
 {
 	int i;
 	struct stat buf;
-	char *path, **path_arr;
+	char *path, **path_arr, *env;
 
-	path_arr = _strtok(_getenv("PATH"), ":");
+	env = _getenv("PATH");
+	_printf("here?\n");
+	path_arr = _strtok(env, ":");
+	_printf("here?\n");
 	for (i = 0; path_arr[i]; i++)
 	{
 		if (!_strstr(comm, "/"))
 		{
-			path = malloc(_strlen(path_arr[i]) + _strlen(comm) + 2);
+			path = malloc(strlen(path_arr[i]) + _strlen(comm) + 2);
 			_strcpy(path, path_arr[i]);
 			_strcat(path, "/");
 			_strcat(path, comm);
 		}
 		else
 		{
-			path = malloc(_strlen(comm) + 1);
+			path = malloc(strlen(comm) + 1);
 			_strcpy(path, comm);
 		}
 		if (!access(path, X_OK) && stat(path, &buf) == 0)

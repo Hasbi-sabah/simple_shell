@@ -75,8 +75,9 @@ char *_strcat(char *, char *);
 char *_strdup(char *);
 int _strlen(char *);
 int _strcmp(const char *, char *);
-int _strncmp(const char *s1, char *s2, int n);
+int _strncmp(const char *, char *, int);
 char *_strstr(char *, char *);
-int _strrev(char *s, int i);
+char *_memcpy(char *, char *, unsigned int);
+int _strrev(char *, int);
 
 #endif
