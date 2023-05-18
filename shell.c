@@ -37,7 +37,7 @@ int main(int argc, char **args)
 	{
 		if (!leftover)
 		{
-			write(1, "$ ", 2);
+			_printf(1, "$ ");
 			if (_getline(&input) <= 0)
 			{
 				write(1, "\n", 1);
@@ -56,6 +56,6 @@ int main(int argc, char **args)
 			split_line(input, name);
 		}
 	}
-	write(1, "\n", 1);
+	_printf(1, "\n");
 	return (0);
 }

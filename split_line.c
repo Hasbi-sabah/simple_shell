@@ -37,7 +37,7 @@ void and_handling(char *line, char *name)
 	while (*line_split)
 	{
 		arr = _strtok(*line_split, " \n");
-		if (args_count(arr) > 0 && cmd_selector(arr[0], arr) == 0)
+		if (args_count(arr) > 0 && cmd_selector(arr[0], arr, name) == 0)
 			_fork(name, arr);
 		_free(arr);
 		line_split++;
@@ -93,7 +93,7 @@ void or_handling(char *line, char *name)
 			i++;
 			continue;
 		}
-		if (args_count(arr1) > 0 && cmd_selector(arr1[0], arr1) == 0)
+		if (args_count(arr1) > 0 && cmd_selector(arr1[0], arr1, name) == 0)
 			_fork(name, arr1);
 	        _free(arr1);
 		i++;
@@ -124,7 +124,7 @@ void split_line(char *line, char *name)
 		return;
 	}
 	arr = _strtok(line, " \n");
-	if (args_count(arr) > 0 && cmd_selector(arr[0], arr) == 0)
+	if (args_count(arr) > 0 && cmd_selector(arr[0], arr, name) == 0)
 		_fork(name, arr);
 	else
 		_free(arr);

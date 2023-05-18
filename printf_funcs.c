@@ -72,6 +72,7 @@ int conv_i_d(int n, va_list conv)
 	if (flag == 1)
 		temp[k++] = '-';
 	_strrev(temp, k);
+	temp[k++] = '\0';
 	for (k = 0; temp[k]; k++, z++)
 		_putchar(n, temp[k]);
 	return (z);

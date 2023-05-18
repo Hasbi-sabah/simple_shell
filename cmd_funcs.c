@@ -6,7 +6,7 @@
  * @args: arguments
  * Return: success
  */
-void exit_function(int n, char **args)
+void exit_function(int n, char **args, char *name)
 {
 	int i;
 
@@ -14,7 +14,7 @@ void exit_function(int n, char **args)
 	{
 		if (args[1][i] < '0' || args[1][i] > '9')
 		{
-			_printf(2, "Illegal number: %s\n", args[1]);
+			error(name, args, NULL, 2);
 			return;
 		}
 	}
@@ -30,7 +30,7 @@ void exit_function(int n, char **args)
  * Return: none
  */
 char *previous = NULL;
-void change_dir(int argc, char **args)
+void change_dir(int argc, char **args, char *name)
 {
 	int r;
 	char *path;
@@ -44,7 +44,7 @@ void change_dir(int argc, char **args)
 	r = chdir(path);
 	if (r < 0)
 	{
-		_printf(2, "cd: can't cd to %s\n", path);
+		error(name, args, path, 3);
 		return;
 	}
 	getcwd(previous, 1024);
@@ -57,12 +57,12 @@ void change_dir(int argc, char **args)
  * @args: arguments
  * Return: none
  */
-void export(int argc, char **args)
+void export(int argc, char **args, char *name)
 {
 	char **env;
 
 	if (argc == 1)
-		_printf(2, "setenv VARIABLE VALUE\n");
+		error(name, args, NULL, 4);
 	else
 	{
 		env = _strtok(args[1], " =");
@@ -76,10 +76,10 @@ void export(int argc, char **args)
  * @args: arguments
  * Return: none
  */
-void unset(int argc, char **args)
+void unset(int argc, char **args, char *name)
 {
 	if (argc == 1 || _getenv(args[1]) == NULL)
-		_printf(1, "\n");
+		error(name, args, NULL, 5);
 	else
 		unsetenv(args[1]);
 }
@@ -90,12 +90,13 @@ void unset(int argc, char **args)
  * @args: arguments
  * Return: none
  */
-void env(int argc, char **args)
+void env(int argc, char **args, char *name)
 {
 	int i;
 
 	(void) argc;
 	(void) args;
+	(void) name;
 	for (i = 0; environ[i]; i++)
 		_printf(1, "%s\n", environ[i]);
 }

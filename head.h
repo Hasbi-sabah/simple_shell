@@ -27,6 +27,7 @@ int args_count(char **);
 char *check_ops(char **);
 char *_getenv(char *);
 int echo(char **);
+void error(char *, char **, char *, int);
 
 /* for _printf() */
 /**
@@ -58,14 +59,14 @@ int conv_i_d(int n, va_list conv);
 typedef struct cmd_executer
 {
 	char *cmd;
-	void (*exe_func)(int, char **);
+	void (*exe_func)(int, char **, char *);
 } cmd_executer;
-int cmd_selector(const char *, char **);
-void change_dir(int, char **);
-void exit_function(int, char **);
-void export(int, char **);
-void unset(int, char **);
-void env(int, char **);
+int cmd_selector(const char *, char **, char *);
+void change_dir(int, char **, char *);
+void exit_function(int, char **, char *);
+void export(int, char **, char *);
+void unset(int, char **, char *);
+void env(int, char **, char *);
 
 /* string functions */
 char **_strtok(char *, char *);

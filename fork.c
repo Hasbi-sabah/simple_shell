@@ -9,11 +9,9 @@
 void _fork(char *name, char **arr)
 {
 	pid_t pid;
-	static int i;
 	int status;
 	char *path = NULL, *comm = NULL;
 
-	i++;
 	comm = arr[0];
 	path = is_valid(comm);
 	if (path != NULL)
@@ -26,7 +24,8 @@ void _fork(char *name, char **arr)
 		}
 		else
 			waitpid(pid, &status, 0);
+		error(name, arr, NULL, 0);
 	}
 	else
-		_printf(2, "%s: %i: %s: not found\n", name, i, comm);
+		error(name, arr, NULL, 1);
 }
