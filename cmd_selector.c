@@ -4,6 +4,7 @@
  * cmd_selector - check code
  * @cmd: command name
  * @args: arguments
+ * @name: program name
  * Return: success
  */
 int cmd_selector(const char *cmd, char **args, char *name)
@@ -22,6 +23,7 @@ int cmd_selector(const char *cmd, char **args, char *name)
 		j++;
 	if (executers[j].exe_func != NULL)
 	{
+		error(name, args, NULL, 0);
 		executers[j].exe_func(args_count(args), args, name);
 		return (1);
 	}

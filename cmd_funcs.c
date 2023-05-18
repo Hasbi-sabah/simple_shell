@@ -4,6 +4,7 @@
  * exit_function - check code
  * @n: arguments count
  * @args: arguments
+ * @name: program name
  * Return: success
  */
 void exit_function(int n, char **args, char *name)
@@ -27,14 +28,14 @@ void exit_function(int n, char **args, char *name)
  * change_dir - check code
  * @argc: arguments count
  * @args: arguments
+ * @name: program name
  * Return: none
  */
-char *previous = NULL;
 void change_dir(int argc, char **args, char *name)
 {
 	int r;
 	char *path;
-	static char *previous = NULL;
+	static char *previous;
 
 	if (!previous)
 		getcwd(previous, 1024);
@@ -49,12 +50,15 @@ void change_dir(int argc, char **args, char *name)
 	}
 	getcwd(previous, 1024);
 	setenv("PWD", path, 1);
+	if (argc == 1)
+		_printf(1, "%s\n", path);
 }
 
 /**
  * export - check code
  * @argc: arguments count
  * @args: arguments
+ * @name: program name
  * Return: none
  */
 void export(int argc, char **args, char *name)
@@ -74,6 +78,7 @@ void export(int argc, char **args, char *name)
  * unset - check code
  * @argc: arguments count
  * @args: arguments
+ * @name: program name
  * Return: none
  */
 void unset(int argc, char **args, char *name)
@@ -88,6 +93,7 @@ void unset(int argc, char **args, char *name)
  * env - prints env
  * @argc: argc
  * @args: arguments
+ * @name: program name
  * Return: none
  */
 void env(int argc, char **args, char *name)

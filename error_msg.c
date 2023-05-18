@@ -12,7 +12,7 @@ void error(char *name, char **args, char *path, int n)
 	else if (n == 2)
 		_printf(2, "%s: %i: exit: Illegal number: %s\n", name, i, args[1]);
 	else if (n == 3)
-		_printf(2, "%s: %i: cd: can't cd to %s\n", name, i, path);
+		_printf(2, "%s: %i: cd: can't cd to %s\n", name, --i, path);
 	else if (n == 4)
 		_printf(2, "%s: %i: usage: setenv VARIABLE VALUE\n", name, i);
 	else if (n == 5)
