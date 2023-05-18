@@ -42,7 +42,6 @@ void and_handling(char *line, char *name)
 		_free(arr);
 		line_split++;
 	}
-	free(line);
 }
 /**
  * cmd_duplication - check code
@@ -100,7 +99,6 @@ void or_handling(char *line, char *name)
 	        _free(arr1);
 		i++;
 	}
-	free(line);
 }
 /**
  * split_line - read command line
@@ -130,5 +128,4 @@ void split_line(char *line, char *name)
 		_fork(name, arr);
 	else
 		_free(arr);
-	free(line);
 }

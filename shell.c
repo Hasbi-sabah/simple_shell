@@ -55,6 +55,7 @@ int main(int argc, char **args)
 			leftover = check_ops(&input);
 			split_line(input, name);
 		}
+		free(input);
 	}
 	write(1, "\n", 1);
 	return (0);
