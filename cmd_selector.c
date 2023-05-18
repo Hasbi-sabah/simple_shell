@@ -11,8 +11,9 @@ int cmd_selector(const char *cmd, char **args)
 	cmd_executer executers[] = {
 		{"exit", exit_function},
 		{"cd", change_dir},
-		{"export", export},
-		{"unset", unset},
+		{"setenv", export},
+		{"unsetenv", unset},
+		{"env", env},
 		{NULL, NULL}
 	};
 	int j = 0;
@@ -25,4 +26,16 @@ int cmd_selector(const char *cmd, char **args)
 		return (1);
 	}
 	return (0);
+}
+
+/**
+ * args_count - check code
+ * @args: arguments
+ * Return: argc
+ */
+int args_count(char **args)
+{
+	if (args == NULL || *args == NULL)
+		return (0);
+	return (1 + args_count(args + 1));
 }
