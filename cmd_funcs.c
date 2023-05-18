@@ -37,6 +37,7 @@ void change_dir(int argc, char **args, char *name)
 	char *path;
 	static char *previous;
 
+	
 	if (!previous)
 		getcwd(previous, 1024);
 	path = argc == 1 || _strcmp(args[1], "~") == 0 ? _getenv("HOME") : args[1];
@@ -63,15 +64,10 @@ void change_dir(int argc, char **args, char *name)
  */
 void export(int argc, char **args, char *name)
 {
-	char **env;
-
-	if (argc == 1)
+	if (argc != 3)
 		error(name, args, NULL, 4);
 	else
-	{
-		env = _strtok(args[1], " =");
-		setenv(env[0], env[1], 1);
-	}
+		setenv(arg[1], args[2], 1);
 }
 
 /**
