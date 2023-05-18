@@ -23,7 +23,6 @@ void exit_function(int n, char **args, char *name)
 		i = atoi(args[1]);
 	exit(i);
 }
-
 /**
  * change_dir - check code
  * @argc: arguments count
@@ -54,7 +53,6 @@ void change_dir(int argc, char **args, char *name)
 	if (argc == 1)
 		_printf(1, "%s\n", path);
 }
-
 /**
  * export - check code
  * @argc: arguments count

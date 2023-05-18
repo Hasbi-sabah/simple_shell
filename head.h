@@ -41,13 +41,12 @@ struct conversion
 	int (*f)(int, va_list);
 };
 typedef struct conversion conv_list;
-int _printf(int n, const char *format, ...);
-int call_funcs(int n, conv_list *conversion,
-		va_list conv, const char *format);
-int _putchar(int n, char c);
-int conv_c(int n, va_list conv);
-int conv_s(int n, va_list conv);
-int conv_i_d(int n, va_list conv);
+int _printf(int, const char *, ...);
+int call_funcs(int, conv_list *, va_list, const char *);
+int _putchar(int, char);
+int conv_c(int, va_list);
+int conv_s(int, va_list);
+int conv_i_d(int, va_list);
 
 /* for cmd exec */
 
@@ -74,11 +73,12 @@ char *_strpbrk(char *, char *);
 char *_strcpy(char *, char *);
 char *_strcat(char *, char *);
 char *_strdup(char *);
-int _strlen(char *);
+size_t _strlen(char *);
 int _strcmp(const char *, char *);
 int _strncmp(const char *, char *, int);
 char *_strstr(char *, char *);
 char *_memcpy(char *, char *, unsigned int);
 int _strrev(char *, int);
+void replace_substring(char *, char *, char *);
 
 #endif

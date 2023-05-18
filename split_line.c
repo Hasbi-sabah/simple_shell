@@ -1,29 +1,6 @@
 #include "head.h"
 
 /**
- * replace_substring - check code
- * @str: input string
- * @old_substr: old substring
- * @new_substr: input substring
- * Return: command decomposition
- */
-void replace_substring(char *str, char *old_substr, char *new_substr)
-{
-	char *ptr = _strstr(str, old_substr);
-	size_t old_len = _strlen(old_substr);
-	size_t new_len = _strlen(new_substr);
-	int k = new_len, l = old_len;
-
-	if (!ptr)
-		return;
-	do {
-		ptr[k++] = ptr[l++];
-	} while (ptr[l] != '\0');
-	ptr[k] = '\0';
-	memcpy(ptr, new_substr, new_len);
-	replace_substring(ptr + new_len, old_substr, new_substr);
-}
-/**
  * and_handling - check code
  * @line: input command line
  * @name: file name
@@ -42,7 +19,6 @@ void and_handling(char *line, char *name)
 		_free(arr);
 		line_split++;
 	}
-	free(line);
 }
 /**
  * cmd_duplication - check code
@@ -85,8 +61,10 @@ void or_handling(char *line, char *name)
 			if (cmd_duplication(arr1, arr2))
 			{
 				duplication = 1;
+				_free(arr2);
 				break;
-			}			
+			}
+		        _free(arr2);			
 		}
 		if (duplication)
 		{
@@ -98,7 +76,26 @@ void or_handling(char *line, char *name)
 	        _free(arr1);
 		i++;
 	}
-	free(line);
+}
+/**
+ * semi_column_handling - check code
+ * @line: input command line
+ * @name: file name
+ * Return: none
+ */
+void semi_column_handling(char *line, char *name)
+{
+	char **arr, **line_split;
+
+	line_split = _strtok(line, ";");
+	while (*line_split)
+	{
+		arr = _strtok(*line_split, " \n");
+		if (args_count(arr) > 0 && cmd_selector(arr[0], arr, name) == 0)
+			_fork(name, arr);
+		_free(arr);
+		line_split++;
+	}
 }
 /**
  * split_line - read command line
@@ -112,21 +109,16 @@ void split_line(char *line, char *name)
 	char **arr;
 
 	replace_substring(line, "&&", "&");
-	if (_strlen(line) < (int)old_len)
+	if (_strlen(line) < old_len)
 	{
 		and_handling(line, name);
 		return;
 	}
 	replace_substring(line, "||", "|");
-	if (_strlen(line) < (int)old_len)
+	if (_strlen(line) < old_len)
 	{
 		or_handling(line, name);
 		return;
 	}
-	arr = _strtok(line, " \n");
-	if (args_count(arr) > 0 && cmd_selector(arr[0], arr, name) == 0)
-		_fork(name, arr);
-	else
-		_free(arr);
-	free(line);
+	semi_column_handling(line, name);
 }
