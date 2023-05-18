@@ -11,7 +11,6 @@ int _getline(char **line)
 
 	*line = malloc(1024);
 	i = read(STDIN_FILENO, *line, 1024);
-	while (**line == ' ')
-		(*line)++, i--;
+	line[i] = '\0';
 	return (i);
 }

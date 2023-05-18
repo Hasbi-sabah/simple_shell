@@ -30,7 +30,7 @@ char **_strtok(char *s, char *delim)
 	{
 		if (exists_within(s[i], delim))
 		{
-			if (s[i] == '\n')
+		        if (s[i] == '\n')
 				break;
 			if (found == 0 && i > 0)
 			{
@@ -47,15 +47,10 @@ char **_strtok(char *s, char *delim)
 			found = 0;
 		}
 	}
-	while (strlen(tokens[k]) == 0)
+	while (_strlen(tokens[k]) == 0)
 	{
 		tokens[k] = NULL;
 		k--;
-	}
-	if (k < 0)
-	{
-		free(tokens);
-		tokens = NULL;
 	}
 	return (tokens);
 }
