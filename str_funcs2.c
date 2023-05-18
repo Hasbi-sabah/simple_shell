@@ -33,16 +33,24 @@ int _strcmp(const char *s1, char *s2)
 	}
 	return (*s1 - *s2);
 }
+/**
+ * _strncmp - compares n characters
+ * @s1: first string
+ * @s2: second string
+ * @n: number
+ * Return: integer
+ */
 int _strncmp(const char *s1, char *s2, int n)
 {
-	for (; *s1 == *s2 && n > 0; s1++, s2++, n--)
+	int i;
+
+	for (i = 0; *s1 == *s2 && i < n; i++, s1++, s2++)
 	{
 		if (*s1 == '\0')
 			return (0);
 	}
 	return (*s1 - *s2);
 }
-
 /**
  * _strstr - locates a substring.
  *

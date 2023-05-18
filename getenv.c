@@ -12,7 +12,7 @@ char *_getenv(char *var)
 
 	for (i = 0; environ[i]; i++)
 	{
-		if (!_strncmp(var, environ[i], _strlen(var)))
+		if (!strncmp(var, environ[i], _strlen(var)))
 		{
 			temp = _strstr(environ[i], "=");
 			temp++;

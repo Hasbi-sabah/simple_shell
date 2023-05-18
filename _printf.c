@@ -7,7 +7,7 @@
  * Return: int
  */
 
-int _printf(const char *format, ...)
+int _printf(int n, const char *format, ...)
 {
 	va_list conv;
 	conv_list conversion[] = {
@@ -22,9 +22,9 @@ int _printf(const char *format, ...)
 	if (!format)
 		return (-1);
 	va_start(conv, format);
-	i = call_funcs(conversion, conv, format);
+	i = call_funcs(n, conversion, conv, format);
 	va_end(conv);
-	_putchar(-1);
+	_putchar(n, -1);
 	return (i);
 }
 /**
@@ -34,7 +34,7 @@ int _printf(const char *format, ...)
  * @format: what's to be printed
  * Return: int
  */
-int call_funcs(conv_list *conversion,
+int call_funcs(int n, conv_list *conversion,
 		va_list conv, const char *format)
 {
 	int i, j, a;
@@ -46,12 +46,12 @@ int call_funcs(conv_list *conversion,
 			for (a = 0; conversion[a].conv_spec; a++)
 			{
 				if (conversion[a].conv_spec == format[j + 1])
-					i += conversion[a].f(conv);
+					i += conversion[a].f(n, conv);
 			}
 			j++;
 		}
 		else
-			i += _putchar(format[j]);
+			i += _putchar(n, format[j]);
 	}
 	return (i);
 }
@@ -61,14 +61,14 @@ int call_funcs(conv_list *conversion,
  * Return: always 1
  */
 
-int _putchar(char c)
+int _putchar(int n, char c)
 {
 	static char buff[1024];
 	static int idx;
 
 	if (c == -1 || idx >= 1024)
 	{
-		write(2, buff, idx);
+		write(n, buff, idx);
 		idx = 0;
 	}
 	if (c != -1)

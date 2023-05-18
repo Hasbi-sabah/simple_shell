@@ -1,27 +1,6 @@
 #include "head.h"
 
 /**
- * int_to_str - check code
- * @n: command name
- * @s: string
- * Return: string
- */
-char *int_to_str(int n, char *s)
-{
-	int i, j;
-	char temp;
-
-	for (i = 0; n > 0; i++, n /= 10)
-		s[i] = n % 10 + '0';
-	for (j = 0; j < i / 2; j++)
-	{
-		temp = s[j];
-		s[j] = s[i - j - 1];
-		s[i - j - 1] = temp;
-	}
-	return (s);
-}
-/**
  * _fork - check code
  * @name: command name
  * @arr: arguments
@@ -49,5 +28,5 @@ void _fork(char *name, char **arr)
 			waitpid(pid, &status, 0);
 	}
 	else
-		_printf("%s: %i: %s: not found\n", name, i, comm);
+		_printf(2, "%s: %i: %s: not found\n", name, i, comm);
 }

@@ -12,9 +12,7 @@ char *is_valid(char *comm)
 	char *path, **path_arr, *env;
 
 	env = _getenv("PATH");
-	_printf("here?\n");
 	path_arr = _strtok(env, ":");
-	_printf("here?\n");
 	for (i = 0; path_arr[i]; i++)
 	{
 		if (!_strstr(comm, "/"))
