@@ -3,7 +3,7 @@
 /**
  * _printf - produces output according to a format
  * @format: what's to be printed
- *
+ * @n: n
  * Return: int
  */
 
@@ -29,6 +29,7 @@ int _printf(int n, const char *format, ...)
 }
 /**
  * call_funcs - calls function for _printf
+ * @n: n
  * @conversion: struct list
  * @conv: va list
  * @format: what's to be printed
@@ -57,6 +58,7 @@ int call_funcs(int n, conv_list *conversion,
 }
 /**
  * _putchar - prints a character to stdout
+ * @n: n
  * @c: character to be printed
  * Return: always 1
  */

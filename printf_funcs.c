@@ -2,9 +2,8 @@
 
 /**
  * conv_c - prints %c
+ * @n: n
  * @conv: arg
- * @f: flag characters for non-custom conversion specifiers
- * @w: field width
  * Return: length of write
  */
 
@@ -19,9 +18,8 @@ int conv_c(int n, va_list conv)
 
 /**
  * conv_s - prints %s
+ * @n: n
  * @conv: arg
- * @f: flag characters for non-custom conversion specifiers
- * @w: field width
  * Return: length of write
  */
 
@@ -43,9 +41,8 @@ int conv_s(int n, va_list conv)
 
 /**
  * conv_i_d - prints %i and %d
+ * @n: n
  * @conv: arg
- * @f: flag characters for non-custom conversion specifiers
- * @w: field width
  * Return: length of write
  */
 

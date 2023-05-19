@@ -1,6 +1,11 @@
 #include "head.h"
 
 /**
+ * error - prints error msgs to stderr
+ * @name: name
+ * @args: args
+ * @path: path
+ * @n: error index
  */
 void error(char *name, char **args, char *path, int n)
 {
@@ -18,5 +23,8 @@ void error(char *name, char **args, char *path, int n)
 	else if (n == 5)
 		_printf(2, "%s: %i: usage: unsetenv VARIABLE\n", name, --i);
 	else if (n == 6)
-		_printf(2, "%s: %i: environment variable %s not found\n", name, --i, args[1]);
+	{
+		_printf(2, "%s: %i: environment variable ", name, --i);
+		_printf(2, "%s not found\n", args[1]);
+	}
 }

@@ -36,7 +36,6 @@ void change_dir(int argc, char **args, char *name)
 	char *path;
 	static char *previous;
 
-	
 	if (!previous)
 		getcwd(previous, 1024);
 	path = argc == 1 || _strcmp(args[1], "~") == 0 ? _getenv("HOME") : args[1];
@@ -69,7 +68,8 @@ void export(int argc, char **args, char *name)
 		error(name, args, NULL, 4);
 	else
 	{
-		if ((temp = _getenv(args[1])))
+		temp = _getenv(args[1]);
+		if (temp)
 		{
 			_strcpy(temp, args[2]);
 			_strcat(temp, temp + _strlen(args[2]));
@@ -110,7 +110,7 @@ void unset(int argc, char **args, char *name)
 			{
 				environ[i] = NULL;
 				break;
-			}	
+			}
 		}
 	}
 }

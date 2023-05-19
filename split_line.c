@@ -64,7 +64,7 @@ void or_handling(char *line, char *name)
 				_free(arr2);
 				break;
 			}
-		        _free(arr2);			
+			_free(arr2);
 		}
 		if (duplication)
 		{
@@ -73,7 +73,7 @@ void or_handling(char *line, char *name)
 		}
 		if (args_count(arr1) > 0 && cmd_selector(arr1[0], arr1, name) == 0)
 			_fork(name, arr1);
-	        _free(arr1);
+		_free(arr1);
 		i++;
 	}
 }
