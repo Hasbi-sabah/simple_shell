@@ -99,7 +99,7 @@ void split_line(char *line, char *name)
 		replace_substring(line, "&&", "&");
 		if (_strlen(line) < new_len)
 		  {
-		    //error msg
+		    //error msg to add here
 		    return;
 		  }
 		and_handling(line, name);
@@ -112,7 +112,7 @@ void split_line(char *line, char *name)
 		replace_substring(line, "||", "|");
 		if (_strlen(line) < new_len)
 		  {
-		    //error msg
+		    //error msg to add here
 		    return;
 		  }
 		or_handling(line, name);
