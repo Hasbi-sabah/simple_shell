@@ -54,7 +54,10 @@ char **_strtok(char *s, char *delim)
 		if (exists_within(s[i], delim))
 		{
 		        if (s[i] == '\n')
+			{
+				tokens[k][j] = '\0';
 				break;
+			}
 			if (found == 0 && i > 0)
 			{
 				tokens[k][j] = '\0';
