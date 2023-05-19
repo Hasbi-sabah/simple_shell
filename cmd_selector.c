@@ -15,6 +15,7 @@ int cmd_selector(const char *cmd, char **args, char *name)
 		{"setenv", export},
 		{"unsetenv", unset},
 		{"env", env},
+		{"alias", alias},
 		{NULL, NULL}
 	};
 	int j = 0;

@@ -132,3 +132,27 @@ void env(int argc, char **args, char *name)
 	for (i = 0; environ[i]; i++)
 		_printf(1, "%s\n", environ[i]);
 }
+/**
+ * alias - works with aliases
+ */
+void alias(int argc, char **args, char *name)
+{
+	static char **aliases;
+	static int idx;
+	int i;
+
+	(void) name;
+	if (argc == 1)
+	{
+		for (i = 0; idx && i < idx; i++)
+			_printf(1, "%s\n", aliases[i]);
+		return;
+	}
+	if (!idx)
+		aliases = malloc(sizeof(char *));
+	for (i = 1; i < argc; i++, idx++)
+	{
+		aliases[idx] = malloc(_strlen(args[i]) + 1);
+		_strcpy(aliases[idx], args[i]);
+	}
+}
