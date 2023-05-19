@@ -106,7 +106,12 @@ void semi_column_handling(char *line, char *name)
 void split_line(char *line, char *name)
 {
 	size_t old_len = _strlen(line);
+	char *temp;
 
+
+	temp = _strstr(input, "#");
+	if (temp)
+		*temp = '\0';
 	replace_substring(line, "&&", "&");
 	if (_strlen(line) < old_len)
 	{
