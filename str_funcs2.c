@@ -42,14 +42,12 @@ int _strcmp(const char *s1, char *s2)
  */
 int _strncmp(const char *s1, char *s2, int n)
 {
-	int i;
-
-	for (i = 0; *s1 == *s2 && i < n; i++, s1++, s2++)
-	{
-		if (*s1 == '\0')
-			return (0);
-	}
-	return (*s1 - *s2);
+	for (; n && *s1 == *s2; n--, s1++, s2++)
+		;
+	if (!n)
+		return (0);
+	else
+		return (*s1 - *s2);
 }
 /**
  * _strstr - locates a substring.

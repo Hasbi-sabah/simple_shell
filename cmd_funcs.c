@@ -62,10 +62,29 @@ void change_dir(int argc, char **args, char *name)
  */
 void export(int argc, char **args, char *name)
 {
+	int i;
+	char *temp;
+
 	if (argc != 3)
 		error(name, args, NULL, 4);
 	else
-		setenv(arg[1], args[2], 1);
+	{
+		if ((temp = _getenv(args[1])))
+		{
+			_strcpy(temp, args[2]);
+			_strcat(temp, temp + _strlen(args[2]));
+		}
+		else
+		{
+			for (i = 0; environ[i]; i++)
+				;
+			environ[i] = malloc(_strlen(args[1]) + _strlen(args[2]) + 3);
+			_strcat(environ[i], args[1]);
+			_strcat(environ[i], "=");
+			_strcat(environ[i], args[2]);
+			environ[++i] = NULL;
+		}
+	}
 }
 
 /**
@@ -77,10 +96,23 @@ void export(int argc, char **args, char *name)
  */
 void unset(int argc, char **args, char *name)
 {
-	if (argc == 1 || _getenv(args[1]) == NULL)
+	int i;
+
+	if (argc != 2)
 		error(name, args, NULL, 5);
+	else if (_getenv(args[1]) == NULL)
+		error(name, args, NULL, 6);
 	else
-		unsetenv(args[1]);
+	{
+		for (i = 0; environ[i]; i++)
+		{
+			if (_strncmp(environ[i], args[1], _strlen(args[1])) == 0)
+			{
+				environ[i] = NULL;
+				break;
+			}	
+		}
+	}
 }
 
 /**

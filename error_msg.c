@@ -17,4 +17,6 @@ void error(char *name, char **args, char *path, int n)
 		_printf(2, "%s: %i: usage: setenv VARIABLE VALUE\n", name, --i);
 	else if (n == 5)
 		_printf(2, "%s: %i: usage: unsetenv VARIABLE\n", name, --i);
+	else if (n == 6)
+		_printf(2, "%s: %i: environment variable %s not found\n", name, --i, args[1]);
 }
