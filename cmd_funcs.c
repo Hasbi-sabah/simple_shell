@@ -59,7 +59,7 @@ void change_dir(int argc, char **args, char *name)
  */
 void export(int argc, char **args, char *name)
 {
-	int i;
+	int i = 0;
 	char *temp;
 
 	if (argc != 3)
@@ -74,8 +74,8 @@ void export(int argc, char **args, char *name)
 		}
 		else
 		{
-			for (i = 0; environ[i]; i++)
-				;
+			while (environ[i])
+				i++;
 			environ[i] = malloc(_strlen(args[1]) + _strlen(args[2]) + 3);
 			_strcat(environ[i], args[1]);
 			_strcat(environ[i], "=");
