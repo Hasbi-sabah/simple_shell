@@ -32,7 +32,6 @@ void exit_function(int n, char **args, char *name)
  */
 void change_dir(int argc, char **args, char *name)
 {
-	int r;
 	char *path;
 	static char *previous;
 
@@ -41,8 +40,7 @@ void change_dir(int argc, char **args, char *name)
 	path = argc == 1 || _strcmp(args[1], "~") == 0 ? _getenv("HOME") : args[1];
 	if (_strcmp(path, "-") == 0)
 		path = previous;
-	r = chdir(path);
-	if (r < 0)
+	if (chdir(path) < 0)
 	{
 		error(name, args, path, 3);
 		return;
