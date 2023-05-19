@@ -5,11 +5,11 @@
  * @arr: argument array
  * @name: name
  * @path: path
- * Return: none
+ * Return: success
  */
-void execmd(char **arr, char *name, char *path)
+int execmd(char **arr, char *name, char *path)
 {
-	int i = 0;
+	int i = 0, success = 1;
 	char *comm = NULL, *env;
 
 	(void) name;
@@ -27,14 +27,16 @@ void execmd(char **arr, char *name, char *path)
 			else
 			{
 				write(1, "\n", 1);
-				return;
+				return (1);
 			}
 		}
 		if (!i)
 		{
 			_strcpy(arr[0], path);
-			execve(comm, arr, environ);
+			if (execve(comm, arr, environ) < 0)
+				success = 0;
 		}
+		_free(arr);
 	}
-	_free(arr);
+	return (success);
 }

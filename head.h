@@ -17,10 +17,10 @@ void split_line(char *, char *);
 char **_strtok(char *, char *);
 int _getline(char **);
 void check_fork_error(char *, char **, char *);
-void execmd(char **, char *, char *);
+int execmd(char **, char *, char *);
 void get_cmds(char ***, char *);
 void _free(char **);
-void _fork(char *, char **);
+int _fork(char *, char **);
 int args_count(char **);
 char *is_valid(char *);
 int args_count(char **);
@@ -58,14 +58,14 @@ int conv_i_d(int, va_list);
 typedef struct cmd_executer
 {
 	char *cmd;
-	void (*exe_func)(int, char **, char *);
+	int (*exe_func)(int, char **, char *);
 } cmd_executer;
 int cmd_selector(const char *, char **, char *);
-void change_dir(int, char **, char *);
-void exit_function(int, char **, char *);
-void export(int, char **, char *);
-void unset(int, char **, char *);
-void env(int, char **, char *);
+int change_dir(int, char **, char *);
+int exit_function(int, char **, char *);
+int export(int, char **, char *);
+int unset(int, char **, char *);
+int env(int, char **, char *);
 
 /* string functions */
 char **_strtok(char *, char *);
