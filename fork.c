@@ -22,9 +22,10 @@ void _fork(char *name, char **arr)
 			execmd(arr, name, path);
 			exit(0);
 		}
-		else
+		else if (pid > 0)
 			waitpid(pid, &status, 0);
-		error(name, arr, NULL, 0);
+		else
+			error(name, arr, NULL, 0);
 	}
 	else
 		error(name, arr, NULL, 1);
