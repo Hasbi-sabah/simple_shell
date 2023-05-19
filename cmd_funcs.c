@@ -90,7 +90,6 @@ int export(int argc, char **args, char *name)
 		return (1);
 	}
 }
-
 /**
  * unset - check code
  * @argc: arguments count
@@ -125,7 +124,6 @@ int unset(int argc, char **args, char *name)
 		return (1);
 	}
 }
-
 /**
  * env - prints env
  * @argc: argc
@@ -142,5 +140,5 @@ int env(int argc, char **args, char *name)
 	(void) name;
 	for (i = 0; environ[i]; i++)
 		_printf(1, "%s\n", environ[i]);
-        return (1);
+	return (1);
 }
