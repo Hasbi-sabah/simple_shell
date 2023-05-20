@@ -37,7 +37,7 @@ char *is_valid(char *);
 int args_count(char **);
 char *check_ops(char **);
 char *_getenv(char *);
-int _getalias(aliases *, char *, int);
+int _getalias(aliases *, char *, int, int);
 int echo(char **);
 void error(char *, char **, char *, int);
 

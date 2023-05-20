@@ -27,13 +27,15 @@ char *_getenv(char *var)
  * @var: variable name
  * Return: string
  */
-int _getalias(aliases *alias, char *var, int idx)
+int _getalias(aliases *alias, char *var, int idx, int flag)
 {
 	int i;
 
 	for (i = 0; i < idx; i++)
 	{
-		if (!_strcmp(var, alias[i].name))
+		if (flag && !_strcmp(var, alias[i].name))
+			return (i);
+		if (!flag && !_strcmp(var, alias[i].value))
 			return (i);
 	}
 	return (-1);

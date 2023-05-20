@@ -6,7 +6,7 @@ void check_alias(char ***arr, aliases *alias, int idx)
 
 	for (i = 0; (*arr)[i]; i++)
 	{
-		n = _getalias(alias, (*arr)[i], idx);
+		n = _getalias(alias, (*arr)[i], idx, 1);
 		if (n != -1)
 		{
 			(*arr)[i] = NULL;

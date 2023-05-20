@@ -18,7 +18,7 @@ int _alias(int argc, char **args, char *name, aliases *alias, int *idx)
 	for (i = 1; i < argc; i++)
 	{
 		al = _strtok(args[i], "=");
-		j = _getalias(alias, al[0], *idx);
+		j = _getalias(alias, al[0], *idx, 0);
 		if (!_strstr(args[i], "="))
 		{
 			if (j != -1)
