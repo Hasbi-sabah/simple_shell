@@ -9,31 +9,52 @@
  */
 void error(char *name, char **args, char *path, int n)
 {
-	static int i;
+	static unsigned int i = 0;
 
-	if (n == 0)
-		i++;
-	else if (n == 1)
-		_printf(2, "%s: %i: %s: not found\n", name, i, args[0]);
+	if (n < 10)
+	{
+		print_string(name);
+		print_string(": ");
+		to_string(i);
+		print_string(": ");
+	}
+	if (n == 1)
+	{
+		print_string(args[0]);
+		print_string(": not found");
+	}
 	else if (n == 2)
-		_printf(2, "%s: %i: exit: Illegal number: %s\n", name, i, args[1]);
+	{
+		print_string("exit: Illegal number: ");
+		print_string(args[1]);
+	}
 	else if (n == 3)
-		_printf(2, "%s: %i: cd: can't cd to %s\n", name, i, path);
+	{
+		print_string("cd: can't cd to ");
+		print_string(path);
+	}
 	else if (n == 4)
-		_printf(2, "%s: %i: usage: setenv VARIABLE VALUE\n", name, i);
+		print_string("usage: setenv VARIABLE VALUE");
 	else if (n == 5)
-		_printf(2, "%s: %i: usage: unsetenv VARIABLE\n", name, i);
+		print_string("usage: unsetenv VARIABLE VALUE");
 	else if (n == 6)
 	{
-		_printf(2, "%s: %i: environment variable ", name, i);
-		_printf(2, "%s not found\n", args[1]);
+		print_string("environment variable ");
+		print_string(args[1]);
+		print_string(" not found");
 	}
 	else if (n == 7)
-		_printf(2, "%s: %i: Syntax error: \"&\" unexpected\n", name, i);
+		print_string("Syntax error: \"&\" unexpected");
 	else if (n == 8)
-		_printf(2, "%s: %i: Syntax error: \"|\" unexpected\n", name, i);
+		print_string("Syntax error: \"|\" unexpected");
 	else if (n == 9)
-		_printf(2, "%s: %i: Syntax error: \";;\" unexpected\n", name, i);
+		print_string("Syntax error: \";;\" unexpected");
 	else if (n == 10)
-		_printf(2, "alias: %s not found\n", path);
+	{
+		print_string("alias: ");
+		print_string(path);
+		print_string(" not found");
+	}
+        write(1, "\n", 1);
+        i++;
 }

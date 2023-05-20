@@ -48,7 +48,8 @@ int _putchar(int, char);
 int conv_c(int, va_list);
 int conv_s(int, va_list);
 int conv_i_d(int, va_list);
-
+int to_string(unsigned int);
+int print_string(char *);
 /* for cmd exec */
 
 /**

@@ -80,7 +80,7 @@ char **_strtok(char *s, char *delim)
 				tokens[k][j] = '\0';
 				break;
 			}
-			if (found == 0 && i > 0)
+			if (found == 0 && tokens[k] != NULL)
 			{
 				tokens[k][j] = '\0';
 				k++;

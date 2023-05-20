@@ -49,7 +49,10 @@ int change_dir(int argc, char **args, char *name)
 	getcwd(previous, 1024);
 	setenv("PWD", path, 1);
 	if (argc == 1)
-		_printf(1, "%s\n", path);
+	{
+		print_string(path);
+		write(1, "\n", 1);
+	}
 	return (1);
 }
 /**
@@ -133,17 +136,23 @@ int unset(int argc, char **args, char *name)
  */
 int env(int argc, char **args, char *name)
 {
-	int i;
+	char *env;
 
 	(void) argc;
 	(void) args;
 	(void) name;
-	for (i = 0; environ[i]; i++)
-		_printf(1, "%s\n", environ[i]);
+	for (env = environ; *env; env++)
+	{
+		print_string(*env);
+		write(1, "\n", 1);
+	}
 	return (1);
 }
 /**
  * alias - works with aliases
+ * @argc: argc
+ * @args: arguments
+ * @name: name file
  */
 int alias(int argc, char **args, char *name)
 {
@@ -156,7 +165,10 @@ int alias(int argc, char **args, char *name)
 	if (argc == 1)
 	{
 		for (i = 0; idx && i < idx; i++)
-			_printf(1, "%s\n", aliases[i]);
+		{
+			print_string(aliases[i]);
+			write(1, "\n", 1);
+		}
 		return (1);
 	}
 	for (i = 1; i < argc; i++)
@@ -166,7 +178,10 @@ int alias(int argc, char **args, char *name)
 		if (!_strstr(args[i], "="))
 		{
 			if (j != -1)
-				_printf(1, "%s\n", aliases[j]);
+			{
+				print_string(aliases[j]);
+				write(1, "\n", 1);
+			}
 			else
 				error(name, args, args[i], 10);
 		}
