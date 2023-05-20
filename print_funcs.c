@@ -17,9 +17,10 @@ int to_string(unsigned int n)
 /**
  * print_string - check code
  * @str: string
+ * @i: integer
  * Return: string length
  */
-int print_string(char *str)
+int print_string(int i, char *str)
 {
-	return (write(1, str, _strlen(str)));
+	return (write(i, str, _strlen(str)));
 }
