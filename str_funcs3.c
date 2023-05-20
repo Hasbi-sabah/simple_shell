@@ -97,6 +97,7 @@ char **_strtok(char *s, char *delim)
 	}
 	while (k >= 0 && _strlen(tokens[k]) == 0)
 	{
+		free(tokens[k]);
 		tokens[k] = NULL;
 		k--;
 	}
