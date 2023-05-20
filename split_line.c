@@ -29,25 +29,6 @@ void and_handling(char *line, char *name)
 	}
 }
 /**
- * cmd_duplication - check code
- * @arr1: first args
- * @arr2: second args
- * Return: condition
- */
-int cmd_duplication(char **arr1, char **arr2)
-{
-	int i;
-
-	if (args_count(arr1) != args_count(arr2))
-		return (0);
-	for (i = 0; arr1[i] && arr2[i]; i++)
-	{
-		if (_strcmp(arr1[i], arr2[i]) != 0)
-			return (0);
-	}
-	return (1);
-}
-/**
  * or_handling - check code
  * @line: input command line
  * @name: file name
@@ -55,42 +36,24 @@ int cmd_duplication(char **arr1, char **arr2)
  */
 void or_handling(char *line, char *name)
 {
-	char **arr1, **arr2, **line_split;
-	int i = 0, j, duplication;
+	char **arr, **line_split;
 	int break_condition, argc, selector;
 
 	line_split = _strtok(line, "|");
-	while (line_split[i])
+	while (*line_split)
 	{
-		arr1 = _strtok(line_split[i], " \n");
-		duplication = 0;
-		for (j = 0; j < i; j++)
-		{
-			arr2 = _strtok(line_split[j], " \n");
-			if (cmd_duplication(arr1, arr2))
-			{
-				duplication = 1;
-				_free(arr2);
-				break;
-			}
-			_free(arr2);
-		}
-		if (duplication)
-		{
-			i++;
-			continue;
-		}
+		arr = _strtok(*line_split, " \n");
 		break_condition = 0;
-		argc = args_count(arr1);
-		selector = cmd_selector(arr1[0], arr1, name);
+		argc = args_count(arr);
+		selector = cmd_selector(arr[0], arr, name);
 		if (argc > 0 && selector < 0)
-			break_condition = _fork(name, arr1);
+			break_condition = _fork(name, arr);
 		else if (argc > 0)
 			break_condition = selector;
-		_free(arr1);
+		_free(arr);
 		if (break_condition)
 			break;
-		i++;
+		line_split++;
 	}
 }
 /**
@@ -122,6 +85,7 @@ void semi_column_handling(char *line, char *name)
 void split_line(char *line, char *name)
 {
 	size_t old_len = _strlen(line);
+	size_t new_len;
 	char *temp;
 
 
@@ -129,14 +93,28 @@ void split_line(char *line, char *name)
 	if (temp)
 		*temp = '\0';
 	replace_substring(line, "&&", "&");
-	if (_strlen(line) < old_len)
+	new_len = _strlen(line);
+	if (new_len < old_len)
 	{
+		replace_substring(line, "&&", "&");
+		if (_strlen(line) < new_len)
+		  {
+		    //error msg to add here
+		    return;
+		  }
 		and_handling(line, name);
 		return;
 	}
 	replace_substring(line, "||", "|");
-	if (_strlen(line) < old_len)
+	new_len = _strlen(line);
+	if (new_len < old_len)
 	{
+		replace_substring(line, "||", "|");
+		if (_strlen(line) < new_len)
+		  {
+		    //error msg to add here
+		    return;
+		  }
 		or_handling(line, name);
 		return;
 	}
