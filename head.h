@@ -31,23 +31,6 @@ int echo(char **);
 void error(char *, char **, char *, int);
 
 /* for _printf() */
-/**
- * struct conversion - struct
- * @conv_spec: conversion specifier
- * @f: function to be executed
- */
-struct conversion
-{
-	char conv_spec;
-	int (*f)(int, va_list);
-};
-typedef struct conversion conv_list;
-int _printf(int, const char *, ...);
-int call_funcs(int, conv_list *, va_list, const char *);
-int _putchar(int, char);
-int conv_c(int, va_list);
-int conv_s(int, va_list);
-int conv_i_d(int, va_list);
 int to_string(unsigned int);
 int print_string(char *);
 /* for cmd exec */
