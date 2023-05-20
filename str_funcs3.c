@@ -42,7 +42,7 @@ void replace_substring(char *str, char *old_substr, char *new_substr)
 		ptr[k++] = ptr[l++];
 	} while (ptr[l] != '\0');
 	ptr[k] = '\0';
-	memcpy(ptr, new_substr, new_len);
+	_memcpy(ptr, new_substr, new_len);
 	replace_substring(ptr + new_len, old_substr, new_substr);
 }
 /**
@@ -66,7 +66,7 @@ int exists_within(char c, char *s)
 char **_strtok(char *s, char *delim)
 {
 	char **tokens;
-	size_t k = 0, j = 0, i, len = strlen(s);
+	size_t k = 0, j = 0, i, len = _strlen(s);
 	int found = 0;
 
 	tokens = (char **)malloc(len * sizeof(char *));
@@ -80,7 +80,7 @@ char **_strtok(char *s, char *delim)
 				tokens[k][j] = '\0';
 				break;
 			}
-			if (found == 0 && i > 0)
+			if (found == 0 && tokens[k] != NULL)
 			{
 				tokens[k][j] = '\0';
 				k++;
@@ -95,8 +95,9 @@ char **_strtok(char *s, char *delim)
 			found = 0;
 		}
 	}
-	while (_strlen(tokens[k]) == 0)
+	while ((int)k >= 0 && _strlen(tokens[k]) == 0)
 	{
+		free(tokens[k]);
 		tokens[k] = NULL;
 		k--;
 	}
