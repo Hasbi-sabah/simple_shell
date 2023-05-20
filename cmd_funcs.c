@@ -50,7 +50,7 @@ int change_dir(int argc, char **args, char *name)
 	setenv("PWD", path, 1);
 	if (argc == 1)
 	{
-		print_string(path);
+		print_string(1, path);
 		write(1, "\n", 1);
 	}
 	return (1);
@@ -136,14 +136,14 @@ int unset(int argc, char **args, char *name)
  */
 int env(int argc, char **args, char *name)
 {
-	char *env;
+	int i;
 
 	(void) argc;
 	(void) args;
 	(void) name;
-	for (env = environ; *env; env++)
+	for (i = 0; environ[i]; i++)
 	{
-		print_string(*env);
+		print_string(1, environ[i]);
 		write(1, "\n", 1);
 	}
 	return (1);
@@ -166,7 +166,7 @@ int alias(int argc, char **args, char *name)
 	{
 		for (i = 0; idx && i < idx; i++)
 		{
-			print_string(aliases[i]);
+			print_string(1, aliases[i]);
 			write(1, "\n", 1);
 		}
 		return (1);
@@ -179,7 +179,7 @@ int alias(int argc, char **args, char *name)
 		{
 			if (j != -1)
 			{
-				print_string(aliases[j]);
+				print_string(1, aliases[j]);
 				write(1, "\n", 1);
 			}
 			else

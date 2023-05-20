@@ -14,7 +14,7 @@ int main(int argc, char **args)
 	(void) argc;
 	while (1)
 	{
-		_printf(1, "$ ");
+		write(1, "$ ", 2);
 		if (_getline(&input) <= 0)
 		{
 			free(input);
@@ -27,6 +27,6 @@ int main(int argc, char **args)
 			split_line(input, name);
 		}
 	}
-	_printf(1, "\n");
+	write(1, "\n", 1);
 	return (0);
 }
