@@ -7,10 +7,12 @@
  * @name: program name
  * Return: success
  */
-int exit_function(int n, char **args, char *name)
+int exit_function(int n, char **args, char *name, aliases *alias, int *idx)
 {
 	int i;
 
+	(void) alias;
+	(void) idx;
 	for (i = 0; n > 1 && args[1][i]; i++)
 	{
 		if (args[1][i] < '0' || args[1][i] > '9')
@@ -31,11 +33,13 @@ int exit_function(int n, char **args, char *name)
  * @name: program name
  * Return: success
  */
-int change_dir(int argc, char **args, char *name)
+int change_dir(int argc, char **args, char *name, aliases *alias, int *idx)
 {
 	char *path;
 	static char *previous;
 
+	(void) alias;
+	(void) idx;
 	if (!previous)
 		getcwd(previous, 1024);
 	path = argc == 1 || _strcmp(args[1], "~") == 0 ? _getenv("HOME") : args[1];
@@ -59,11 +63,13 @@ int change_dir(int argc, char **args, char *name)
  * @name: program name
  * Return: success
  */
-int export(int argc, char **args, char *name)
+int export(int argc, char **args, char *name, aliases *alias, int *idx)
 {
 	int i = 0;
 	char *temp;
 
+	(void) alias;
+	(void) idx;
 	if (argc != 3)
 	{
 		error(name, args, NULL, 4);
@@ -97,10 +103,12 @@ int export(int argc, char **args, char *name)
  * @name: program name
  * Return: success
  */
-int unset(int argc, char **args, char *name)
+int unset(int argc, char **args, char *name, aliases *alias, int *idx)
 {
 	int i;
 
+	(void) alias;
+	(void) idx;
 	if (argc != 2)
 	{
 		error(name, args, NULL, 5);
@@ -131,59 +139,16 @@ int unset(int argc, char **args, char *name)
  * @name: program name
  * Return: success
  */
-int env(int argc, char **args, char *name)
+int env(int argc, char **args, char *name, aliases *alias, int *idx)
 {
 	int i;
 
 	(void) argc;
 	(void) args;
 	(void) name;
+	(void) alias;
+	(void) idx;
 	for (i = 0; environ[i]; i++)
 		_printf(1, "%s\n", environ[i]);
-	return (1);
-}
-/**
- * alias - works with aliases
- */
-int alias(int argc, char **args, char *name)
-{
-	static char **aliases;
-	char **alias;
-	static int idx;
-	int i, j;
-
-	(void) name;
-	if (argc == 1)
-	{
-		for (i = 0; idx && i < idx; i++)
-			_printf(1, "%s\n", aliases[i]);
-		return (1);
-	}
-	for (i = 1; i < argc; i++)
-	{
-		alias = _strtok(args[i], "=");
-		j = _getalias(aliases, alias[0], idx);
-		if (!_strstr(args[i], "="))
-		{
-			if (j != -1)
-				_printf(1, "%s\n", aliases[j]);
-			else
-				error(name, args, args[i], 10);
-		}
-		else if (j != -1)
-		{
-			aliases[j] = NULL;
-			aliases[j] = malloc(_strlen(args[i]) + 1 + _strlen("''"));
-			_strcpy(aliases[j], args[i]);
-		}
-		else
-		{
-			if (!idx)
-				aliases = malloc(sizeof(char *));
-			aliases[idx] = malloc(_strlen(args[i]) + 1 + _strlen("''"));
-			_strcpy(aliases[idx], args[i]);
-			idx++;
-		}
-	}
 	return (1);
 }

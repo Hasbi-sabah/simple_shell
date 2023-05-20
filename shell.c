@@ -9,9 +9,13 @@
 int EXIT_STATUS = 0;
 int main(int argc, char **args)
 {
+	aliases alias;
+	int idx = 0;
 	char *input, *name = args[0];
 
 	(void) argc;
+	alias.name = NULL;
+	alias.value = NULL;
 	while (1)
 	{
 		_printf(1, "$ ");
@@ -24,7 +28,7 @@ int main(int argc, char **args)
 		if (_strcmp(input, "\n") && *input != '\0')
 		{
 			error(name, NULL, NULL, 0);
-			split_line(input, name);
+			split_line(input, name, &alias, &idx);
 		}
 	}
 	_printf(1, "\n");

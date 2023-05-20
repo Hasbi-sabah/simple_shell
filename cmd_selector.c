@@ -7,7 +7,7 @@
  * @name: program name
  * Return: success
  */
-int cmd_selector(const char *cmd, char **args, char *name)
+int cmd_selector(const char *cmd, char **args, char *name, aliases *alias, int *idx)
 {
 	cmd_executer executers[] = {
 		{"exit", exit_function},
@@ -15,7 +15,7 @@ int cmd_selector(const char *cmd, char **args, char *name)
 		{"setenv", export},
 		{"unsetenv", unset},
 		{"env", env},
-		{"alias", alias},
+		{"alias", _alias},
 		{NULL, NULL}
 	};
 	int j = 0;
@@ -23,7 +23,7 @@ int cmd_selector(const char *cmd, char **args, char *name)
 	while (executers[j].exe_func != NULL && _strcmp(cmd, executers[j].cmd) != 0)
 		j++;
 	if (executers[j].exe_func != NULL)
-		return (executers[j].exe_func(args_count(args), args, name));
+		return (executers[j].exe_func(args_count(args), args, name, alias, idx));
 	return (-1);
 }
 
