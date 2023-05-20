@@ -7,7 +7,7 @@
  * @name: program name
  * Return: success
  */
-void exit_function(int n, char **args, char *name)
+int exit_function(int n, char **args, char *name)
 {
 	int i;
 
@@ -16,23 +16,23 @@ void exit_function(int n, char **args, char *name)
 		if (args[1][i] < '0' || args[1][i] > '9')
 		{
 			error(name, args, NULL, 2);
-			return;
+			return (0);
 		}
 	}
 	if (n > 1)
 		i = atoi(args[1]);
 	exit(i);
+	return (1);
 }
 /**
  * change_dir - check code
  * @argc: arguments count
  * @args: arguments
  * @name: program name
- * Return: none
+ * Return: success
  */
-void change_dir(int argc, char **args, char *name)
+int change_dir(int argc, char **args, char *name)
 {
-	int r;
 	char *path;
 	static char *previous;
 
@@ -41,31 +41,34 @@ void change_dir(int argc, char **args, char *name)
 	path = argc == 1 || _strcmp(args[1], "~") == 0 ? _getenv("HOME") : args[1];
 	if (_strcmp(path, "-") == 0)
 		path = previous;
-	r = chdir(path);
-	if (r < 0)
+	if (chdir(path) < 0)
 	{
 		error(name, args, path, 3);
-		return;
+		return (0);
 	}
 	getcwd(previous, 1024);
 	setenv("PWD", path, 1);
 	if (argc == 1)
 		_printf(1, "%s\n", path);
+	return (1);
 }
 /**
  * export - check code
  * @argc: arguments count
  * @args: arguments
  * @name: program name
- * Return: none
+ * Return: success
  */
-void export(int argc, char **args, char *name)
+int export(int argc, char **args, char *name)
 {
-	int i;
+	int i = 0;
 	char *temp;
 
 	if (argc != 3)
+	{
 		error(name, args, NULL, 4);
+		return (0);
+	}
 	else
 	{
 		temp = _getenv(args[1]);
@@ -76,32 +79,38 @@ void export(int argc, char **args, char *name)
 		}
 		else
 		{
-			for (i = 0; environ[i]; i++)
-				;
+			while (environ[i])
+				i++;
 			environ[i] = malloc(_strlen(args[1]) + _strlen(args[2]) + 3);
 			_strcat(environ[i], args[1]);
 			_strcat(environ[i], "=");
 			_strcat(environ[i], args[2]);
 			environ[++i] = NULL;
 		}
+		return (1);
 	}
 }
-
 /**
  * unset - check code
  * @argc: arguments count
  * @args: arguments
  * @name: program name
- * Return: none
+ * Return: success
  */
-void unset(int argc, char **args, char *name)
+int unset(int argc, char **args, char *name)
 {
 	int i;
 
 	if (argc != 2)
+	{
 		error(name, args, NULL, 5);
+		return (0);
+	}
 	else if (_getenv(args[1]) == NULL)
+	{
 		error(name, args, NULL, 6);
+		return (0);
+	}
 	else
 	{
 		for (i = 0; environ[i]; i++)
@@ -112,17 +121,17 @@ void unset(int argc, char **args, char *name)
 				break;
 			}
 		}
+		return (1);
 	}
 }
-
 /**
  * env - prints env
  * @argc: argc
  * @args: arguments
  * @name: program name
- * Return: none
+ * Return: success
  */
-void env(int argc, char **args, char *name)
+int env(int argc, char **args, char *name)
 {
 	int i;
 
@@ -131,11 +140,12 @@ void env(int argc, char **args, char *name)
 	(void) name;
 	for (i = 0; environ[i]; i++)
 		_printf(1, "%s\n", environ[i]);
+	return (1);
 }
 /**
  * alias - works with aliases
  */
-void alias(int argc, char **args, char *name)
+int alias(int argc, char **args, char *name)
 {
 	static char **aliases;
 	static int idx;
@@ -146,7 +156,7 @@ void alias(int argc, char **args, char *name)
 	{
 		for (i = 0; idx && i < idx; i++)
 			_printf(1, "%s\n", aliases[i]);
-		return;
+		return (1);
 	}
 	if (!idx)
 		aliases = malloc(sizeof(char *));
@@ -155,4 +165,5 @@ void alias(int argc, char **args, char *name)
 		aliases[idx] = malloc(_strlen(args[i]) + 1);
 		_strcpy(aliases[idx], args[i]);
 	}
+	return (1);
 }

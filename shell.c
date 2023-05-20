@@ -9,7 +9,7 @@
 int EXIT_STATUS = 0;
 int main(int argc, char **args)
 {
-	char *input, *temp, *name = args[0];
+	char *input, *name = args[0];
 
 	(void) argc;
 	while (1)
@@ -21,9 +21,6 @@ int main(int argc, char **args)
 			write(1, "\n", 1);
 			return (0);
 		}
-		temp = _strstr(input, "#");
-		if (temp)
-			*temp = '\0';
 		if (_strcmp(input, "\n") && *input != '\0')
 			split_line(input, name);
 	}

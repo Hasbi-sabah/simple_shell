@@ -4,12 +4,12 @@
  * _fork - check code
  * @name: command name
  * @arr: arguments
- * Return: none
+ * Return: success
  */
-void _fork(char *name, char **arr)
+int _fork(char *name, char **arr)
 {
 	pid_t pid;
-	int status;
+	int status, success = 1;
 	char *path = NULL, *comm = NULL;
 
 	comm = arr[0];
@@ -19,13 +19,18 @@ void _fork(char *name, char **arr)
 		pid = fork();
 		if (pid == 0)
 		{
-			execmd(arr, name, path);
+			success = execmd(arr, name, path);
 			exit(0);
 		}
-		else
+		else if (pid > 0)
 			waitpid(pid, &status, 0);
-		error(name, arr, NULL, 0);
+		else
+			error(name, arr, NULL, 0);
 	}
 	else
+	{
 		error(name, arr, NULL, 1);
+		success = 0;
+	}
+	return (success);
 }
