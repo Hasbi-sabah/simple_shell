@@ -148,8 +148,9 @@ int env(int argc, char **args, char *name)
 int alias(int argc, char **args, char *name)
 {
 	static char **aliases;
+	char **alias;
 	static int idx;
-	int i;
+	int i, j;
 
 	(void) name;
 	if (argc == 1)
@@ -158,12 +159,31 @@ int alias(int argc, char **args, char *name)
 			_printf(1, "%s\n", aliases[i]);
 		return (1);
 	}
-	if (!idx)
-		aliases = malloc(sizeof(char *));
-	for (i = 1; i < argc; i++, idx++)
+	for (i = 1; i < argc; i++)
 	{
-		aliases[idx] = malloc(_strlen(args[i]) + 1);
-		_strcpy(aliases[idx], args[i]);
+		alias = _strtok(args[i], "=");
+		j = _getalias(aliases, alias[0], idx);
+		if (!_strstr(args[i], "="))
+		{
+			if (j != -1)
+				_printf(1, "%s\n", aliases[j]);
+			else
+				error(name, args, args[i], 10);
+		}
+		else if (j != -1)
+		{
+			aliases[j] = NULL;
+			aliases[j] = malloc(_strlen(args[i]) + 1 + _strlen("''"));
+			_strcpy(aliases[j], args[i]);
+		}
+		else
+		{
+			if (!idx)
+				aliases = malloc(sizeof(char *));
+			aliases[idx] = malloc(_strlen(args[i]) + 1 + _strlen("''"));
+			_strcpy(aliases[idx], args[i]);
+			idx++;
+		}
 	}
 	return (1);
 }

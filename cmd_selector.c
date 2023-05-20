@@ -23,10 +23,7 @@ int cmd_selector(const char *cmd, char **args, char *name)
 	while (executers[j].exe_func != NULL && _strcmp(cmd, executers[j].cmd) != 0)
 		j++;
 	if (executers[j].exe_func != NULL)
-	{
-		error(name, args, NULL, 0);
 		return (executers[j].exe_func(args_count(args), args, name));
-	}
 	return (-1);
 }
 

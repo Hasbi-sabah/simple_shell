@@ -22,7 +22,10 @@ int main(int argc, char **args)
 			return (0);
 		}
 		if (_strcmp(input, "\n") && *input != '\0')
+		{
+			error(name, NULL, NULL, 0);
 			split_line(input, name);
+		}
 	}
 	_printf(1, "\n");
 	return (0);
