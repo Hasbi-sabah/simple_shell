@@ -42,7 +42,7 @@ void replace_substring(char *str, char *old_substr, char *new_substr)
 		ptr[k++] = ptr[l++];
 	} while (ptr[l] != '\0');
 	ptr[k] = '\0';
-	memcpy(ptr, new_substr, new_len);
+	_memcpy(ptr, new_substr, new_len);
 	replace_substring(ptr + new_len, old_substr, new_substr);
 }
 /**
