@@ -98,11 +98,9 @@ void split_line(char *line, char *name)
 	{
 		replace_substring(line, "&&", "&");
 		if (_strlen(line) < new_len)
-		  {
-		    //error msg to add here
-		    return;
-		  }
-		and_handling(line, name);
+		  //error msg here
+		else
+			and_handling(line, name);
 		return;
 	}
 	replace_substring(line, "||", "|");
@@ -111,12 +109,13 @@ void split_line(char *line, char *name)
 	{
 		replace_substring(line, "||", "|");
 		if (_strlen(line) < new_len)
-		  {
 		    //error msg to add here
-		    return;
-		  }
-		or_handling(line, name);
+		else
+			or_handling(line, name);
 		return;
 	}
-	semi_column_handling(line, name);
+	if (_strstr(line, ";;"))
+	  //error msg
+	else
+		semi_column_handling(line, name);
 }
