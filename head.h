@@ -10,6 +10,7 @@
 #include <stdarg.h>
 #include <dirent.h>
 #include <string.h>
+#include <fcntl.h>
 
 extern char **environ;
 
@@ -26,6 +27,7 @@ char *is_valid(char *);
 int args_count(char **);
 char *check_ops(char **);
 char *_getenv(char *);
+int _getalias(char **, char *, int);
 int echo(char **);
 void error(char *, char **, char *, int);
 
@@ -66,6 +68,7 @@ int exit_function(int, char **, char *);
 int export(int, char **, char *);
 int unset(int, char **, char *);
 int env(int, char **, char *);
+int alias(int, char **, char *);
 
 /* string functions */
 char **_strtok(char *, char *);

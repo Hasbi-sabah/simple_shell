@@ -21,3 +21,20 @@ char *_getenv(char *var)
 	}
 	return (NULL);
 }
+/**
+ * _getalias - checks for aliases
+ * @aliases: aliases
+ * @var: variable name
+ * Return: string
+ */
+int _getalias(char **aliases, char *var, int idx)
+{
+	int i;
+
+	for (i = 0; i < idx; i++)
+	{
+		if (!_strncmp(var, aliases[i], _strlen(var)))
+			return (i);
+	}
+	return (-1);
+}

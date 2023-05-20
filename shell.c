@@ -17,12 +17,15 @@ int main(int argc, char **args)
 		_printf(1, "$ ");
 		if (_getline(&input) <= 0)
 		{
+			free(input);
 			write(1, "\n", 1);
 			return (0);
 		}
 		if (_strcmp(input, "\n") && *input != '\0')
+		{
+			error(name, NULL, NULL, 0);
 			split_line(input, name);
-		free(input);
+		}
 	}
 	_printf(1, "\n");
 	return (0);
