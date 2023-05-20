@@ -65,13 +65,17 @@ void or_handling(char *line, char *name)
 void semi_column_handling(char *line, char *name)
 {
 	char **arr, **line_split;
+	int argc;
 
 	line_split = _strtok(line, ";");
 	while (*line_split)
 	{
 		arr = _strtok(*line_split, " \n");
-		if (args_count(arr) > 0 && cmd_selector(arr[0], arr, name) < 0)
+		argc = args_count(arr);
+		if (argc > 0 && cmd_selector(arr[0], arr, name) < 0)
 			_fork(name, arr);
+		else if (argc == 0)
+	        	error(name, NULL, NULL, 9);
 		_free(arr);
 		line_split++;
 	}
