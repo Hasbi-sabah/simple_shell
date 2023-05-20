@@ -7,7 +7,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
-#include <stdarg.h>
 #include <dirent.h>
 #include <fcntl.h>
 
