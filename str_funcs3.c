@@ -81,11 +81,9 @@ char **_strtok(char *s, char *delim)
 				break;
 			}
 			if (found == 0 && tokens[k] != NULL)
-			{
-				tokens[k][j] = '\0';
-				k++;
-			}
-			tokens[k] = (char *)malloc(len);
+				tokens[k++][j] = '\0';
+			if (!tokens[k])
+				tokens[k] = (char *)malloc(len);
 			found = 1;
 			j = 0;
 		}
