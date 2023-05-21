@@ -6,7 +6,7 @@ void check_alias(char ***arr, aliases *alias, int idx)
 
 	for (i = 0; (*arr)[i]; i++)
 	{
-		n = _getalias(alias, (*arr)[i], idx, 1);
+		n = _getalias(alias, (*arr)[i], idx);
 		if (n != -1)
 		{
 			(*arr)[i] = NULL;
@@ -31,7 +31,8 @@ void and_handling(char *line, char *name, aliases *alias, int *idx)
 	{
 		break_condition = 0;
 		arr = _strtok(*line_split, " \n");
-		check_alias(&arr, alias, *idx);
+		if (_strcmp(arr[0], "alias"))
+			check_alias(&arr, alias, *idx);
 		argc = args_count(arr);
 		selector = cmd_selector(arr[0], arr, name, alias, idx);
 		if (argc > 0 && selector < 0)
@@ -59,7 +60,8 @@ void or_handling(char *line, char *name, aliases *alias, int *idx)
 	while (*line_split)
 	{
 		arr = _strtok(*line_split, " \n");
-		check_alias(&arr, alias, *idx);
+		if (_strcmp(arr[0], "alias"))
+			check_alias(&arr, alias, *idx);
 		break_condition = 0;
 		argc = args_count(arr);
 		selector = cmd_selector(arr[0], arr, name, alias, idx);
@@ -88,7 +90,8 @@ void semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 	while (*line_split)
 	{
 		arr = _strtok(*line_split, " \n");
-		check_alias(&arr, alias, *idx);
+		if (_strcmp(arr[0], "alias"))
+			check_alias(&arr, alias, *idx);
 		argc = args_count(arr);
 		if (argc > 0 && cmd_selector(arr[0], arr, name, alias, idx) < 0)
 			_fork(name, arr);

@@ -26,13 +26,13 @@ int _alias(int argc, char **args, char *name, aliases *alias, int *idx)
 	for (i = 1; i < argc; i++)
 	{
 		al = _strtok(args[i], "=");
-		j = _getalias(alias, al[0], *idx, 0);
+		j = _getalias(alias, al[0], *idx);
 		if (!_strstr(args[i], "="))
 		{
 			if (j != -1)
 			{
-				print_string(1, alias[i].name), print_string(1, "='");
-				print_string(1, alias[i].value), print_string(1, "'\n");
+				print_string(1, alias[j].name), print_string(1, "='");
+				print_string(1, alias[j].value), print_string(1, "'\n");
 			}
 			else
 				error(name, args, args[i], 10);
