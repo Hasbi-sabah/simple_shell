@@ -11,11 +11,11 @@ void and_handling(char *line, char *name)
 	char **arr, **line_split;
 	int break_condition, argc, selector, i = 0;
 
-	line_split = _strtok(line, "&");
+	line_split = _strtok(line, "&\n");
 	while (line_split[i])
 	{
 		break_condition = 0;
-		arr = _strtok(line_split[i], " \n");
+		arr = _strtok(line_split[i], " ");
 		argc = args_count(arr);
 		selector = cmd_selector(arr[0], arr, name);
 		if (argc > 0 && selector < 0)
@@ -40,10 +40,10 @@ void or_handling(char *line, char *name)
 	char **arr, **line_split;
 	int break_condition, argc, selector, i = 0;
 
-	line_split = _strtok(line, "|");
+	line_split = _strtok(line, "|\n");
 	while (line_split[i])
 	{
-		arr = _strtok(line_split[i], " \n");
+		arr = _strtok(line_split[i], " ");
 		break_condition = 0;
 		argc = args_count(arr);
 		selector = cmd_selector(arr[0], arr, name);
@@ -69,10 +69,10 @@ void semi_column_handling(char *line, char *name)
 	char **arr, **line_split;
 	int argc, i = 0, j;
 
-	line_split = _strtok(line, ";");
+	line_split = _strtok(line, ";\n");
 	while (line_split[i])
 	{
-		arr = _strtok(line_split[i], " \n");
+		arr = _strtok(line_split[i], " ");
 		argc = args_count(arr);
 		if (argc > 0 && cmd_selector(arr[0], arr, name) < 0)
 			_fork(name, arr);
