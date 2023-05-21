@@ -67,7 +67,7 @@ void or_handling(char *line, char *name)
 void semi_column_handling(char *line, char *name)
 {
 	char **arr, **line_split;
-	int argc, i = 0;
+	int argc, i = 0, j;
 
 	line_split = _strtok(line, ";");
 	while (line_split[i])

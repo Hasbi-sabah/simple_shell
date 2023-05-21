@@ -6,7 +6,6 @@
  * @args: arguments set
  * Return: 0
  */
-int EXIT_STATUS = 0;
 int main(int argc, char **args)
 {
 	int idx = 0;
