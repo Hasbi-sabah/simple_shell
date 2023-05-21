@@ -9,9 +9,11 @@
  */
 void error(char *name, char **args, char *path, int n)
 {
-	static unsigned int i = 0;
+	static unsigned int i;
 
-	if (n < 10)
+	if (!n)
+		i++;
+	else
 	{
 		print_string(2, name);
 		print_string(2, ": ");
@@ -55,6 +57,6 @@ void error(char *name, char **args, char *path, int n)
 		print_string(2, path);
 		print_string(2, " not found");
 	}
-        write(2, "\n", 1);
-        i++;
+	if (n)
+		write(2, "\n", 1);
 }

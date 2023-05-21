@@ -12,7 +12,17 @@
 
 extern char **environ;
 
-void split_line(char *, char *);
+/**
+ * struct aliases - struct aliases
+ * @name: alias name
+ * @value: alias value
+ */
+typedef struct aliases
+{
+	char *name;
+	char *value;
+} aliases;
+void split_line(char *, char *, aliases *, int *);
 char **_strtok(char *, char *);
 int _getline(char **);
 void check_fork_error(char *, char **, char *);
@@ -25,7 +35,7 @@ char *is_valid(char *);
 int args_count(char **);
 char *check_ops(char **);
 char *_getenv(char *);
-int _getalias(char **, char *, int);
+int _getalias(aliases *, char *, int, int);
 int echo(char **);
 void error(char *, char **, char *, int);
 
@@ -42,15 +52,15 @@ int print_string(int, char *);
 typedef struct cmd_executer
 {
 	char *cmd;
-	int (*exe_func)(int, char **, char *);
+	int (*exe_func)(int, char **, char *, aliases *, int *);
 } cmd_executer;
-int cmd_selector(const char *, char **, char *);
-int change_dir(int, char **, char *);
-int exit_function(int, char **, char *);
-int export(int, char **, char *);
-int unset(int, char **, char *);
-int env(int, char **, char *);
-int alias(int, char **, char *);
+int cmd_selector(const char *, char **, char *, aliases *, int *);
+int change_dir(int, char **, char *, aliases *, int *);
+int exit_function(int, char **, char *, aliases *, int *);
+int export(int, char **, char *, aliases *, int *);
+int unset(int, char **, char *, aliases *, int *);
+int env(int, char **, char *, aliases *, int *);
+int _alias(int, char **, char *, aliases *, int *);
 
 /* string functions */
 char **_strtok(char *, char *);
@@ -65,5 +75,4 @@ char *_strstr(char *, char *);
 char *_memcpy(char *, char *, unsigned int);
 int _strrev(char *, int);
 void replace_substring(char *, char *, char *);
-
 #endif
