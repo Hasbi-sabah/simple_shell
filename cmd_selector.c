@@ -5,9 +5,12 @@
  * @cmd: command name
  * @args: arguments
  * @name: program name
+ * @alias: struct
+ * @idx: index
  * Return: success
  */
-int cmd_selector(const char *cmd, char **args, char *name, aliases *alias, int *idx)
+int cmd_selector(const char *cmd, char **args,
+		char *name, aliases *alias, int *idx)
 {
 	cmd_executer executers[] = {
 		{"exit", exit_function},

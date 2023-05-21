@@ -6,7 +6,6 @@
  * @args: arguments
  * Return: success
  */
-extern int EXIT_STATUS;
 int echo(char **args)
 {
 	if (args[1])

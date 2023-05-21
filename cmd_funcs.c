@@ -5,6 +5,8 @@
  * @n: arguments count
  * @args: arguments
  * @name: program name
+ * @alias: struct
+ * @idx: index
  * Return: success
  */
 int exit_function(int n, char **args, char *name, aliases *alias, int *idx)
@@ -22,7 +24,7 @@ int exit_function(int n, char **args, char *name, aliases *alias, int *idx)
 		}
 	}
 	if (n > 1)
-		i = atoi(args[1]);
+		i = _atoi(args[1]);
 	exit(i);
 	return (1);
 }
@@ -31,6 +33,8 @@ int exit_function(int n, char **args, char *name, aliases *alias, int *idx)
  * @argc: arguments count
  * @args: arguments
  * @name: program name
+ * @alias: struct
+ * @idx: index
  * Return: success
  */
 int change_dir(int argc, char **args, char *name, aliases *alias, int *idx)
@@ -64,6 +68,8 @@ int change_dir(int argc, char **args, char *name, aliases *alias, int *idx)
  * @argc: arguments count
  * @args: arguments
  * @name: program name
+ * @alias: struct
+ * @idx: index
  * Return: success
  */
 int export(int argc, char **args, char *name, aliases *alias, int *idx)
@@ -104,6 +110,8 @@ int export(int argc, char **args, char *name, aliases *alias, int *idx)
  * @argc: arguments count
  * @args: arguments
  * @name: program name
+ * @alias: struct
+ * @idx: index
  * Return: success
  */
 int unset(int argc, char **args, char *name, aliases *alias, int *idx)
@@ -140,6 +148,8 @@ int unset(int argc, char **args, char *name, aliases *alias, int *idx)
  * @argc: argc
  * @args: arguments
  * @name: program name
+ * @alias: struct
+ * @idx: index
  * Return: success
  */
 int env(int argc, char **args, char *name, aliases *alias, int *idx)

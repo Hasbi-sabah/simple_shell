@@ -30,6 +30,7 @@ int main(int argc, char **args)
 			error(name, NULL, NULL, 0);
 			split_line(input, name, &alias, &idx);
 		}
+		free(input);
 	}
 	write(1, "\n", 1);
 	return (0);

@@ -1,28 +1,6 @@
 #include "head.h"
 
 /**
- * _strrev - copies and reverses a string
- * @i: str length
- * @s: string
- * Return: i
- */
-
-int _strrev(char *s, int i)
-{
-	char temp;
-	int j;
-
-	i--;
-	for (j = 0; j <= i / 2; j++)
-	{
-		temp = s[j];
-		s[j] = s[i - j];
-		s[i - j] = temp;
-	}
-	return (j);
-}
-
-/**
  * replace_substring - check code
  * @str: input string
  * @old_substr: old substring
@@ -99,4 +77,30 @@ char **_strtok(char *s, char *delim)
 		tokens[k--] = NULL;
 	}
 	return (tokens);
+}
+/**
+ * _atoi - convert a string to an integer
+ *
+ *@s: string
+ * Return: integer
+ */
+
+int _atoi(char *s)
+{
+	int i, m;
+	unsigned int n;
+
+	for (i = 0, n = 0, m = 1; s[i] != '\0'; i++)
+	{
+		if (s[i] == '-')
+			m = -m;
+		if (s[i] >= '0' && s[i] <= '9')
+		{
+			n = (n * 10) + (s[i] - '0');
+			if (!(s[i + 1] >= '0' && s[i + 1] <= '9'))
+				break;
+		}
+	}
+	n *= m;
+	return (n);
 }

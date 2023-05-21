@@ -11,6 +11,7 @@
 #include <fcntl.h>
 
 extern char **environ;
+extern int EXIT_STATUS;
 
 /**
  * struct aliases - struct aliases
@@ -73,6 +74,6 @@ int _strcmp(const char *, char *);
 int _strncmp(const char *, char *, int);
 char *_strstr(char *, char *);
 char *_memcpy(char *, char *, unsigned int);
-int _strrev(char *, int);
 void replace_substring(char *, char *, char *);
+int _atoi(char *);
 #endif
