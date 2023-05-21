@@ -14,6 +14,19 @@ void and_handling(char *line, char *name)
 	line_split = _strtok(line, "&\n");
 	while (line_split[i])
 	{
+		arr = _strtok(line_split[i], " ");
+		if (args_count(arr) == 0)
+		{
+	        	error(name, NULL, NULL, 9);
+			_free(arr);
+			_free(line_split);
+			return;
+		}
+		i++;
+	}
+	i = 0;
+	while (line_split[i])
+	{
 		break_condition = 0;
 		arr = _strtok(line_split[i], " ");
 		argc = args_count(arr);
@@ -44,6 +57,19 @@ void or_handling(char *line, char *name)
 	while (line_split[i])
 	{
 		arr = _strtok(line_split[i], " ");
+		if (args_count(arr) == 0)
+		{
+	        	error(name, NULL, NULL, 9);
+			_free(arr);
+			_free(line_split);
+			return;
+		}
+		i++;
+	}
+	i = 0;
+	while (line_split[i])
+	{
+		arr = _strtok(line_split[i], " ");
 		break_condition = 0;
 		argc = args_count(arr);
 		selector = cmd_selector(arr[0], arr, name);
@@ -67,9 +93,22 @@ void or_handling(char *line, char *name)
 void semi_column_handling(char *line, char *name)
 {
 	char **arr, **line_split;
-	int argc, i = 0, j;
+	int argc, i = 0;
 
 	line_split = _strtok(line, ";\n");
+	while (line_split[i])
+	{
+		arr = _strtok(line_split[i], " ");
+		if (args_count(arr) == 0)
+		{
+	        	error(name, NULL, NULL, 9);
+			_free(arr);
+			_free(line_split);
+			return;
+		}
+		i++;
+	}
+	i = 0;
 	while (line_split[i])
 	{
 		arr = _strtok(line_split[i], " ");
