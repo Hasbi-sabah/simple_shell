@@ -9,13 +9,13 @@
 void and_handling(char *line, char *name)
 {
 	char **arr, **line_split;
-	int break_condition, argc, selector;
+	int break_condition, argc, selector, i = 0;
 
 	line_split = _strtok(line, "&");
-	while (*line_split)
+	while (line_split[i])
 	{
 		break_condition = 0;
-		arr = _strtok(*line_split, " \n");
+		arr = _strtok(line_split[i], " \n");
 		argc = args_count(arr);
 		selector = cmd_selector(arr[0], arr, name);
 		if (argc > 0 && selector < 0)
@@ -25,8 +25,9 @@ void and_handling(char *line, char *name)
 		_free(arr);
 		if (break_condition)
 			break;
-		line_split++;
+		i++;
 	}
+	_free(line_split);
 }
 /**
  * or_handling - check code
@@ -37,12 +38,12 @@ void and_handling(char *line, char *name)
 void or_handling(char *line, char *name)
 {
 	char **arr, **line_split;
-	int break_condition, argc, selector;
+	int break_condition, argc, selector, i = 0;
 
 	line_split = _strtok(line, "|");
-	while (*line_split)
+	while (line_split[i])
 	{
-		arr = _strtok(*line_split, " \n");
+		arr = _strtok(line_split[i], " \n");
 		break_condition = 0;
 		argc = args_count(arr);
 		selector = cmd_selector(arr[0], arr, name);
@@ -53,8 +54,9 @@ void or_handling(char *line, char *name)
 		_free(arr);
 		if (break_condition)
 			break;
-		line_split++;
+		i++;
 	}
+	_free(line_split);
 }
 /**
  * semi_column_handling - check code
@@ -65,20 +67,21 @@ void or_handling(char *line, char *name)
 void semi_column_handling(char *line, char *name)
 {
 	char **arr, **line_split;
-	int argc;
+	int argc, i = 0;
 
 	line_split = _strtok(line, ";");
-	while (*line_split)
+	while (line_split[i])
 	{
-		arr = _strtok(*line_split, " \n");
+		arr = _strtok(line_split[i], " \n");
 		argc = args_count(arr);
 		if (argc > 0 && cmd_selector(arr[0], arr, name) < 0)
 			_fork(name, arr);
 		else if (argc == 0)
 	        	error(name, NULL, NULL, 9);
 		_free(arr);
-		line_split++;
+		i++;
 	}
+	_free(line_split);
 }
 /**
  * split_line - read command line
