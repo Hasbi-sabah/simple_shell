@@ -93,5 +93,10 @@ char **_strtok(char *s, char *delim)
 			found = 0;
 		}
 	}
+	while ((int)k >= 0 && _strlen(tokens[k]) == 0)
+	{
+		free(tokens[k]);
+		tokens[k--] = NULL;
+	}
 	return (tokens);
 }
