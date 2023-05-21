@@ -54,7 +54,7 @@ int change_dir(int argc, char **args, char *name, aliases *alias, int *idx)
 	setenv("PWD", path, 1);
 	if (argc == 1)
 	{
-		print_string(path);
+		print_string(1, path);
 		write(1, "\n", 1);
 	}
 	return (1);
@@ -153,7 +153,7 @@ int env(int argc, char **args, char *name, aliases *alias, int *idx)
 	(void) idx;
 	for (i = 0; environ[i]; i++)
 	{
-		print_string(environ[i]);
+		print_string(1, environ[i]);
 		write(1, "\n", 1);
 	}
 	return (1);

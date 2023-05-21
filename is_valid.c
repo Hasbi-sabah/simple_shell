@@ -29,11 +29,11 @@ char *is_valid(char *comm)
 		}
 		if (!access(path, X_OK) && stat(path, &buf) == 0)
 		{
-			_free(path_arr);
+			free(path_arr);
 			return (path);
 		}
 
 	}
-	_free(path_arr);
+	free(path_arr);
 	return (NULL);
 }

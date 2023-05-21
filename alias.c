@@ -12,7 +12,12 @@ int _alias(int argc, char **args, char *name, aliases *alias, int *idx)
 	if (argc == 1)
 	{
 		for (i = 0; *idx && i < *idx; i++)
-			_printf(1, "%s=%s\n", alias[i].name, alias[i].value);
+		{
+			print_string(1, alias[i].name);
+			print_string(1, "='");
+			print_string(1, alias[i].value);
+			print_string(1, "'\n");
+		}
 		return (1);
 	}
 	for (i = 1; i < argc; i++)
@@ -22,7 +27,12 @@ int _alias(int argc, char **args, char *name, aliases *alias, int *idx)
 		if (!_strstr(args[i], "="))
 		{
 			if (j != -1)
-				_printf(1, "%s=%s\n", alias[j].name, alias[j].value);
+			{
+				print_string(1, alias[i].name);
+				print_string(1, "='");
+				print_string(1, alias[i].value);
+				print_string(1, "'\n");
+			}
 			else
 				error(name, args, args[i], 10);
 		}

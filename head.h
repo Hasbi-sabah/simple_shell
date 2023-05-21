@@ -7,7 +7,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
-#include <stdarg.h>
 #include <dirent.h>
 #include <fcntl.h>
 
@@ -41,8 +40,8 @@ int echo(char **);
 void error(char *, char **, char *, int);
 
 /* for _printf() */
-int to_string(unsigned int);
-int print_string(char *);
+int to_string(int, unsigned int);
+int print_string(int, char *);
 /* for cmd exec */
 
 /**
