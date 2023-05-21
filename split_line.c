@@ -72,7 +72,7 @@ void semi_column_handling(char *line, char *name)
 	line_split = _strtok(line, ";");
 	while (line_split[i])
 	{
-		arr = _strtok(*line_split, " \n");
+		arr = _strtok(line_split[i], " \n");
 		argc = args_count(arr);
 		if (argc > 0 && cmd_selector(arr[0], arr, name) < 0)
 			_fork(name, arr);
