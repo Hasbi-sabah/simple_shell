@@ -24,6 +24,7 @@ int _fork(char *name, char **arr)
 		}
 		else 
 			waitpid(pid, &status, 0);
+		free(path);
 	}
 	else
 	{
