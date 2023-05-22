@@ -17,7 +17,7 @@ void and_handling(char *line, char *name)
 		arr = _strtok(line_split[i], " ");
 		if (args_count(arr) == 0)
 		{
-	        	error(name, NULL, NULL, 9);
+	        	error(name, NULL, NULL, 7);
 			_free(arr);
 			_free(line_split);
 			return;
@@ -59,7 +59,7 @@ void or_handling(char *line, char *name)
 		arr = _strtok(line_split[i], " ");
 		if (args_count(arr) == 0)
 		{
-	        	error(name, NULL, NULL, 9);
+	        	error(name, NULL, NULL, 8);
 			_free(arr);
 			_free(line_split);
 			return;
