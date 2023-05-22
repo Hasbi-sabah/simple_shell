@@ -174,5 +174,9 @@ void split_line(char *line, char *name, aliases *alias, int *idx)
 	if (_strstr(line, ";;"))
 	        error(name, NULL, NULL, 9);
 	else
+	{
+		replace_substring(line, "\n", ";");
 		semi_column_handling(line, name, alias, idx);
+	}
+
 }
