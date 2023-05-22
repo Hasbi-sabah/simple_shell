@@ -24,24 +24,26 @@ void check_alias(char ***arr, aliases *alias, int idx)
 void and_handling(char *line, char *name, aliases *alias, int *idx)
 {
 	char **arr, **line_split;
-	int break_condition, argc, selector, i;
+	int break_condition, argc, selector, i = 0;
 
 	line_split = _strtok(line, "&\n");
-	for (i = 0; line_split[i]; i++)
+	while (line_split[i])
 	{
 		arr = _strtok(line_split[i], " ");
 		if (args_count(arr) == 0)
 		{
-		       	error(name, NULL, NULL, 9);
+	        	error(name, NULL, NULL, 7);
 			_free(arr);
 			_free(line_split);
 			return;
 		}
+		i++;
 	}
-	for (i = 0; line_split[i]; i++)
+	i = 0;
+	while (line_split[i])
 	{
 		break_condition = 0;
-		arr = _strtok(*line_split, " \n");
+		arr = _strtok(line_split[i], " ");
 		if (_strcmp(arr[0], "alias"))
 			check_alias(&arr, alias, *idx);
 		argc = args_count(arr);
@@ -53,6 +55,7 @@ void and_handling(char *line, char *name, aliases *alias, int *idx)
 		_free(arr);
 		if (break_condition)
 			break;
+		i++;
 	}
 	_free(line_split);
 }
@@ -65,23 +68,25 @@ void and_handling(char *line, char *name, aliases *alias, int *idx)
 void or_handling(char *line, char *name, aliases *alias, int *idx)
 {
 	char **arr, **line_split;
-	int break_condition, argc, selector, i;
+	int break_condition, argc, selector, i = 0;
 
 	line_split = _strtok(line, "|\n");
-	for (i = 0; line_split[i]; i++)
+	while (line_split[i])
 	{
 		arr = _strtok(line_split[i], " ");
 		if (args_count(arr) == 0)
 		{
-			error(name, NULL, NULL, 9);
+		       	error(name, NULL, NULL, 8);
 			_free(arr);
 			_free(line_split);
 			return;
 		}
+		i++;
 	}
-	for (i = 0; line_split[i]; i++)
+	i = 0;
+	while (line_split[i])
 	{
-		arr = _strtok(*line_split, " ");
+		arr = _strtok(line_split[i], " ");
 		if (_strcmp(arr[0], "alias"))
 			check_alias(&arr, alias, *idx);
 		break_condition = 0;
@@ -94,7 +99,9 @@ void or_handling(char *line, char *name, aliases *alias, int *idx)
 		_free(arr);
 		if (break_condition)
 			break;
+		i++;
 	}
+								_free(line_split);
 }
 /**
  * semi_column_handling - check code
@@ -105,33 +112,36 @@ void or_handling(char *line, char *name, aliases *alias, int *idx)
 void semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 {
 	char **arr, **line_split;
-	int argc, i;
+	int argc, i = 0;
 
 	line_split = _strtok(line, ";\n");
-	for (i = 0; line_split[i]; i++)
+	while (line_split[i])
 	{
 		arr = _strtok(line_split[i], " ");
 		if (args_count(arr) == 0)
 		{
-	        	error(name, NULL, NULL, 9);
+		       	error(name, NULL, NULL, 9);
 			_free(arr);
 			_free(line_split);
 			return;
 		}
+		i++;
 	}
-	for (i = 0; line_split[i]; i++)
+	i = 0;
+	while (line_split[i])
 	{
-		arr = _strtok(*line_split, " ");
+		arr = _strtok(line_split[i], " ");
 		if (_strcmp(arr[0], "alias"))
 			check_alias(&arr, alias, *idx);
 		argc = args_count(arr);
 		if (argc > 0 && cmd_selector(arr[0], arr, name, alias, idx) < 0)
 			_fork(name, arr);
 		else if (argc == 0)
-	        	error(name, NULL, NULL, 9);
+        		error(name, NULL, NULL, 9);
 		_free(arr);
-		line_split++;
+		i++;
 	}
+	_free(line_split);
 }
 /**
  * split_line - read command line
@@ -144,7 +154,6 @@ void split_line(char *line, char *name, aliases *alias, int *idx)
 	size_t old_len = _strlen(line);
 	size_t new_len;
 	char *temp;
-
 
 	temp = _strstr(line, "#");
 	if (temp)
@@ -178,5 +187,4 @@ void split_line(char *line, char *name, aliases *alias, int *idx)
 		replace_substring(line, "\n", ";");
 		semi_column_handling(line, name, alias, idx);
 	}
-
 }
