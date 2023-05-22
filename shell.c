@@ -18,19 +18,21 @@ int main(int argc, char **args)
 	alias.value = NULL;
 	while (1)
 	{
-		write(1, "$ ", 2);
+		if (isatty(0))
+			write(1, "$ ", 2);
 		if (_getline(&input) <= 0)
 		{
 			free(input);
-			write(1, "\n", 1);
+			if (isatty(0))
+				write(1, "\n", 1);
 			return (0);
 		}
-		if (_strcmp(input, "\n") && *input != '\0')
+		if (*input != '\0' && _strcmp(input, "\n"))
 		{
 			error(name, NULL, NULL, 0);
 			split_line(input, name, &alias, &idx);
 		}
-		free(input);
+		input = NULL;
 	}
 	write(1, "\n", 1);
 	return (0);

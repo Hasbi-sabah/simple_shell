@@ -24,10 +24,21 @@ void check_alias(char ***arr, aliases *alias, int idx)
 void and_handling(char *line, char *name, aliases *alias, int *idx)
 {
 	char **arr, **line_split;
-	int break_condition, argc, selector;
+	int break_condition, argc, selector, i;
 
-	line_split = _strtok(line, "&");
-	while (*line_split)
+	line_split = _strtok(line, "&\n");
+	for (i = 0; line_split[i]; i++)
+	{
+		arr = _strtok(line_split[i], " ");
+		if (args_count(arr) == 0)
+		{
+		       	error(name, NULL, NULL, 9);
+			_free(arr);
+			_free(line_split);
+			return;
+		}
+	}
+	for (i = 0; line_split[i]; i++)
 	{
 		break_condition = 0;
 		arr = _strtok(*line_split, " \n");
@@ -42,8 +53,8 @@ void and_handling(char *line, char *name, aliases *alias, int *idx)
 		_free(arr);
 		if (break_condition)
 			break;
-		line_split++;
 	}
+	_free(line_split);
 }
 /**
  * or_handling - check code
@@ -54,12 +65,23 @@ void and_handling(char *line, char *name, aliases *alias, int *idx)
 void or_handling(char *line, char *name, aliases *alias, int *idx)
 {
 	char **arr, **line_split;
-	int break_condition, argc, selector;
+	int break_condition, argc, selector, i;
 
-	line_split = _strtok(line, "|");
-	while (*line_split)
+	line_split = _strtok(line, "|\n");
+	for (i = 0; line_split[i]; i++)
 	{
-		arr = _strtok(*line_split, " \n");
+		arr = _strtok(line_split[i], " ");
+		if (args_count(arr) == 0)
+		{
+			error(name, NULL, NULL, 9);
+			_free(arr);
+			_free(line_split);
+			return;
+		}
+	}
+	for (i = 0; line_split[i]; i++)
+	{
+		arr = _strtok(*line_split, " ");
 		if (_strcmp(arr[0], "alias"))
 			check_alias(&arr, alias, *idx);
 		break_condition = 0;
@@ -72,7 +94,6 @@ void or_handling(char *line, char *name, aliases *alias, int *idx)
 		_free(arr);
 		if (break_condition)
 			break;
-		line_split++;
 	}
 }
 /**
@@ -84,12 +105,23 @@ void or_handling(char *line, char *name, aliases *alias, int *idx)
 void semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 {
 	char **arr, **line_split;
-	int argc;
+	int argc, i;
 
-	line_split = _strtok(line, ";");
-	while (*line_split)
+	line_split = _strtok(line, ";\n");
+	for (i = 0; line_split[i]; i++)
 	{
-		arr = _strtok(*line_split, " \n");
+		arr = _strtok(line_split[i], " ");
+		if (args_count(arr) == 0)
+		{
+	        	error(name, NULL, NULL, 9);
+			_free(arr);
+			_free(line_split);
+			return;
+		}
+	}
+	for (i = 0; line_split[i]; i++)
+	{
+		arr = _strtok(*line_split, " ");
 		if (_strcmp(arr[0], "alias"))
 			check_alias(&arr, alias, *idx);
 		argc = args_count(arr);

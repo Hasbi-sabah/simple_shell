@@ -32,7 +32,7 @@ void get_cmds(char ***, char *);
 void _free(char **);
 int _fork(char *, char **);
 int args_count(char **);
-char *is_valid(char *);
+char *is_valid(char *, char *, char **);
 int args_count(char **);
 char *check_ops(char **);
 char *_getenv(char *);

@@ -5,13 +5,18 @@
  * @comm: command
  * Return: string
  */
-char *is_valid(char *comm)
+char *is_valid(char *comm, char *name, char **arr)
 {
 	int i;
 	struct stat buf;
 	char *path, **path_arr, *env;
 
 	env = _getenv("PATH");
+	if (*env == '\0')
+	{
+		error(name, arr, NULL, 1);
+		exit(127);
+	}
 	path_arr = _strtok(env, ":");
 	for (i = 0; path_arr[i]; i++)
 	{

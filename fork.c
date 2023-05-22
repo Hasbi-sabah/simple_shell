@@ -13,7 +13,7 @@ int _fork(char *name, char **arr)
 	char *path = NULL, *comm = NULL;
 
 	comm = arr[0];
-	path = is_valid(comm);
+	path = is_valid(comm, name, arr);
 	if (path != NULL)
 	{
 		pid = fork();

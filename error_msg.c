@@ -13,7 +13,7 @@ void error(char *name, char **args, char *path, int n)
 
 	if (!n)
 		i++;
-	else
+	else if (n < 10)
 	{
 		print_string(2, name);
 		print_string(2, ": ");
