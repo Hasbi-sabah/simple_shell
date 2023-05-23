@@ -1,12 +1,36 @@
 #include "head.h"
 
 /**
+ * check_alias - check code
+ * @arr: arguments
+ * @alias: alias array
+ * @idx: integer
+ * Return: none
+ */
+void check_alias(char ***arr, aliases *alias, int idx)
+{
+	int i, n;
+
+	for (i = 0; (*arr)[i]; i++)
+	{
+		n = _getalias(alias, (*arr)[i], idx);
+		if (n != -1)
+		{
+			(*arr)[i] = NULL;
+			(*arr)[i] = malloc(_strlen(alias[n].value) + 1);
+			_strcpy((*arr)[i], alias[n].value);
+		}
+	}
+}
+/**
  * and_handling - check code
  * @line: input command line
  * @name: file name
- * Return: none
+ * @alias: alias array
+ * @idx: integer
+ * Return: integer
  */
-void and_handling(char *line, char *name)
+int and_handling(char *line, char *name, aliases *alias, int *idx)
 {
 	char **arr, **line_split;
 	int break_condition, argc, selector, i = 0;
@@ -14,13 +38,12 @@ void and_handling(char *line, char *name)
 	line_split = _strtok(line, "&\n");
 	while (line_split[i])
 	{
-		arr = _strtok(line_split[i], " ");
+		arr = _strtok(line_split[i], " \t");
 		if (args_count(arr) == 0)
 		{
-	        	error(name, NULL, NULL, 7);
 			_free(arr);
 			_free(line_split);
-			return;
+			return (error(name, NULL, NULL, 7));
 		}
 		i++;
 	}
@@ -28,7 +51,9 @@ void and_handling(char *line, char *name)
 	while (line_split[i])
 	{
 		break_condition = 0;
-		arr = _strtok(line_split[i], " ");
+		arr = _strtok(line_split[i], " \t");
+		if (_strcmp(arr[0], "alias"))
+			check_alias(&arr, alias, *idx);
 		argc = args_count(arr);
 		selector = cmd_selector(arr[0], arr, name);
 		if (argc > 0 && selector < 0)
@@ -37,18 +62,21 @@ void and_handling(char *line, char *name)
 			break_condition = 1 - selector;
 		_free(arr);
 		if (break_condition)
-			break;
+			return (0);
 		i++;
 	}
 	_free(line_split);
+	return (127);
 }
 /**
  * or_handling - check code
  * @line: input command line
  * @name: file name
- * Return: none
+ * @alias: alias array
+ * @idx: integer
+ * Return: integer
  */
-void or_handling(char *line, char *name)
+int or_handling(char *line, char *name, aliases *alias, int *idx)
 {
 	char **arr, **line_split;
 	int break_condition, argc, selector, i = 0;
@@ -56,20 +84,21 @@ void or_handling(char *line, char *name)
 	line_split = _strtok(line, "|\n");
 	while (line_split[i])
 	{
-		arr = _strtok(line_split[i], " ");
+		arr = _strtok(line_split[i], " \t");
 		if (args_count(arr) == 0)
 		{
-	        	error(name, NULL, NULL, 8);
 			_free(arr);
 			_free(line_split);
-			return;
+			return (error(name, NULL, NULL, 8));
 		}
 		i++;
 	}
 	i = 0;
 	while (line_split[i])
 	{
-		arr = _strtok(line_split[i], " ");
+		arr = _strtok(line_split[i], " \t");
+		if (_strcmp(arr[0], "alias"))
+			check_alias(&arr, alias, *idx);
 		break_condition = 0;
 		argc = args_count(arr);
 		selector = cmd_selector(arr[0], arr, name);
@@ -79,18 +108,21 @@ void or_handling(char *line, char *name)
 			break_condition = selector;
 		_free(arr);
 		if (break_condition)
-			break;
+			return (0);
 		i++;
 	}
 	_free(line_split);
+	return (127);
 }
 /**
  * semi_column_handling - check code
  * @line: input command line
  * @name: file name
- * Return: none
+ * @alias: alias array
+ * @idx: integer
+ * Return: integer
  */
-void semi_column_handling(char *line, char *name)
+int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 {
 	char **arr, **line_split;
 	int argc, i = 0;
@@ -98,42 +130,48 @@ void semi_column_handling(char *line, char *name)
 	line_split = _strtok(line, ";\n");
 	while (line_split[i])
 	{
-		arr = _strtok(line_split[i], " ");
+		arr = _strtok(line_split[i], " \t");
 		if (args_count(arr) == 0)
 		{
-	        	error(name, NULL, NULL, 9);
 			_free(arr);
 			_free(line_split);
-			return;
+			return (error(name, NULL, NULL, 9));
 		}
 		i++;
 	}
 	i = 0;
 	while (line_split[i])
 	{
-		arr = _strtok(line_split[i], " ");
+		arr = _strtok(line_split[i], " \t");
+		if (_strcmp(arr[0], "alias"))
+			check_alias(&arr, alias, *idx);
 		argc = args_count(arr);
-		if (argc > 0 && cmd_selector(arr[0], arr, name) < 0)
-			_fork(name, arr);
+		if (argc > 0 && cmd_selector(arr[0], arr, name, alias, idx) < 0)
+		{
+			if (!_fork(name, arr))
+				return (127);
+		}
 		else if (argc == 0)
-	        	error(name, NULL, NULL, 9);
+			return (error(name, NULL, NULL, 9));
 		_free(arr);
 		i++;
 	}
 	_free(line_split);
+	return (0);
 }
 /**
  * split_line - read command line
  * @line: input command line
  * @name: file name
- * Return: none
+ * @alias: alias array
+ * @idx: integer
+ * Return: integer
  */
-void split_line(char *line, char *name)
+int split_line(char *line, char *name, aliases *alias, int *idx)
 {
 	size_t old_len = _strlen(line);
 	size_t new_len;
 	char *temp;
-
 
 	temp = _strstr(line, "#");
 	if (temp)
@@ -144,10 +182,8 @@ void split_line(char *line, char *name)
 	{
 		replace_substring(line, "&&", "&");
 		if (_strlen(line) < new_len)
-			error(name, NULL, NULL, 7);
-		else
-			and_handling(line, name);
-		return;
+			return (error(name, NULL, NULL, 7));
+		return (and_handling(line, name, alias, idx));
 	}
 	replace_substring(line, "||", "|");
 	new_len = _strlen(line);
@@ -155,6 +191,7 @@ void split_line(char *line, char *name)
 	{
 		replace_substring(line, "||", "|");
 		if (_strlen(line) < new_len)
+<<<<<< HEAD
 			error(name, NULL, NULL, 8);
 		else
 			or_handling(line, name);
@@ -167,4 +204,13 @@ void split_line(char *line, char *name)
 		replace_substring(line, "\n", ";");
 		semi_column_handling(line, name);
 	}
+=======
+			return (error(name, NULL, NULL, 8));
+		return (or_handling(line, name, alias, idx));
+	}
+	if (_strstr(line, ";;"))
+		return (error(name, NULL, NULL, 9));
+	replace_substring(line, "\n", ";");
+	return (semi_column_handling(line, name, alias, idx));
+>>>>>>> sabah
 }

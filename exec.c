@@ -10,12 +10,11 @@
 int execmd(char **arr, char *name, char *path)
 {
 	int i = 0, success = 1;
-	char *comm = NULL, *env;
+	char *env;
 
 	(void) name;
 	if (arr)
 	{
-		comm = arr[0];
 		if (!_strcmp(arr[0], "echo") && (i = echo(arr)) == 0 && arr[1][0] == '$')
 		{
 			env = _getenv(arr[1] + 1);
@@ -32,8 +31,7 @@ int execmd(char **arr, char *name, char *path)
 		}
 		if (!i)
 		{
-			_strcpy(arr[0], path);
-			if (execve(comm, arr, environ) < 0)
+			if (execve(path, arr, environ) == -1)
 				success = 0;
 		}
 		_free(arr);

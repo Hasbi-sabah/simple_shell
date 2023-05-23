@@ -5,6 +5,8 @@
  * @n: arguments count
  * @args: arguments
  * @name: program name
+ * @alias: struct
+ * @idx: index
  * Return: success
  */
 int exit_function(int n, char **args, char *name)
@@ -20,7 +22,7 @@ int exit_function(int n, char **args, char *name)
 		}
 	}
 	if (n > 1)
-		i = atoi(args[1]);
+		i = _atoi(args[1]);
 	exit(i);
 	return (1);
 }
@@ -29,11 +31,13 @@ int exit_function(int n, char **args, char *name)
  * @argc: arguments count
  * @args: arguments
  * @name: program name
+ * @alias: struct
+ * @idx: index
  * Return: success
  */
 int change_dir(int argc, char **args, char *name)
 {
-	char *path;
+	char *path, *temp;
 	static char *previous;
 
 	if (!previous)
@@ -47,7 +51,8 @@ int change_dir(int argc, char **args, char *name)
 		return (0);
 	}
 	getcwd(previous, 1024);
-	setenv("PWD", path, 1);
+	temp = _getenv("PWD");
+	_strcpy(temp, path);
 	if (argc == 1)
 	{
 		print_string(1, path);
@@ -60,6 +65,8 @@ int change_dir(int argc, char **args, char *name)
  * @argc: arguments count
  * @args: arguments
  * @name: program name
+ * @alias: struct
+ * @idx: index
  * Return: success
  */
 int export(int argc, char **args, char *name)
@@ -76,10 +83,7 @@ int export(int argc, char **args, char *name)
 	{
 		temp = _getenv(args[1]);
 		if (temp)
-		{
 			_strcpy(temp, args[2]);
-			_strcat(temp, temp + _strlen(args[2]));
-		}
 		else
 		{
 			while (environ[i])
@@ -98,6 +102,8 @@ int export(int argc, char **args, char *name)
  * @argc: arguments count
  * @args: arguments
  * @name: program name
+ * @alias: struct
+ * @idx: index
  * Return: success
  */
 int unset(int argc, char **args, char *name)
@@ -132,6 +138,8 @@ int unset(int argc, char **args, char *name)
  * @argc: argc
  * @args: arguments
  * @name: program name
+ * @alias: struct
+ * @idx: index
  * Return: success
  */
 int env(int argc, char **args, char *name)

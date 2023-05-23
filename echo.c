@@ -2,11 +2,9 @@
 
 /**
  * echo - check code
- * @argc: arguments count
  * @args: arguments
  * Return: success
  */
-extern int EXIT_STATUS;
 int echo(char **args)
 {
 	int status;
