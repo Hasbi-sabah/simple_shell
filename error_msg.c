@@ -1,11 +1,49 @@
 #include "head.h"
 
 /**
+ * error2 - prints error msgs to stderr
+ * @args: args
+ * @path: path
+ * @n: error index
+ */
+void error2(char **args, char *path, int n)
+{
+	char semi = ';';
+
+	if (n == 5)
+		print_string(2, "usage: unsetenv VARIABLE VALUE");
+	else if (n == 6)
+	{
+		print_string(2, "environment variable ");
+		print_string(2, args[1]);
+		print_string(2, " not found");
+	}
+	else if (n == 7)
+		print_string(2, "Syntax error: \"&\" unexpected");
+	else if (n == 8)
+		print_string(2, "Syntax error: \"|\" unexpected");
+	else if (n == 9)
+	{
+		print_string(2, "Syntax error: \"");
+		write(1, &semi, 1);
+		write(1, &semi, 1);
+		print_string(2, "\" unexpected");
+	}
+	else if (n == 10)
+	{
+		print_string(2, "alias: ");
+		print_string(2, path);
+		print_string(2, " not found");
+	}
+}
+
+/**
  * error - prints error msgs to stderr
  * @name: name
  * @args: args
  * @path: path
  * @n: error index
+ * Return: value
  */
 int error(char *name, char **args, char *path, int n)
 {
@@ -37,26 +75,8 @@ int error(char *name, char **args, char *path, int n)
 	}
 	else if (n == 4)
 		print_string(2, "usage: setenv VARIABLE VALUE");
-	else if (n == 5)
-		print_string(2, "usage: unsetenv VARIABLE VALUE");
-	else if (n == 6)
-	{
-		print_string(2, "environment variable ");
-		print_string(2, args[1]);
-		print_string(2, " not found");
-	}
-	else if (n == 7)
-		print_string(2, "Syntax error: \"&\" unexpected");
-	else if (n == 8)
-		print_string(2, "Syntax error: \"|\" unexpected");
-	else if (n == 9)
-		print_string(2, "Syntax error: \";;\" unexpected");
-	else if (n == 10)
-	{
-		print_string(2, "alias: ");
-		print_string(2, path);
-		print_string(2, " not found");
-	}
+	else
+		error2(args, path, n);
 	write(2, "\n", 1);
 	return (127);
 }
