@@ -150,7 +150,6 @@ int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 		{
 			if (!_fork(name, arr))
 				return (127);
-			return (0);
 		}
 		else if (argc == 0)
 			return (error(name, NULL, NULL, 9));

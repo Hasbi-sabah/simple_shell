@@ -54,6 +54,14 @@ int error(char *name, char **args, char *path, int n)
 		i++;
 		return (0);
 	}
+	if (n == 11)
+	{
+		print_string(2, name);
+		print_string(2, ": 0: Can't open ");
+		print_string(2, args[1]);
+		write(2, "\n", 1);
+		return (127);
+	}
 	print_string(2, name);
 	print_string(2, ": ");
 	to_string(2, i);
