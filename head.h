@@ -52,14 +52,15 @@ int print_string(int, char *);
 typedef struct cmd_executer
 {
 	char *cmd;
-	int (*exe_func)(int, char **, char *);
+	int (*exe_func)(int, char **, char *, aliases *, int *);
 } cmd_executer;
-int cmd_selector(const char *, char **, char *);
-int change_dir(int, char **, char *);
-int exit_function(int, char **, char *);
-int export(int, char **, char *);
-int unset(int, char **, char *);
-int env(int, char **, char *);
+int cmd_selector(const char *, char **, char *, aliases *, int *);
+int change_dir(int, char **, char *, aliases *, int *);
+int exit_function(int, char **, char *, aliases *, int *);
+int export(int, char **, char *, aliases *, int *);
+int unset(int, char **, char *, aliases *, int *);
+int env(int, char **, char *, aliases *, int *);
+int _alias(int, char **, char *, aliases *, int *);
 
 /* string functions */
 char **_strtok(char *, char *);

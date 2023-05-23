@@ -20,7 +20,7 @@ int echo(char **args)
 		else if (!_strcmp(args[1], "$?"))
 		{
 			waitpid(getpid() - 1, &status, 0);
-		        to_string(1, WEXITSTATUS(status));
+			to_string(1, WEXITSTATUS(status));
 			write(1, "\n", 1);
 			return (1);
 		}

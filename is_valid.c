@@ -3,6 +3,8 @@
 /**
  * is_valid - is valid command
  * @comm: command
+ * @name: name
+ * @arr: arr
  * Return: string
  */
 char *is_valid(char *comm, char *name, char **arr)
@@ -22,7 +24,7 @@ char *is_valid(char *comm, char *name, char **arr)
 	else if (*env == '\0')
 	{
 		error(name, arr, NULL, 1);
-		exit(EXIT_FAILURE);
+		exit(127);
 	}
 	else
 		path_arr = _strtok(env, ":");
@@ -36,16 +38,12 @@ char *is_valid(char *comm, char *name, char **arr)
 			_strcat(path, comm);
 		}
 		else
-		{
-			path = malloc(_strlen(comm) + 1);
-			_strcpy(path, comm);
-		}
+			path = malloc(_strlen(comm) + 1), _strcpy(path, comm);
 		if (!access(path, X_OK) && stat(path, &buf) == 0)
 		{
 			free(path_arr);
 			return (path);
 		}
-
 	}
 	free(path_arr);
 	return (NULL);

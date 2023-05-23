@@ -23,8 +23,9 @@ char *_getenv(char *var)
 }
 /**
  * _getalias - checks for aliases
- * @aliases: aliases
+ * @alias: aliases
  * @var: variable name
+ * @idx: index
  * Return: string
  */
 int _getalias(aliases *alias, char *var, int idx)

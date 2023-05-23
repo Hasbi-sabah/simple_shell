@@ -18,6 +18,7 @@ int cmd_selector(const char *cmd, char **args,
 		{"setenv", export},
 		{"unsetenv", unset},
 		{"env", env},
+		{"alias", _alias},
 		{NULL, NULL}
 	};
 	int j = 0;
@@ -25,7 +26,7 @@ int cmd_selector(const char *cmd, char **args,
 	while (executers[j].exe_func != NULL && _strcmp(cmd, executers[j].cmd) != 0)
 		j++;
 	if (executers[j].exe_func != NULL)
-		return (executers[j].exe_func(args_count(args), args, name));
+		return (executers[j].exe_func(args_count(args), args, name, alias, idx));
 	return (-1);
 }
 

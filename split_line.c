@@ -55,7 +55,7 @@ int and_handling(char *line, char *name, aliases *alias, int *idx)
 		if (_strcmp(arr[0], "alias"))
 			check_alias(&arr, alias, *idx);
 		argc = args_count(arr);
-		selector = cmd_selector(arr[0], arr, name);
+		selector = cmd_selector(arr[0], arr, name, alias, idx);
 		if (argc > 0 && selector < 0)
 			break_condition = 1 - _fork(name, arr);
 		else if (argc > 0)
@@ -101,7 +101,7 @@ int or_handling(char *line, char *name, aliases *alias, int *idx)
 			check_alias(&arr, alias, *idx);
 		break_condition = 0;
 		argc = args_count(arr);
-		selector = cmd_selector(arr[0], arr, name);
+		selector = cmd_selector(arr[0], arr, name, alias, idx);
 		if (argc > 0 && selector < 0)
 			break_condition = _fork(name, arr);
 		else if (argc > 0)
@@ -191,20 +191,6 @@ int split_line(char *line, char *name, aliases *alias, int *idx)
 	{
 		replace_substring(line, "||", "|");
 		if (_strlen(line) < new_len)
-<<<<<< HEAD
-			error(name, NULL, NULL, 8);
-		else
-			or_handling(line, name);
-		return;
-	}
-	if (_strstr(line, ";;"))
-	        error(name, NULL, NULL, 9);
-	else
-	{
-		replace_substring(line, "\n", ";");
-		semi_column_handling(line, name);
-	}
-=======
 			return (error(name, NULL, NULL, 8));
 		return (or_handling(line, name, alias, idx));
 	}
@@ -212,5 +198,4 @@ int split_line(char *line, char *name, aliases *alias, int *idx)
 		return (error(name, NULL, NULL, 9));
 	replace_substring(line, "\n", ";");
 	return (semi_column_handling(line, name, alias, idx));
->>>>>>> sabah
 }

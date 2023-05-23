@@ -1,5 +1,11 @@
 #include "head.h"
 
+/**
+ * _read - reads file
+ * @line: holder
+ * @args: source
+ * Return: int
+ */
 int _read(char **line, char **args)
 {
 	ssize_t i;

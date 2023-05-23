@@ -9,7 +9,7 @@
 
 size_t _strlen(char *s)
 {
-        if (!s || *s == '\0')
+	if (!s || *s == '\0')
 		return (0);
 	return (1 + _strlen(s + 1));
 }

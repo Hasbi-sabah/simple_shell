@@ -9,10 +9,12 @@
  * @idx: index
  * Return: success
  */
-int exit_function(int n, char **args, char *name)
+int exit_function(int n, char **args, char *name, aliases *alias, int *idx)
 {
 	int i;
 
+	(void) alias;
+	(void) idx;
 	for (i = 0; n > 1 && args[1][i]; i++)
 	{
 		if (args[1][i] < '0' || args[1][i] > '9')
@@ -35,11 +37,13 @@ int exit_function(int n, char **args, char *name)
  * @idx: index
  * Return: success
  */
-int change_dir(int argc, char **args, char *name)
+int change_dir(int argc, char **args, char *name, aliases *alias, int *idx)
 {
 	char *path, *temp;
 	static char *previous;
 
+	(void) alias;
+	(void) idx;
 	if (!previous)
 		getcwd(previous, 1024);
 	path = argc == 1 || _strcmp(args[1], "~") == 0 ? _getenv("HOME") : args[1];
@@ -69,11 +73,13 @@ int change_dir(int argc, char **args, char *name)
  * @idx: index
  * Return: success
  */
-int export(int argc, char **args, char *name)
+int export(int argc, char **args, char *name, aliases *alias, int *idx)
 {
 	int i = 0;
 	char *temp;
 
+	(void) alias;
+	(void) idx;
 	if (argc != 3)
 	{
 		error(name, args, NULL, 4);
@@ -106,10 +112,12 @@ int export(int argc, char **args, char *name)
  * @idx: index
  * Return: success
  */
-int unset(int argc, char **args, char *name)
+int unset(int argc, char **args, char *name, aliases *alias, int *idx)
 {
 	int i;
 
+	(void) alias;
+	(void) idx;
 	if (argc != 2)
 	{
 		error(name, args, NULL, 5);
@@ -142,13 +150,15 @@ int unset(int argc, char **args, char *name)
  * @idx: index
  * Return: success
  */
-int env(int argc, char **args, char *name)
+int env(int argc, char **args, char *name, aliases *alias, int *idx)
 {
 	int i;
 
 	(void) argc;
 	(void) args;
 	(void) name;
+	(void) alias;
+	(void) idx;
 	for (i = 0; environ[i]; i++)
 	{
 		print_string(1, environ[i]);
