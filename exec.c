@@ -15,7 +15,8 @@ int execmd(char **arr, char *name, char *path)
 	(void) name;
 	if (arr)
 	{
-		if (!_strcmp(arr[0], "echo") && (i = echo(arr)) == 0 && arr[1][0] == '$')
+		i = echo(arr);
+		if (i == 0 && arr[1][0] == '$')
 		{
 			env = _getenv(arr[1] + 1);
 			if (env)

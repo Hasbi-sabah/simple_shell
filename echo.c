@@ -9,7 +9,7 @@ int echo(char **args)
 {
 	int status;
 
-	if (args[1])
+	if (!_strcmp(args[0], "echo") && args[1])
 	{
 		if (!_strcmp(args[1], "$$"))
 		{
