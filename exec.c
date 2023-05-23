@@ -16,7 +16,7 @@ int execmd(char **arr, char *name, char *path)
 	if (arr)
 	{
 		i = echo(arr);
-		if (i == 0 && arr[1][0] == '$')
+		if (i == 0 && arr[1] && arr[1][0] == '$')
 		{
 			env = _getenv(arr[1] + 1);
 			if (env)
@@ -30,7 +30,7 @@ int execmd(char **arr, char *name, char *path)
 				return (1);
 			}
 		}
-		if (!i)
+		if (i == 0)
 		{
 			if (execve(path, arr, environ) == -1)
 				success = 0;
