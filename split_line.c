@@ -1,5 +1,12 @@
 #include "head.h"
 
+/**
+ * check_alias - check code
+ * @arr: arguments
+ * @alias: alias array
+ * @idx: integer
+ * Return: none
+ */
 void check_alias(char ***arr, aliases *alias, int idx)
 {
 	int i, n;
@@ -19,7 +26,9 @@ void check_alias(char ***arr, aliases *alias, int idx)
  * and_handling - check code
  * @line: input command line
  * @name: file name
- * Return: none
+ * @alias: alias array
+ * @idx: integer
+ * Return: integer
  */
 int and_handling(char *line, char *name, aliases *alias, int *idx)
 {
@@ -34,7 +43,7 @@ int and_handling(char *line, char *name, aliases *alias, int *idx)
 		{
 			_free(arr);
 			_free(line_split);
-	        	return (error(name, NULL, NULL, 7));
+			return (error(name, NULL, NULL, 7));
 		}
 		i++;
 	}
@@ -63,7 +72,9 @@ int and_handling(char *line, char *name, aliases *alias, int *idx)
  * or_handling - check code
  * @line: input command line
  * @name: file name
- * Return: none
+ * @alias: alias array
+ * @idx: integer
+ * Return: integer
  */
 int or_handling(char *line, char *name, aliases *alias, int *idx)
 {
@@ -107,7 +118,9 @@ int or_handling(char *line, char *name, aliases *alias, int *idx)
  * semi_column_handling - check code
  * @line: input command line
  * @name: file name
- * Return: none
+ * @alias: alias array
+ * @idx: integer
+ * Return: integer
  */
 int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 {
@@ -140,7 +153,7 @@ int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 			return (0);
 		}
 		else if (argc == 0)
-        		return (error(name, NULL, NULL, 9));
+			return (error(name, NULL, NULL, 9));
 		_free(arr);
 		i++;
 	}
@@ -151,7 +164,9 @@ int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
  * split_line - read command line
  * @line: input command line
  * @name: file name
- * Return: none
+ * @alias: alias array
+ * @idx: integer
+ * Return: integer
  */
 int split_line(char *line, char *name, aliases *alias, int *idx)
 {
@@ -181,7 +196,7 @@ int split_line(char *line, char *name, aliases *alias, int *idx)
 		return (or_handling(line, name, alias, idx));
 	}
 	if (_strstr(line, ";;"))
-	        return (error(name, NULL, NULL, 9));
+		return (error(name, NULL, NULL, 9));
 	replace_substring(line, "\n", ";");
 	return (semi_column_handling(line, name, alias, idx));
 }
