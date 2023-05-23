@@ -7,19 +7,19 @@
  * @path: path
  * @n: error index
  */
-void error(char *name, char **args, char *path, int n)
+int error(char *name, char **args, char *path, int n)
 {
 	static unsigned int i;
 
 	if (!n)
-		i++;
-	else if (n < 10)
 	{
-		print_string(2, name);
-		print_string(2, ": ");
-		to_string(2, i);
-		print_string(2, ": ");
+		i++;
+		return (0);
 	}
+	print_string(2, name);
+	print_string(2, ": ");
+	to_string(2, i);
+	print_string(2, ": ");
 	if (n == 1)
 	{
 		print_string(2, args[0]);
@@ -57,6 +57,6 @@ void error(char *name, char **args, char *path, int n)
 		print_string(2, path);
 		print_string(2, " not found");
 	}
-	if (n)
-		write(2, "\n", 1);
+	write(2, "\n", 1);
+	return (127);
 }

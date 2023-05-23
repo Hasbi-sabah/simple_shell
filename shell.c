@@ -10,7 +10,7 @@ int EXIT_STATUS = 0;
 int main(int argc, char **args)
 {
 	aliases alias;
-	int idx = 0;
+	int idx = 0, ret_val = 0;
 	char *input, *name = args[0];
 
 	(void) argc;
@@ -25,15 +25,13 @@ int main(int argc, char **args)
 			free(input);
 			if (isatty(0))
 				write(1, "\n", 1);
-			return (0);
+			return (ret_val);
 		}
 		if (*input != '\0' && _strcmp(input, "\n"))
 		{
 			error(name, NULL, NULL, 0);
-			split_line(input, name, &alias, &idx);
+			ret_val = split_line(input, name, &alias, &idx);
 		}
 		input = NULL;
 	}
-	write(1, "\n", 1);
-	return (0);
 }

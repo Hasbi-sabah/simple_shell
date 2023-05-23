@@ -23,7 +23,7 @@ typedef struct aliases
 	char *name;
 	char *value;
 } aliases;
-void split_line(char *, char *, aliases *, int *);
+int split_line(char *, char *, aliases *, int *);
 char **_strtok(char *, char *);
 int _getline(char **);
 void check_fork_error(char *, char **, char *);
@@ -38,7 +38,7 @@ char *check_ops(char **);
 char *_getenv(char *);
 int _getalias(aliases *, char *, int);
 int echo(char **);
-void error(char *, char **, char *, int);
+int error(char *, char **, char *, int);
 
 /* for _printf() */
 int to_string(int, unsigned int);

@@ -21,7 +21,7 @@ void check_alias(char ***arr, aliases *alias, int idx)
  * @name: file name
  * Return: none
  */
-void and_handling(char *line, char *name, aliases *alias, int *idx)
+int and_handling(char *line, char *name, aliases *alias, int *idx)
 {
 	char **arr, **line_split;
 	int break_condition, argc, selector, i = 0;
@@ -29,13 +29,12 @@ void and_handling(char *line, char *name, aliases *alias, int *idx)
 	line_split = _strtok(line, "&\n");
 	while (line_split[i])
 	{
-		arr = _strtok(line_split[i], " ");
+		arr = _strtok(line_split[i], " \t");
 		if (args_count(arr) == 0)
 		{
-	        	error(name, NULL, NULL, 7);
 			_free(arr);
 			_free(line_split);
-			return;
+	        	return (error(name, NULL, NULL, 7));
 		}
 		i++;
 	}
@@ -43,7 +42,7 @@ void and_handling(char *line, char *name, aliases *alias, int *idx)
 	while (line_split[i])
 	{
 		break_condition = 0;
-		arr = _strtok(line_split[i], " ");
+		arr = _strtok(line_split[i], " \t");
 		if (_strcmp(arr[0], "alias"))
 			check_alias(&arr, alias, *idx);
 		argc = args_count(arr);
@@ -54,10 +53,11 @@ void and_handling(char *line, char *name, aliases *alias, int *idx)
 			break_condition = 1 - selector;
 		_free(arr);
 		if (break_condition)
-			break;
+			return (0);
 		i++;
 	}
 	_free(line_split);
+	return (127);
 }
 /**
  * or_handling - check code
@@ -65,7 +65,7 @@ void and_handling(char *line, char *name, aliases *alias, int *idx)
  * @name: file name
  * Return: none
  */
-void or_handling(char *line, char *name, aliases *alias, int *idx)
+int or_handling(char *line, char *name, aliases *alias, int *idx)
 {
 	char **arr, **line_split;
 	int break_condition, argc, selector, i = 0;
@@ -73,20 +73,19 @@ void or_handling(char *line, char *name, aliases *alias, int *idx)
 	line_split = _strtok(line, "|\n");
 	while (line_split[i])
 	{
-		arr = _strtok(line_split[i], " ");
+		arr = _strtok(line_split[i], " \t");
 		if (args_count(arr) == 0)
 		{
-		       	error(name, NULL, NULL, 8);
 			_free(arr);
 			_free(line_split);
-			return;
+			return (error(name, NULL, NULL, 8));
 		}
 		i++;
 	}
 	i = 0;
 	while (line_split[i])
 	{
-		arr = _strtok(line_split[i], " ");
+		arr = _strtok(line_split[i], " \t");
 		if (_strcmp(arr[0], "alias"))
 			check_alias(&arr, alias, *idx);
 		break_condition = 0;
@@ -98,10 +97,11 @@ void or_handling(char *line, char *name, aliases *alias, int *idx)
 			break_condition = selector;
 		_free(arr);
 		if (break_condition)
-			break;
+			return (0);
 		i++;
 	}
-								_free(line_split);
+	_free(line_split);
+	return (127);
 }
 /**
  * semi_column_handling - check code
@@ -109,7 +109,7 @@ void or_handling(char *line, char *name, aliases *alias, int *idx)
  * @name: file name
  * Return: none
  */
-void semi_column_handling(char *line, char *name, aliases *alias, int *idx)
+int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 {
 	char **arr, **line_split;
 	int argc, i = 0;
@@ -117,31 +117,35 @@ void semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 	line_split = _strtok(line, ";\n");
 	while (line_split[i])
 	{
-		arr = _strtok(line_split[i], " ");
+		arr = _strtok(line_split[i], " \t");
 		if (args_count(arr) == 0)
 		{
-		       	error(name, NULL, NULL, 9);
 			_free(arr);
 			_free(line_split);
-			return;
+			return (error(name, NULL, NULL, 9));
 		}
 		i++;
 	}
 	i = 0;
 	while (line_split[i])
 	{
-		arr = _strtok(line_split[i], " ");
+		arr = _strtok(line_split[i], " \t");
 		if (_strcmp(arr[0], "alias"))
 			check_alias(&arr, alias, *idx);
 		argc = args_count(arr);
 		if (argc > 0 && cmd_selector(arr[0], arr, name, alias, idx) < 0)
-			_fork(name, arr);
+		{
+			if (!_fork(name, arr))
+				return (127);
+			return (0);
+		}
 		else if (argc == 0)
-        		error(name, NULL, NULL, 9);
+        		return (error(name, NULL, NULL, 9));
 		_free(arr);
 		i++;
 	}
 	_free(line_split);
+	return (0);
 }
 /**
  * split_line - read command line
@@ -149,7 +153,7 @@ void semi_column_handling(char *line, char *name, aliases *alias, int *idx)
  * @name: file name
  * Return: none
  */
-void split_line(char *line, char *name, aliases *alias, int *idx)
+int split_line(char *line, char *name, aliases *alias, int *idx)
 {
 	size_t old_len = _strlen(line);
 	size_t new_len;
@@ -164,10 +168,8 @@ void split_line(char *line, char *name, aliases *alias, int *idx)
 	{
 		replace_substring(line, "&&", "&");
 		if (_strlen(line) < new_len)
-			error(name, NULL, NULL, 7);
-		else
-			and_handling(line, name, alias, idx);
-		return;
+			return (error(name, NULL, NULL, 7));
+		return (and_handling(line, name, alias, idx));
 	}
 	replace_substring(line, "||", "|");
 	new_len = _strlen(line);
@@ -175,16 +177,11 @@ void split_line(char *line, char *name, aliases *alias, int *idx)
 	{
 		replace_substring(line, "||", "|");
 		if (_strlen(line) < new_len)
-			error(name, NULL, NULL, 8);
-		else
-			or_handling(line, name, alias, idx);
-		return;
+			return (error(name, NULL, NULL, 8));
+		return (or_handling(line, name, alias, idx));
 	}
 	if (_strstr(line, ";;"))
-	        error(name, NULL, NULL, 9);
-	else
-	{
-		replace_substring(line, "\n", ";");
-		semi_column_handling(line, name, alias, idx);
-	}
+	        return (error(name, NULL, NULL, 9));
+	replace_substring(line, "\n", ";");
+	return (semi_column_handling(line, name, alias, idx));
 }

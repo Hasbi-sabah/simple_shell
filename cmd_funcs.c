@@ -39,7 +39,7 @@ int exit_function(int n, char **args, char *name, aliases *alias, int *idx)
  */
 int change_dir(int argc, char **args, char *name, aliases *alias, int *idx)
 {
-	char *path;
+	char *path, *temp;
 	static char *previous;
 
 	(void) alias;
@@ -55,7 +55,8 @@ int change_dir(int argc, char **args, char *name, aliases *alias, int *idx)
 		return (0);
 	}
 	getcwd(previous, 1024);
-	setenv("PWD", path, 1);
+	temp = _getenv("PWD");
+	_strcpy(temp, path);
 	if (argc == 1)
 	{
 		print_string(1, path);
@@ -88,10 +89,7 @@ int export(int argc, char **args, char *name, aliases *alias, int *idx)
 	{
 		temp = _getenv(args[1]);
 		if (temp)
-		{
 			_strcpy(temp, args[2]);
-			_strcat(temp, temp + _strlen(args[2]));
-		}
 		else
 		{
 			while (environ[i])

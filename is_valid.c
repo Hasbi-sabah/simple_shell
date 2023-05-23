@@ -9,15 +9,23 @@ char *is_valid(char *comm, char *name, char **arr)
 {
 	int i;
 	struct stat buf;
-	char *path, **path_arr, *env;
+	char *path, **path_arr = NULL, *env;
 
 	env = _getenv("PATH");
-	if (*env == '\0')
+	if (!env)
+	{
+		if (!access(comm, X_OK) && stat(comm, &buf) == 0)
+			return (comm);
+		else
+			return (NULL);
+	}
+	else if (*env == '\0')
 	{
 		error(name, arr, NULL, 1);
-		exit(127);
+		exit(EXIT_FAILURE);
 	}
-	path_arr = _strtok(env, ":");
+	else
+		path_arr = _strtok(env, ":");
 	for (i = 0; path_arr[i]; i++)
 	{
 		if (!_strstr(comm, "/"))
