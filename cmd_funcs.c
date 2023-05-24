@@ -70,7 +70,7 @@ int change_dir(int argc, char **args, char *name,
 	return (1);
 }
 /**
- * export - check code
+ * export - handles setenv
  * @argc: arguments count
  * @args: arguments
  * @name: program name
