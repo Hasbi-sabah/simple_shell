@@ -1,6 +1,6 @@
 #include "head.h"
 /**
- * _free - frees
+ * _free - frees array of strings
  * @arr: arr
  */
 void _free(char **arr)
