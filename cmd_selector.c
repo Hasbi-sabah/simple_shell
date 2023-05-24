@@ -34,7 +34,7 @@ int cmd_selector(const char *cmd, char **args,
 }
 
 /**
- * args_count - check code
+ * args_count - counts number of args
  * @args: arguments
  * Return: argc
  */
