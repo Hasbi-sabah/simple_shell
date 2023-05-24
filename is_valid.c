@@ -18,8 +18,7 @@ char *is_valid(char *comm, char *name, char **arr)
 	{
 		if (!access(comm, X_OK) && stat(comm, &buf) == 0)
 			return (comm);
-		else
-			return (NULL);
+	        return (NULL);
 	}
 	else if (*env == '\0')
 	{

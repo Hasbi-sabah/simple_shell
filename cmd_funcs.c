@@ -11,11 +11,11 @@
  */
 int exit_function(int n, char **args, char *name, aliases *alias, int *idx)
 {
-	int i;
+	int i = 0;
 
 	(void) alias;
 	(void) idx;
-	for (i = 0; n > 1 && args[1][i]; i++)
+	for (; n > 1 && args[1][i]; i++)
 	{
 		if (args[1][i] < '0' || args[1][i] > '9')
 		{
@@ -60,7 +60,7 @@ int change_dir(int argc, char **args, char *name, aliases *alias, int *idx)
 	if (argc == 1)
 	{
 		print_string(1, path);
-		write(1, "\n", 1);
+		write(STDOUT_FILENO, "\n", 1);
 	}
 	return (1);
 }
@@ -162,7 +162,7 @@ int env(int argc, char **args, char *name, aliases *alias, int *idx)
 	for (i = 0; environ[i]; i++)
 	{
 		print_string(1, environ[i]);
-		write(1, "\n", 1);
+		write(STDOUT_FILENO, "\n", 1);
 	}
 	return (1);
 }
