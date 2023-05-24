@@ -1,7 +1,7 @@
 #include "head.h"
 
 /**
- * _getenv - check code
+ * _getenv - retrieves enviromental variables
  * @var: variable name
  * Return: string
  */
