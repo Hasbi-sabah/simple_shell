@@ -1,12 +1,12 @@
 #include "head.h"
 
 /**
- * _alias - works with aliases
+ * _alias - takes care of aliases
  * @argc: arguments count
- * @args: arguments
+ * @args: arguments arr
  * @name: program name
- * @alias: struct
- * @idx: index
+ * @alias: alias struct, contains name and value
+ * @idx: number of aliases
  * @split: split line
  * @line: line
  * Return: success
