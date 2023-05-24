@@ -15,7 +15,7 @@ int _read(char **line, char **args)
 	if (ret == -1)
 	{
 		error(args[0], args, NULL, 11);
-		exit(127);
+		exit(EXIT_FAILURE);
 	}
 	*line = malloc(10240);
 	i = read(ret, *line, 10240);
@@ -43,27 +43,27 @@ int main(int argc, char **args)
 	while (1)
 	{
 		if (isatty(0) && argc == 1)
-			write(1, "$ ", 2);
+			write(STDOUT_FILENO, "$ ", 2);
 		if (argc == 1 && _getline(&input) <= 0)
 		{
 			free(input);
 			if (isatty(0))
-				write(1, "\n", 1);
-			return (ret_val);
+				write(STDOUT_FILENO, "\n", 1);
+			exit(EXIT_SUCCESS);
 		}
 		else if (argc != 1 && _read(&input, args) <= 0)
 		{
 			free(input);
 			if (isatty(0))
-				write(1, "\n", 1);
-			return (ret_val);
+				write(STDOUT_FILENO, "\n", 1);
+			exit(EXIT_SUCCESS);
 		}
 		if (*input != '\0' && _strcmp(input, "\n"))
 		{
 			error(name, NULL, NULL, 0);
 			ret_val = split_line(input, name, &alias, &idx);
 		}
-		input = NULL;
+		free(input);
 		if (argc != 1)
 			return (0);
 	}

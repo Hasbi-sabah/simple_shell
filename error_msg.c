@@ -25,8 +25,8 @@ void error2(char **args, char *path, int n)
 	else if (n == 9)
 	{
 		print_string(2, "Syntax error: \"");
-		write(1, &semi, 1);
-		write(1, &semi, 1);
+		write(STDERR_FILENO, &semi, 1);
+		write(STDERR_FILENO, &semi, 1);
 		print_string(2, "\" unexpected");
 	}
 	else if (n == 10)
@@ -59,7 +59,7 @@ int error(char *name, char **args, char *path, int n)
 		print_string(2, name);
 		print_string(2, ": 0: Can't open ");
 		print_string(2, args[1]);
-		write(2, "\n", 1);
+		write(STDERR_FILENO, "\n", 1);
 		return (127);
 	}
 	print_string(2, name);
@@ -85,6 +85,6 @@ int error(char *name, char **args, char *path, int n)
 		print_string(2, "usage: setenv VARIABLE VALUE");
 	else
 		error2(args, path, n);
-	write(2, "\n", 1);
-	return (127);
+	write(STDERR_FILENO, "\n", 1);
+	return (EXIT_FAILURE);
 }

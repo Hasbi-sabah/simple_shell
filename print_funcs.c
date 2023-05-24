@@ -13,7 +13,9 @@ int to_string(int i, unsigned int n)
 	if (n >= 10)
 		return (to_string(i, n / 10) + to_string(i, n % 10));
 	digit = '0' + n;
-	return (write(i, &digit, 1));
+	if (i == 1)
+		return (write(STDOUT_FILENO, &digit, 1));
+	return (write(STDERR_FILENO, &digit, 1));
 }
 /**
  * print_string - check code
@@ -23,5 +25,7 @@ int to_string(int i, unsigned int n)
  */
 int print_string(int i, char *str)
 {
-	return (write(i, str, _strlen(str)));
+	if (i == 1)
+		return (write(STDOUT_FILENO, str, _strlen(str)));
+	return (write(STDERR_FILENO, str, _strlen(str)));
 }
