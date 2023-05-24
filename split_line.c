@@ -165,7 +165,7 @@ int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 	return (frk ? EXIT_FAILURE : 0);
 }
 /**
- * split_line - read command line
+ * split_line - reads command line (input)
  * @line: input command line
  * @name: file name
  * @alias: alias array
