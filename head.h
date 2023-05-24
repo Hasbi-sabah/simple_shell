@@ -68,6 +68,7 @@ char **_strtok(char *, char *);
 char *_strpbrk(char *, char *);
 char *_strcpy(char *, char *);
 char *_strcat(char *, char *);
+void del(char **);
 size_t _strlen(char *);
 int _strcmp(const char *, char *);
 int _strncmp(const char *, char *, int);

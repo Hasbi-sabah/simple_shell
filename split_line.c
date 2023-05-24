@@ -47,8 +47,8 @@ int and_handling(char *line, char *name, aliases *alias, int *idx)
 		}
 		i++;
 	}
-	_free(arr);
 	i = 0;
+	_free(arr);
 	while (line_split[i])
 	{
 		break_condition = 0;
@@ -188,10 +188,15 @@ int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
  */
 int split_line(char *line, char *name, aliases *alias, int *idx)
 {
-	size_t old_len = _strlen(line);
+	size_t old_len;
 	size_t new_len;
 	char *temp;
 
+	while (*line == ' ' || *line == '\t')
+		del(&line);
+	old_len = _strlen(line);
+	if (old_len == 1)
+		return (0);
 	temp = _strstr(line, "#");
 	if (temp)
 		*temp = '\0';
