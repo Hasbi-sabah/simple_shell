@@ -40,7 +40,7 @@ int _getalias(aliases *, char *, int);
 int echo(char **);
 int error(char *, char **, char *, int);
 
-/* for _printf() */
+/* printing functions */
 int to_string(int, unsigned int);
 int print_string(int, char *);
 /* for cmd exec */
