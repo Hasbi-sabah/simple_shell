@@ -142,15 +142,17 @@ int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 		}
 		_free(arr);
 	}
+	_free(line_split);
+	line_split = _strtok(line, "@;\n");
 	for (i = 0; line_split[i]; i++)
 	{
 		arr = _strtok(line_split[i], " \t");
-		if (_strcmp(arr[0], "alias"))
+		if (_strstr(line, "alias"))
 			check_alias(&arr, alias, *idx);
 		argc = args_count(arr);
 		if (argc > 0 && cmd_selector(arr[0], arr, name, alias, idx) < 0)
 			_fork(name, arr);
-		else if (argc == 0)
+		else if (!_strstr(line, "@") && argc == 0)
 		{
 			_free(line_split);
 			_free(arr);
@@ -203,6 +205,6 @@ int split_line(char *line, char *name, aliases *alias, int *idx)
 	}
 	if (_strstr(line, ";;"))
 		return (error(name, NULL, NULL, 9));
-	replace_substring(line, "\n", ";");
+	replace_substring(line, "\n", "@");
 	return (semi_column_handling(line, name, alias, idx));
 }
