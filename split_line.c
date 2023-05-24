@@ -149,14 +149,7 @@ int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 			check_alias(&arr, alias, *idx);
 		argc = args_count(arr);
 		if (argc > 0 && cmd_selector(arr[0], arr, name, alias, idx) < 0)
-		{
-			if (!_fork(name, arr))
-			{
-				frk = 1;
-				_free(arr);
-				break;
-			}
-		}
+			_fork(name, arr);
 		else if (argc == 0)
 		{
 			_free(line_split);
