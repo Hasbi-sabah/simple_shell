@@ -15,10 +15,8 @@ void _free(char **arr)
 }
 /**
  * _calloc - allocates memory for an array, using malloc.
- *
  * @nmemb: number of members
  * @size: size
- *
  * Return: pointer or NULL
  */
 
