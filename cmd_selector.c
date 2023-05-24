@@ -1,7 +1,7 @@
 #include "head.h"
 
 /**
- * cmd_selector - check code
+ * cmd_selector - checks for builin functions
  * @cmd: command name
  * @args: arguments
  * @name: program name
