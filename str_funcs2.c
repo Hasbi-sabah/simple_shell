@@ -70,7 +70,6 @@ char *_strstr(char *haystack, char *needle)
 }
 /**
  * _memcpy - copies memory area.
- *
  * @dest: destination memory area
  * @src: source memory area
  * @n: bytes of the memory
