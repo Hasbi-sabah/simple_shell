@@ -45,8 +45,8 @@ int and_handling(char *line, char *name, aliases *alias, int *idx)
 			_free(line_split);
 			return (error(name, NULL, NULL, 7));
 		}
-		_free(arr);
 	}
+	_free(arr);
 	for (i = 0; line_split[i]; i++)
 	{
 		break_condition = 0;
@@ -59,11 +59,9 @@ int and_handling(char *line, char *name, aliases *alias, int *idx)
 			break_condition = 1 - _fork(name, arr);
 		else if (argc > 0)
 			break_condition = 1 - selector;
-		_free(arr);
 		if (break_condition)
 		{
 			_free(arr);
-			_free(line_split);
 			break;
 		}
 		_free(arr);
@@ -109,11 +107,9 @@ int or_handling(char *line, char *name, aliases *alias, int *idx)
 			break_condition = _fork(name, arr);
 		else if (argc > 0)
 			break_condition = selector;
-		_free(arr);
 		if (break_condition)
 		{
 			_free(arr);
-			_free(line_split);
 			break;
 		}
 		_free(arr);
@@ -163,8 +159,8 @@ int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 		}
 		else if (argc == 0)
 		{
-			_free(arr);
 			_free(line_split);
+			_free(arr);
 			return (error(name, NULL, NULL, 9));
 		}
 		_free(arr);
