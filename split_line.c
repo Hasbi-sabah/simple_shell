@@ -149,8 +149,8 @@ int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 			_free(line_split);
 			return (error(name, NULL, NULL, 9));
 		}
+		_free(arr);
 	}
-	_free(arr);
 	for (i = 0; line_split[i]; i++)
 	{
 		arr = _strtok(line_split[i], " \t");
@@ -175,7 +175,6 @@ int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 		_free(arr);
 	}
 	_free(line_split);
-	line_split = NULL;
 	return (0);
 }
 /**
