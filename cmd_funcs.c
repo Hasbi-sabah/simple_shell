@@ -1,7 +1,7 @@
 #include "head.h"
 
 /**
- * exit_function - check code
+ * exit_function - function to exit
  * @n: arguments count
  * @args: arguments
  * @name: program name
