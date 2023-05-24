@@ -129,7 +129,7 @@ int or_handling(char *line, char *name, aliases *alias, int *idx)
 int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 {
 	char **arr, **line_split;
-	int argc, i = 0, _fork = 0;
+	int argc, i = 0, frk = 0;
 
 	line_split = _strtok(line, ";\n");
 	for (i = 0; line_split[i]; i++)
@@ -153,7 +153,7 @@ int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 		{
 			if (!_fork(name, arr))
 			{
-				_fork = 1;
+				frk = 1;
 				_free(arr);
 				break;
 			}
@@ -167,7 +167,7 @@ int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 		_free(arr);
 	}
 	_free(line_split);
-	return (_fork ? EXIT_FAILURE : 0);
+	return (frk ? EXIT_FAILURE : 0);
 }
 /**
  * split_line - read command line
