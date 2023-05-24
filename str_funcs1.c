@@ -28,7 +28,6 @@ char *_strpbrk(char *s, char *accept)
 }
 /**
  * _strcpy - copies the string pointed to by src to dest
- *
  *@src: string
  *@dest: buffer
  * Return: string
