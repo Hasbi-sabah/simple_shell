@@ -82,27 +82,6 @@ void replace_substring(char *str, char *old_substr, char *new_substr)
 	replace_substring(ptr + new_len, old_substr, new_substr);
 }
 /**
- * _strrev - copies and reverses a string
- * @i: str length
- * @s: string
- * Return: i
- */
-
-int _strrev(char *s, int i)
-{
-	char temp;
-	int j;
-
-	i--;
-	for (j = 0; j <= i / 2; j++)
-	{
-		temp = s[j];
-		s[j] = s[i - j];
-		s[i - j] = temp;
-	}
-	return (j);
-}
-/**
  * _atoi - convert a string to an integer
  *
  *@s: string
