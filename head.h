@@ -64,7 +64,7 @@ int unset(int, char **, char *, aliases *, int *, char **, char *);
 int env(int, char **, char *, aliases *, int *, char **, char *);
 int _alias(int, char **, char *, aliases *, int *, char **, char *);
 
-/* string functions */
+/* custom string functions */
 char **_strtok(char *, char *);
 char *_strpbrk(char *, char *);
 char *_strcpy(char *, char *);
