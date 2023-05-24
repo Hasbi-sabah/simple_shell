@@ -60,7 +60,7 @@ int error(char *name, char **args, char *path, int n)
 		print_string(2, ": 0: Can't open ");
 		print_string(2, args[1]);
 		write(STDERR_FILENO, "\n", 1);
-		return (127);
+		return (EXIT_FAILURE);
 	}
 	print_string(2, name);
 	print_string(2, ": ");

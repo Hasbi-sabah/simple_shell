@@ -49,14 +49,14 @@ int main(int argc, char **args)
 			free(input);
 			if (isatty(0))
 				write(STDOUT_FILENO, "\n", 1);
-			exit(EXIT_SUCCESS);
+			exit(ret_val);
 		}
 		else if (argc != 1 && _read(&input, args) <= 0)
 		{
 			free(input);
 			if (isatty(0))
 				write(STDOUT_FILENO, "\n", 1);
-			exit(EXIT_SUCCESS);
+			exit(ret_val);
 		}
 		if (*input != '\0' && _strcmp(input, "\n"))
 		{
