@@ -9,7 +9,9 @@ int _getline(char **line)
 {
 	int i;
 
-	*line = malloc(10240);
+	*line = NULL;
+	*line = _calloc(10240, sizeof(char));
+	i = 0;
 	i = read(STDIN_FILENO, *line, 10240);
 	while (**line == ' ' || **line == '\t')
 		(*line)++, i--;
