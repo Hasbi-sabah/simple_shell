@@ -1,7 +1,7 @@
 #include "head.h"
 
 /**
- * is_valid - is valid command
+ * is_valid - checks if a command is valid
  * @comm: command
  * @name: name
  * @arr: arr
