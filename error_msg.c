@@ -1,7 +1,7 @@
 #include "head.h"
 
 /**
- * error2 - prints error msgs to stderr
+ * error2 - prints error msgs to stderr (part 2)
  * @args: args
  * @path: path
  * @n: error index
