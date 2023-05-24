@@ -45,8 +45,8 @@ int and_handling(char *line, char *name, aliases *alias, int *idx)
 			_free(line_split);
 			return (error(name, NULL, NULL, 7));
 		}
+		_free(arr);
 	}
-	_free(arr);
 	for (i = 0; line_split[i]; i++)
 	{
 		break_condition = 0;
