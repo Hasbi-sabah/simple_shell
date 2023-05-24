@@ -83,9 +83,9 @@ void replace_substring(char *str, char *old_substr, char *new_substr)
 	_memcpy(ptr, new_substr, new_len);
 	replace_substring(ptr + new_len, old_substr, new_substr);
 }
+
 /**
  * _atoi - convert a string to an integer
- *
  *@s: string
  * Return: integer
  */
