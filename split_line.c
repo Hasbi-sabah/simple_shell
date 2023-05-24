@@ -36,7 +36,7 @@ int and_handling(char *line, char *name, aliases *alias, int *idx)
 	int break_condition, argc, selector, i = 0;
 
 	line_split = _strtok(line, "&\n");
-	while (line_split[i])
+	for (i = 0; line_split[i]; i++)
 	{
 		arr = _strtok(line_split[i], " \t");
 		if (args_count(arr) == 0)
@@ -45,11 +45,9 @@ int and_handling(char *line, char *name, aliases *alias, int *idx)
 			_free(line_split);
 			return (error(name, NULL, NULL, 7));
 		}
-		i++;
+		_free(arr);
 	}
-	i = 0;
-	_free(arr);
-	while (line_split[i])
+	for (i = 0; line_split[i]; i++)
 	{
 		break_condition = 0;
 		arr = _strtok(line_split[i], " \t");
@@ -68,9 +66,8 @@ int and_handling(char *line, char *name, aliases *alias, int *idx)
 			_free(line_split);
 			return (0);
 		}
-		i++;
+		_free(arr);
 	}
-	_free(arr);
 	_free(line_split);
 	return (EXIT_FAILURE);
 }
@@ -88,7 +85,7 @@ int or_handling(char *line, char *name, aliases *alias, int *idx)
 	int break_condition, argc, selector, i = 0;
 
 	line_split = _strtok(line, "|\n");
-	while (line_split[i])
+	for (i = 0; line_split[i]; i++)
 	{
 		arr = _strtok(line_split[i], " \t");
 		if (args_count(arr) == 0)
@@ -97,11 +94,10 @@ int or_handling(char *line, char *name, aliases *alias, int *idx)
 			_free(line_split);
 			return (error(name, NULL, NULL, 8));
 		}
-		i++;
+		_free(arr);
 	}
-	_free(arr);
 	i = 0;
-	while (line_split[i])
+	for (i = 0; line_split[i]; i++)
 	{
 		arr = _strtok(line_split[i], " \t");
 		if (_strcmp(arr[0], "alias"))
@@ -120,9 +116,8 @@ int or_handling(char *line, char *name, aliases *alias, int *idx)
 			_free(line_split);
 			return (0);
 		}
-		i++;
+		_free(arr);
 	}
-	_free(arr);
 	_free(line_split);
 	return (EXIT_FAILURE);
 }
