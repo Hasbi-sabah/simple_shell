@@ -26,13 +26,13 @@ char *_strpbrk(char *s, char *accept)
 		return (&s[i]);
 	return (0);
 }
+
 /**
  * _strcpy - copies the string pointed to by src to dest
  *@src: string
  *@dest: buffer
  * Return: string
  */
-
 char *_strcpy(char *dest, char *src)
 {
 	int i;
@@ -42,13 +42,13 @@ char *_strcpy(char *dest, char *src)
 	dest[i] = '\0';
 	return (dest);
 }
+
 /**
  * _strcat - concatenates two strings
  *@src: first string
  *@dest: second string
  *Return: dest string
  */
-
 char *_strcat(char *dest, char *src)
 {
 	int i, j;
