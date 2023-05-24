@@ -1,7 +1,7 @@
 #include "head.h"
 
 /**
- * echo - check code
+ * echo - handles echo $$ and $?
  * @args: arguments
  * Return: success
  */
