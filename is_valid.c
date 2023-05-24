@@ -43,6 +43,7 @@ char *is_valid(char *comm, char *name, char **arr)
 			_free(path_arr);
 			return (path);
 		}
+		free(path);
 	}
 	_free(path_arr);
 	free(path);
