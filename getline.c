@@ -1,7 +1,7 @@
 #include "head.h"
 
 /**
- * _getline - check code
+ * _getline - reads input from stdin
  * @line: string to read
  * Return: string length
  */
