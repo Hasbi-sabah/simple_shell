@@ -74,7 +74,6 @@ char *_strstr(char *haystack, char *needle)
  * @dest: destination memory area
  * @src: source memory area
  * @n: bytes of the memory
- *
  * Return: dest
  */
 char *_memcpy(char *dest, char *src, unsigned int n)
