@@ -26,6 +26,8 @@ char **_strtok(char *s, char *delim)
 
 	tokens = (char **)malloc(len * sizeof(char *));
 	*tokens = (char *)malloc(len);
+	if (!*tokens)
+		free(tokens);
 	for (i = 0; s[i]; i++)
 	{
 		if (exists_within(s[i], delim))
