@@ -1,9 +1,9 @@
 #include "head.h"
 
 /**
- * exists_within - check code
+ * exists_within - checks whether character is within delim
  * @c: character
- * @s: string
+ * @s: delim
  * Return: boolean
  */
 int exists_within(char c, char *s)
