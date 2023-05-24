@@ -84,7 +84,7 @@ int export(int argc, char **args, char *name,
 		aliases *alias, int *idx, char **split, char *line)
 {
 	int i = 0;
-	char *temp;
+	char *temp = NULL;
 
 	(void) alias;
 	(void) idx;
@@ -104,7 +104,7 @@ int export(int argc, char **args, char *name,
 		{
 			while (environ[i])
 				i++;
-			environ[i] = malloc(_strlen(args[1]) + _strlen(args[2]) + 3);
+			environ[i] = _calloc(_strlen(args[1]) + _strlen(args[2]) + 3, 1);
 			_strcat(environ[i], args[1]);
 			_strcat(environ[i], "=");
 			_strcat(environ[i], args[2]);
@@ -149,7 +149,7 @@ int unset(int argc, char **args, char *name,
 		{
 			if (_strncmp(environ[i], args[1], _strlen(args[1])) == 0)
 			{
-				environ[i] = NULL;
+				free(environ[i]);
 				break;
 			}
 		}

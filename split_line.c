@@ -146,7 +146,7 @@ int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 	line_split = _strtok(line, "@;\n");
 	for (i = 0; line_split[i]; i++)
 	{
-		arr = _strtok(line_split[i], " \t'");
+		arr = _strtok(line_split[i], " \t");
 		if (_strstr(line, "alias"))
 			check_alias(&arr, alias, *idx);
 		argc = args_count(arr);
