@@ -23,7 +23,7 @@ void check_alias(char ***arr, aliases *alias, int idx)
 	}
 }
 /**
- * and_handling - check code
+ * and_handling - handles &&
  * @line: input command line
  * @name: file name
  * @alias: alias array
