@@ -1,7 +1,7 @@
 #include "head.h"
 
 /**
- * check_alias - check code
+ * check_alias - checks for aliases
  * @arr: arguments
  * @alias: alias array
  * @idx: integer
