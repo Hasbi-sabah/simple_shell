@@ -9,7 +9,8 @@
  * @idx: index
  * Return: success
  */
-int exit_function(int n, char **args, char *name, aliases *alias, int *idx)
+int exit_function(int n, char **args, char *name,
+		aliases *alias, int *idx, char **split, char *line)
 {
 	int i = 0;
 
@@ -25,6 +26,9 @@ int exit_function(int n, char **args, char *name, aliases *alias, int *idx)
 	}
 	if (n > 1)
 		i = _atoi(args[1]);
+	_free(split);
+	free(line);
+	_free(args);
 	exit(i);
 	return (1);
 }
@@ -37,24 +41,21 @@ int exit_function(int n, char **args, char *name, aliases *alias, int *idx)
  * @idx: index
  * Return: success
  */
-int change_dir(int argc, char **args, char *name, aliases *alias, int *idx)
+int change_dir(int argc, char **args, char *name,
+		aliases *alias, int *idx, char **split, char *line)
 {
 	char *path, *temp;
-	static char *previous;
 
 	(void) alias;
 	(void) idx;
-	if (!previous)
-		getcwd(previous, 1024);
+	(void) line;
+	(void) split;
 	path = argc == 1 || _strcmp(args[1], "~") == 0 ? _getenv("HOME") : args[1];
-	if (_strcmp(path, "-") == 0)
-		path = previous;
 	if (chdir(path) < 0)
 	{
 		error(name, args, path, 3);
 		return (0);
 	}
-	getcwd(previous, 1024);
 	temp = _getenv("PWD");
 	_strcpy(temp, path);
 	if (argc == 1)
@@ -73,13 +74,16 @@ int change_dir(int argc, char **args, char *name, aliases *alias, int *idx)
  * @idx: index
  * Return: success
  */
-int export(int argc, char **args, char *name, aliases *alias, int *idx)
+int export(int argc, char **args, char *name,
+		aliases *alias, int *idx, char **split, char *line)
 {
 	int i = 0;
 	char *temp;
 
 	(void) alias;
 	(void) idx;
+	(void) split;
+	(void) line;
 	if (argc != 3)
 	{
 		error(name, args, NULL, 4);
@@ -112,12 +116,15 @@ int export(int argc, char **args, char *name, aliases *alias, int *idx)
  * @idx: index
  * Return: success
  */
-int unset(int argc, char **args, char *name, aliases *alias, int *idx)
+int unset(int argc, char **args, char *name,
+		aliases *alias, int *idx, char **split, char *line)
 {
 	int i;
 
 	(void) alias;
 	(void) idx;
+	(void) split;
+	(void) line;
 	if (argc != 2)
 	{
 		error(name, args, NULL, 5);
@@ -150,15 +157,18 @@ int unset(int argc, char **args, char *name, aliases *alias, int *idx)
  * @idx: index
  * Return: success
  */
-int env(int argc, char **args, char *name, aliases *alias, int *idx)
+int env(int argc, char **args, char *name,
+		aliases *alias, int *idx, char **split, char *line)
 {
 	int i;
 
 	(void) argc;
 	(void) args;
 	(void) name;
+	(void) split;
 	(void) alias;
 	(void) idx;
+	(void) line;
 	for (i = 0; environ[i]; i++)
 	{
 		print_string(1, environ[i]);

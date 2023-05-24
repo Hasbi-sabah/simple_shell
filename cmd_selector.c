@@ -10,7 +10,7 @@
  * Return: success
  */
 int cmd_selector(const char *cmd, char **args,
-		char *name, aliases *alias, int *idx)
+		char *name, aliases *alias, int *idx, char **split, char *line)
 {
 	cmd_executer executers[] = {
 		{"exit", exit_function},
@@ -26,7 +26,8 @@ int cmd_selector(const char *cmd, char **args,
 	while (executers[j].exe_func != NULL && _strcmp(cmd, executers[j].cmd) != 0)
 		j++;
 	if (executers[j].exe_func != NULL)
-		return (executers[j].exe_func(args_count(args), args, name, alias, idx));
+		return (executers[j].exe_func(args_count(args), args,
+					name, alias, idx, split, line));
 	return (-1);
 }
 
