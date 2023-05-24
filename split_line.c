@@ -118,7 +118,7 @@ int or_handling(char *line, char *name, aliases *alias, int *idx)
 	return (break_condition ? 0 : EXIT_FAILURE);
 }
 /**
- * semi_column_handling - check code
+ * semi_column_handling - handles ;
  * @line: input command line
  * @name: file name
  * @alias: alias array
