@@ -26,7 +26,7 @@ int execmd(char **arr, char *name, char *path)
 			}
 			else
 			{
-				write(1, "\n", 1);
+				write(STDOUT_FILENO, "\n", 1);
 				return (1);
 			}
 		}

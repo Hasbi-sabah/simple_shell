@@ -23,7 +23,7 @@ char *is_valid(char *comm, char *name, char **arr)
 	else if (*env == '\0')
 	{
 		error(name, arr, NULL, 1);
-		exit(127);
+		exit(EXIT_FAILURE);
 	}
 	else
 		path_arr = _strtok(env, ":");
@@ -40,10 +40,12 @@ char *is_valid(char *comm, char *name, char **arr)
 			path = malloc(_strlen(comm) + 1), _strcpy(path, comm);
 		if (!access(path, X_OK) && stat(path, &buf) == 0)
 		{
-			free(path_arr);
+			_free(path_arr);
 			return (path);
 		}
+		free(path_arr[i]);
 	}
 	free(path_arr);
+	free(path);
 	return (NULL);
 }

@@ -69,7 +69,7 @@ int and_handling(char *line, char *name, aliases *alias, int *idx)
 		i++;
 	}
 	_free(line_split);
-	return (127);
+	return (EXIT_FAILURE);
 }
 /**
  * or_handling - check code
@@ -118,7 +118,7 @@ int or_handling(char *line, char *name, aliases *alias, int *idx)
 		i++;
 	}
 	_free(line_split);
-	return (127);
+	return (EXIT_FAILURE);
 }
 /**
  * semi_column_handling - check code
@@ -145,6 +145,7 @@ int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 		}
 		i++;
 	}
+	_free(arr);
 	i = 0;
 	while (line_split[i])
 	{
@@ -158,7 +159,7 @@ int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 			{
 				_free(arr);
 				_free(line_split);
-				return (127);
+				return (EXIT_FAILURE);
 			}
 		}
 		else if (argc == 0)
@@ -167,8 +168,8 @@ int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 			_free(line_split);
 			return (error(name, NULL, NULL, 9));
 		}
-		_free(arr);
 		i++;
+		_free(arr);
 	}
 	_free(line_split);
 	return (0);

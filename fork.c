@@ -10,10 +10,9 @@ int _fork(char *name, char **arr)
 {
 	pid_t pid;
 	int status, success = 1;
-	char *path = NULL, *comm = NULL;
+	char *path = NULL;
 
-	comm = arr[0];
-	path = is_valid(comm, name, arr);
+	path = is_valid(arr[0], name, arr);
 	if (path != NULL)
 	{
 		pid = fork();
