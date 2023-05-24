@@ -12,6 +12,7 @@ int exists_within(char c, char *s)
 		return (c == *s);
 	return (c == *s ? 1 : exists_within(c, s + 1));
 }
+
 /**
  * _strtok - string tokenizer
  * @s: string
@@ -57,8 +58,9 @@ char **_strtok(char *s, char *delim)
 		tokens[k][j] = '\0';
 	return (tokens);
 }
+
 /**
- * replace_substring - check code
+ * replace_substring - replaces substring
  * @str: input string
  * @old_substr: old substring
  * @new_substr: input substring
