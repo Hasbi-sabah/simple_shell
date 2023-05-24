@@ -7,6 +7,8 @@
  * @name: program name
  * @alias: struct
  * @idx: index
+ * @split: split line
+ * @line: line
  * Return: success
  */
 int exit_function(int n, char **args, char *name,
@@ -39,6 +41,8 @@ int exit_function(int n, char **args, char *name,
  * @name: program name
  * @alias: struct
  * @idx: index
+ * @split: split line
+ * @line: line
  * Return: success
  */
 int change_dir(int argc, char **args, char *name,
@@ -72,6 +76,8 @@ int change_dir(int argc, char **args, char *name,
  * @name: program name
  * @alias: struct
  * @idx: index
+ * @split: split line
+ * @line: line
  * Return: success
  */
 int export(int argc, char **args, char *name,
@@ -114,6 +120,8 @@ int export(int argc, char **args, char *name,
  * @name: program name
  * @alias: struct
  * @idx: index
+ * @split: split line
+ * @line: line
  * Return: success
  */
 int unset(int argc, char **args, char *name,
@@ -155,6 +163,8 @@ int unset(int argc, char **args, char *name,
  * @name: program name
  * @alias: struct
  * @idx: index
+ * @split: split line
+ * @line: line
  * Return: success
  */
 int env(int argc, char **args, char *name,

@@ -150,7 +150,8 @@ int semi_column_handling(char *line, char *name, aliases *alias, int *idx)
 		if (_strstr(line, "alias"))
 			check_alias(&arr, alias, *idx);
 		argc = args_count(arr);
-		if (argc > 0 && cmd_selector(arr[0], arr, name, alias, idx, line_split, line) < 0)
+		if (argc > 0 && cmd_selector(arr[0], arr,
+					name, alias, idx, line_split, line) < 0)
 			_fork(name, arr);
 		else if (!_strstr(line, "@") && argc == 0)
 		{

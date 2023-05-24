@@ -55,7 +55,8 @@ typedef struct cmd_executer
 	char *cmd;
 	int (*exe_func)(int, char **, char *, aliases *, int *, char **, char *);
 } cmd_executer;
-int cmd_selector(const char *, char **, char *, aliases *, int *, char **, char *);
+int cmd_selector(const char *, char **, char *,
+		aliases *, int *, char **, char *);
 int change_dir(int, char **, char *, aliases *, int *, char **, char *);
 int exit_function(int, char **, char *, aliases *, int *, char **, char *);
 int export(int, char **, char *, aliases *, int *, char **, char *);

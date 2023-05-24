@@ -7,6 +7,8 @@
  * @name: program name
  * @alias: struct
  * @idx: index
+ * @split: split line
+ * @line: line
  * Return: success
  */
 int _alias(int argc, char **args, char *name,
@@ -28,16 +30,14 @@ int _alias(int argc, char **args, char *name,
 	}
 	for (i = 1; i < argc; i++)
 	{
-		al = _strtok(args[i], "=");
-		j = _getalias(alias, al[0], *idx);
+		al = _strtok(args[i], "="), j = _getalias(alias, al[0], *idx);
 		if (!_strstr(args[i], "="))
 		{
 			if (j != -1)
 			{
 				print_string(1, alias[j].name), print_string(1, "='");
 				print_string(1, alias[j].value), print_string(1, "'\n");
-			}
-			else
+			} else
 				error(name, args, args[i], 10);
 		}
 		else if (j != -1)

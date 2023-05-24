@@ -7,6 +7,8 @@
  * @name: program name
  * @alias: struct
  * @idx: index
+ * @split: split line
+ * @line: line
  * Return: success
  */
 int cmd_selector(const char *cmd, char **args,
