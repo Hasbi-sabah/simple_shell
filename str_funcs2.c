@@ -45,7 +45,6 @@ int _strncmp(const char *s1, char *s2, int n)
 }
 /**
  * _strstr - locates a substring.
- *
  * @haystack: string
  * @needle: string looking for
  * Return: location or NULL
