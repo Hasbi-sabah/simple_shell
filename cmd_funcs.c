@@ -114,7 +114,7 @@ int export(int argc, char **args, char *name,
 	}
 }
 /**
- * unset - check code
+ * unset - handles unsetenv
  * @argc: arguments count
  * @args: arguments
  * @name: program name
