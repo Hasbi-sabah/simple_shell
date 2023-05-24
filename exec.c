@@ -1,7 +1,7 @@
 #include "head.h"
 
 /**
- * execmd - executes commands
+ * executer - executes commands
  * @arr: argument array
  * @name: name
  * @path: path
