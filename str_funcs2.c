@@ -15,10 +15,8 @@ size_t _strlen(char *s)
 
 /**
  * _strcmp - compares two strings
- *
  *@s1: first string
  *@s2: second string
- *
  *Return: integer
  */
 int _strcmp(const char *s1, char *s2)
