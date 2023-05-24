@@ -38,7 +38,7 @@ void error2(char **args, char *path, int n)
 }
 
 /**
- * error - prints error msgs to stderr
+ * error - prints error msgs to stderr (part 1)
  * @name: name
  * @args: args
  * @path: path
