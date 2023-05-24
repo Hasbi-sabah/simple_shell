@@ -35,7 +35,7 @@ int main(int argc, char **args)
 {
 	aliases alias;
 	int idx = 0, ret_val = 0;
-	char *input = NULL, *name = args[0];
+	char *input = NULL, *name = args[0], *temp = NULL;
 
 	(void) argc;
 	alias.name = NULL;
@@ -58,6 +58,9 @@ int main(int argc, char **args)
 				write(STDOUT_FILENO, "\n", 1);
 			exit(ret_val);
 		}
+		temp = _strstr(input, "#");
+		if (temp)
+			*temp = '\0';
 		if (*input != '\0' && _strcmp(input, "\n"))
 		{
 			error(name, NULL, NULL, 0);

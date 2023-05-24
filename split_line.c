@@ -176,16 +176,12 @@ int split_line(char *line, char *name, aliases *alias, int *idx)
 {
 	size_t old_len;
 	size_t new_len;
-	char *temp;
 
 	while (*line == ' ' || *line == '\t')
 		del(&line);
 	old_len = _strlen(line);
 	if (old_len == 1)
 		return (0);
-	temp = _strstr(line, "#");
-	if (temp)
-		*temp = '\0';
 	replace_substring(line, "&&", "&");
 	new_len = _strlen(line);
 	if (new_len < old_len)
