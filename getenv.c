@@ -22,7 +22,7 @@ char *_getenv(char *var)
 	return (NULL);
 }
 /**
- * _getalias - checks for aliases
+ * _getalias -retrieve aliases 
  * @alias: aliases
  * @var: variable name
  * @idx: index
