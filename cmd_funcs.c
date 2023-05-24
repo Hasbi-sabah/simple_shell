@@ -35,7 +35,7 @@ int exit_function(int n, char **args, char *name,
 	return (1);
 }
 /**
- * change_dir - check code
+ * change_dir - handles cd
  * @argc: arguments count
  * @args: arguments
  * @name: program name
