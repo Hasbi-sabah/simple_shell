@@ -16,7 +16,7 @@ int _getline(char **line)
 }
 
 /**
- * _read - reads file
+ * _read - reads input from file
  * @line: holder
  * @args: source
  * Return: int
