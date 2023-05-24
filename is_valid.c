@@ -46,6 +46,5 @@ char *is_valid(char *comm, char *name, char **arr)
 		free(path);
 	}
 	_free(path_arr);
-	free(path);
 	return (NULL);
 }
