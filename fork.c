@@ -1,7 +1,7 @@
 #include "head.h"
 
 /**
- * _fork - check code
+ * _fork - forks process
  * @name: command name
  * @arr: arguments
  * Return: success
