@@ -18,7 +18,7 @@ int _fork(char *name, char **arr)
 		pid = fork();
 		if (pid == 0)
 		{
-			success = execmd(arr, name, path);
+			success = executer(arr, name, path);
 			exit(0);
 		}
 		else

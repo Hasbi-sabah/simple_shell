@@ -7,7 +7,7 @@
  * @path: path
  * Return: success
  */
-int execmd(char **arr, char *name, char *path)
+int executer(char **arr, char *name, char *path)
 {
 	int i = 0, success = 1;
 	char *env;
