@@ -13,7 +13,7 @@ int exists_within(char c, char *s)
 	return (c == *s ? 1 : exists_within(c, s + 1));
 }
 /**
- * _strtok - check code
+ * _strtok - string tokenizer
  * @s: string
  * @delim: string
  * Return: tokens set
