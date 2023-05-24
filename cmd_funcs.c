@@ -157,7 +157,7 @@ int unset(int argc, char **args, char *name,
 	}
 }
 /**
- * env - prints env
+ * env - handles and prints env
  * @argc: argc
  * @args: arguments
  * @name: program name
