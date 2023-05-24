@@ -26,9 +26,9 @@ char **_strtok(char *s, char *delim)
 
 	tokens = (char **)malloc(len * sizeof(char *));
 	*tokens = (char *)malloc(len);
-	for (i = 0;; i++)
+	for (i = 0; s[i]; i++)
 	{
-		if (s[i] == '\0' || exists_within(s[i], delim))
+		if (exists_within(s[i], delim))
 		{
 			if (!found)
 			{
@@ -43,14 +43,14 @@ char **_strtok(char *s, char *delim)
 			tokens[k][j++] = s[i];
 			found = 0;
 		}
-		if (s[i] == '\0')
-			break;
 	}
 	if (found)
 	{
 		free(tokens[k]);
 		tokens[k] = NULL;
 	}
+	else
+		tokens[k][j] = '\0';
 	return (tokens);
 }
 /**
