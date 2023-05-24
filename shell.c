@@ -1,31 +1,6 @@
 #include "head.h"
 
 /**
- * _read - reads file
- * @line: holder
- * @args: source
- * Return: int
- */
-int _read(char **line, char **args)
-{
-	ssize_t i;
-	int ret;
-
-	ret = open(args[1], O_RDONLY);
-	if (ret == -1)
-	{
-		error(args[0], args, NULL, 11);
-		exit(EXIT_FAILURE);
-	}
-	*line = _calloc(10240, sizeof(char));
-	i = read(ret, *line, 10240);
-	close(ret);
-	while (**line == ' ' || **line == '\t')
-		(*line)++, i--;
-	(*line)[i] = '\0';
-	return (i);
-}
-/**
  * main - simple shell program
  * @argc: arguments count
  * @args: arguments set
