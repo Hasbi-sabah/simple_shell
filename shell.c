@@ -17,7 +17,7 @@ int _read(char **line, char **args)
 		error(args[0], args, NULL, 11);
 		exit(EXIT_FAILURE);
 	}
-	*line = malloc(10240);
+	*line = _calloc(10240, sizeof(char));
 	i = read(ret, *line, 10240);
 	close(ret);
 	while (**line == ' ' || **line == '\t')
