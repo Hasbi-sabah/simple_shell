@@ -41,7 +41,7 @@ char *is_valid(char *comm, char *name, char **arr)
 			path = malloc(_strlen(comm) + 1), _strcpy(path, comm);
 		if (!access(path, X_OK) && stat(path, &buf) == 0)
 		{
-			free(path_arr);
+			_free(path_arr);
 			return (path);
 		}
 		free(path_arr[i]);
