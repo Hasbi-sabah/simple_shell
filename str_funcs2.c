@@ -44,7 +44,7 @@ int _strncmp(const char *s1, char *s2, int n)
 		;
 	if (n)
 		return (*s1 - *s2);
-        return (0);
+	return (0);
 }
 /**
  * _strstr - locates a substring.
