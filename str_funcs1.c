@@ -44,10 +44,8 @@ char *_strcpy(char *dest, char *src)
 }
 /**
  * _strcat - concatenates two strings
- *
  *@src: first string
  *@dest: second string
- *
  *Return: dest string
  */
 
