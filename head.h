@@ -26,7 +26,7 @@ int split_line(char *, char *, aliases *, int *);
 char **_strtok(char *, char *);
 int _getline(char **);
 void check_fork_error(char *, char **, char *);
-int execmd(char **, char *, char *);
+int executer(char **, char *, char *);
 void get_cmds(char ***, char *);
 void _free(char **);
 void *_calloc(unsigned int, unsigned int);
